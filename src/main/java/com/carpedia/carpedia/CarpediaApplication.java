@@ -1,7 +1,6 @@
 package com.carpedia.carpedia;
 
-import com.carpedia.carpedia.repository.SimplyCarRepository;
-import com.carpedia.carpedia.repository.CountryRepository;
+import com.carpedia.carpedia.repository.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -19,15 +18,27 @@ public class CarpediaApplication implements CommandLineRunner {
 	@Autowired
 	CountryRepository country;
 
+	@Autowired
+    SegmentRepository segment;
+
+	@Autowired
+	BodyTypeRepository bodytype;
+
+	@Autowired
+	EngineRepository engine;
+
 	public static void main(String[] args) {
 		SpringApplication.run(CarpediaApplication.class, args);
 	}
 
 	@Override
 	public void run(String... arg0) throws Exception {
-		// clear all record if existed before do the tutorial with new data
+		// clear all record if existed
 		repository.deleteAll();
 		country.deleteAll();
+		segment.deleteAll();
+		bodytype.deleteAll();
+		engine.deleteAll();
 	}
 
 }
