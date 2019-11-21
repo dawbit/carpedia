@@ -24,6 +24,6 @@ public class SegmentModel implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("Segment[id=%d, country='%s']", id, name);
+        return String.format("Segment[id=%d, name='%s']", id, name);
     }
 }

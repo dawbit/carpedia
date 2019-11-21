@@ -24,6 +24,6 @@ public class BodyTypeModel implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("Body Type[id=%d, country='%s']", id, name);
+        return String.format("Body Type[id=%d, name='%s']", id, name);
     }
 }

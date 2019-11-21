@@ -15,6 +15,10 @@ public class CountryModel implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @OneToOne(mappedBy = "country", fetch = FetchType.LAZY, optional = false)
+    private CompanyModel company;
+    //private long company_id;
+
     protected CountryModel() {
     }
 
