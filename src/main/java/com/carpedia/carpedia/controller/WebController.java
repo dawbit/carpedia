@@ -13,7 +13,7 @@ public class WebController {
     @Autowired
     SimplyCarRepository repository;
 
-    @RequestMapping("/save")
+    @RequestMapping("/savesimply")
     public String process(){
         // save a single Car
         repository.save(new SimplyCar("Volkswagen", "Passat"));
