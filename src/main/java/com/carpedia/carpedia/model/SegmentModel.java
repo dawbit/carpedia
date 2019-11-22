@@ -15,6 +15,26 @@ public class SegmentModel implements Serializable {
     @Column(name = "name")
     private String name;
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     protected SegmentModel() {
     }
 
@@ -23,7 +43,7 @@ public class SegmentModel implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return String.format("Segment[id=%d, name='%s']", id, name);
+    public String toString(){
+        return new com.google.gson.Gson().toJson(this);
     }
 }

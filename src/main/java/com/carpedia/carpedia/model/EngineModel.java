@@ -21,6 +21,42 @@ public class EngineModel implements Serializable {
     @Column(name = "capacity")
     private float capacity;
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPower(int power) {
+        this.power = power;
+    }
+
+    public void setCapacity(float capacity) {
+        this.capacity = capacity;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPower() {
+        return power;
+    }
+
+    public float getCapacity() {
+        return capacity;
+    }
+
     protected EngineModel() {
     }
 
@@ -31,7 +67,7 @@ public class EngineModel implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return String.format("Engine[id=%d, name='%s', power='%s', capacity='%s']", id, name, power, capacity);
+    public String toString(){
+        return new com.google.gson.Gson().toJson(this);
     }
 }

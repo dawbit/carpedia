@@ -18,6 +18,35 @@ public class SimplyCar implements Serializable {
     @Column(name = "model")
     private String model;
 
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
     protected SimplyCar() {
     }
 
@@ -27,7 +56,7 @@ public class SimplyCar implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return String.format("SimplyCar[id=%d, company='%s', model='%s']", id, company, model);
+    public String toString(){
+        return new com.google.gson.Gson().toJson(this);
     }
 }

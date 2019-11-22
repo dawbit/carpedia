@@ -49,7 +49,7 @@ public class CompanyController {
     public String fetchDataByCompany(@PathVariable("name") String name){
         String result = "";
 
-        for(CompanyModel company: company.findByName(name)){
+        for(CompanyModel company: company.findAllByName(name)){
             result += company.toString() + "<br>";
         }
 
@@ -67,15 +67,15 @@ public class CompanyController {
 //        return result;
 //    }
 
-        @RequestMapping("/company/country/{country}") //lol, work
-        public String fetchDataByCountry(@PathVariable("country") String name){
-            String result = "";
+    @RequestMapping("/company/country/{country}") //lol, work
+    public String fetchDataByCountry(@PathVariable("country") String name){
+        String result = "";
 
-            for(CountryModel country: country.findByName(name)){
-                result += country.toString() + "<br>";
-            }
-
-            return result;
+        for(CountryModel country: country.findByName(name)){
+            result += country.toString() + "<br>";
         }
+
+        return result;
+    }
 
 }

@@ -3,9 +3,12 @@ package com.carpedia.carpedia.controller;
 import com.carpedia.carpedia.model.BodyTypeModel;
 import com.carpedia.carpedia.repository.BodyTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class BodyTypeController {
@@ -13,7 +16,7 @@ public class BodyTypeController {
     @Autowired
     BodyTypeRepository bodytype;
 
-    @RequestMapping("/savebodytype")
+    @RequestMapping("/bodytype/save")
     public String process(){
         // save a single BodyType
         bodytype.save(new BodyTypeModel("Sedan"));
@@ -22,33 +25,19 @@ public class BodyTypeController {
         return "Done";
     }
 
-    @RequestMapping("/bodytype")
-    public String findAll(){
-        String result = "";
-
-        for(BodyTypeModel bodytype : bodytype.findAll()){
-            result += bodytype.toString() + "<br>";
-        }
-
-        return result;
+    @GetMapping("/bodytype")
+    public List<BodyTypeModel> getAllBodyTypes() {
+        return (List<BodyTypeModel>) bodytype.findAll();
     }
 
-    @RequestMapping("/bodytype/id/{id}")
-    public String fetchdataById(@PathVariable("id") long id){
-        String result = "";
-        result = bodytype.findById(id).toString();
-        return result;
+    @GetMapping("/bodytype/id/{id}")
+    public BodyTypeModel getAllBodyTypeById(@PathVariable long id) {
+        return bodytype.findById(id);
     }
 
-    @RequestMapping("/bodytype/name/{name}")
-    public String fetchDataByCompany(@PathVariable("name") String company){
-        String result = "";
-
-        for(BodyTypeModel bodytype: bodytype.findByName(company)){
-            result += bodytype.toString() + "<br>";
-        }
-
-        return result;
+    @GetMapping("/bodytype/name/{name}")
+    public List<BodyTypeModel> getAllBodyTypeByName(@PathVariable String name) {
+        return bodytype.findAllByName(name);
     }
 
 }

@@ -3,78 +3,48 @@ package com.carpedia.carpedia.controller;
 import com.carpedia.carpedia.model.SimplyCar;
 import com.carpedia.carpedia.repository.SimplyCarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
+@CrossOrigin
 public class WebController {
 
     @Autowired
     SimplyCarRepository repository;
 
-    @RequestMapping("/savesimply")
+    @GetMapping("/simply/save")
     public String process(){
-        // save a single Car
-        repository.save(new SimplyCar("Volkswagen", "Passat"));
         repository.save(new SimplyCar("Volkswagen", "Polo"));
         repository.save(new SimplyCar("Peugeot", "206"));
         repository.save(new SimplyCar("Peugeot", "407"));
         repository.save(new SimplyCar("Kia", "Stinger"));
         repository.save(new SimplyCar("Fiat", "Punto"));
-
-         //save a list of Cars
-        //repository.save(Arrays.asList(new SimplyCar("Volksvagen", "Polo"), new SimplyCar("Peugeot", "407"),
-         //       new SimplyCar("Peugeot", "206"), new SimplyCar("Kia", "Stinger")));
-
-        //repository.save(Arrays.asList(new SimplyCar("Volksvagen", "Polo")));
-
         return "Done";
     }
 
 
-    @RequestMapping("/findall")
-    public String findAll(){
-        String result = "";
-
-        for(SimplyCar simply : repository.findAll()){
-            result += simply.toString() + "<br>";
-        }
-
-        return result;
+    @GetMapping("/simply")
+    public List<SimplyCar> getAllSimplyCars() {
+        return repository.findAll();
     }
 
-    @RequestMapping("/findbyid") // localhost:8080/findbyid?id=..
-    public String fetchdataById(@RequestParam("id") long id){
-        String result = "";
-        //result = repository.findOne(id).toString();
-        //result = repository.findOne(id).toString();
-        result = repository.findById(id).toString();
-        return result;
-        //for(SimplyCar simply: repository.findById(id)){
-         //   result += simply.toString() + "<br>";
-        //}
+    @GetMapping("/simply/id/{id}")
+    public SimplyCar getSimplyCarsById(@PathVariable long id) {
+        return repository.findById(id);
     }
 
-    @RequestMapping("/findbycompany")
-    public String fetchDataByCompany(@RequestParam("company") String company){
-        String result = "";
-
-        for(SimplyCar simply: repository.findByCompany(company)){
-            result += simply.toString() + "<br>";
-        }
-
-        return result;
+    @GetMapping("/simply/company/{company}")
+    public List<SimplyCar> getSimplyCarsByCompany(@PathVariable String company) {
+        return repository.findAllByCompany(company);
     }
 
-    @RequestMapping("/findbymodel")
-    public String fetchDataByModel(@RequestParam("model") String model){
-        String result = "";
-
-        for(SimplyCar simply: repository.findByModel(model)){
-            result += simply.toString() + "<br>";
-        }
-
-        return result;
+    @GetMapping("/simply/model/{model}")
+    public List<SimplyCar> getSimplyCarsByModel(@PathVariable String model) {
+        return repository.findAllByModel(model);
     }
 }

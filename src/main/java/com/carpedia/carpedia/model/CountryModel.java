@@ -1,7 +1,10 @@
 package com.carpedia.carpedia.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "country")
@@ -15,8 +18,9 @@ public class CountryModel implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @OneToOne(mappedBy = "country", fetch = FetchType.LAZY, optional = false)
-    private CompanyModel company;
+    @OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<CompanyModel> company;
     //private long company_id;
 
     protected CountryModel() {
@@ -26,8 +30,12 @@ public class CountryModel implements Serializable {
         this.name = name;
     }
 
+//    @Override
+//    public String toString(){
+//        return new com.google.gson.Gson().toJson(this);
+//    }
     @Override
-    public String toString() {
-        return String.format("Country[id=%d, country='%s']", id, name);
+    public String toString(){
+        return new com.google.gson.Gson().toJson(this);
     }
 }

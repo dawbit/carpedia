@@ -3,17 +3,18 @@ package com.carpedia.carpedia.controller;
 import com.carpedia.carpedia.model.EngineModel;
 import com.carpedia.carpedia.repository.EngineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
+@CrossOrigin
 public class EngineController {
 
     @Autowired
     EngineRepository engine;
 
-    @RequestMapping("/saveengine")
+    @RequestMapping("/engine/save")
     public String process(){
         // save a single Engine
         engine.save(new EngineModel("TU3JP", 75, 1360));
@@ -24,45 +25,29 @@ public class EngineController {
         return "Done";
     }
 
-    @RequestMapping("/engine")
-    public String findAll(){
-        String result = "";
-
-        for(EngineModel engine : engine.findAll()){
-            result += engine.toString() + "<br>";
-        }
-
-        return result;
+    @GetMapping("/engine")
+    public List<EngineModel> getAllEngines() {
+        return (List<EngineModel>) engine.findAll();
     }
 
-    @RequestMapping("/engine/id/{id}")
-    public String fetchdataById(@PathVariable("id") long id){
-        String result = "";
-        result = engine.findById(id).toString();
-        return result;
+    @GetMapping("/engine/id/{id}")
+    public EngineModel getEngineById(@PathVariable long id) {
+        return engine.findById(id);
     }
 
-    @RequestMapping("/engine/power/{power}")
-    public String fetchDataByPower(@PathVariable("power") int power){
-        String result = "";
-
-        //result += power. + "<br>";
-        for(EngineModel engine: engine.findByPower(power)) {
-            result += engine.toString() + "<br>";
-        }
-
-        return result;
+    @GetMapping("/engine/name/{name}")
+    public List<EngineModel> getEngineByName(@PathVariable String name) {
+        return engine.findAllByName(name);
     }
 
-    @RequestMapping("/engine/capacity/{capacity}")
-    public String fetchDataByCompany(@PathVariable("capacity") float capacity){
-        String result = "";
+    @GetMapping("/engine/power/{power}")
+    public List<EngineModel> getEngineByPower(@PathVariable int power) {
+        return engine.findAllByPower(power);
+    }
 
-        for(EngineModel engine: engine.findByCapacity(capacity)){
-            result += engine.toString() + "<br>";
-        }
-
-        return result;
+    @GetMapping("/engine/capacity/{capacity}")
+    public List<EngineModel> getEngineByCapacity(@PathVariable int capacity) {
+        return engine.findAllByCapacity(capacity);
     }
 
 }

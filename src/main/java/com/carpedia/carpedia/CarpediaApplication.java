@@ -27,6 +27,9 @@ public class CarpediaApplication implements CommandLineRunner {
 	@Autowired
 	EngineRepository engine;
 
+	@Autowired
+	CompanyRepository company;
+
 	public static void main(String[] args) {
 		SpringApplication.run(CarpediaApplication.class, args);
 	}
@@ -39,6 +42,7 @@ public class CarpediaApplication implements CommandLineRunner {
 		segment.deleteAll();
 		bodytype.deleteAll();
 		engine.deleteAll();
+		company.deleteAll();
 	}
 
 }
