@@ -1,7 +1,6 @@
 package com.carpedia.carpedia.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -49,7 +48,7 @@ public class CountryModel implements Serializable {
 
     @OneToMany(mappedBy = "country")
     @JsonBackReference(value = "country-company")
-    @JsonIgnore
+   //@JsonIgnore
     private List<CompanyModel> company;
     //private long company_id;
 
