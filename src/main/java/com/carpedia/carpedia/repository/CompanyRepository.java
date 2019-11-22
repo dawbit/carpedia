@@ -9,6 +9,7 @@ public interface CompanyRepository extends JpaRepository<CompanyModel, Long> {
     CompanyModel findById(long id);
 
     List<CompanyModel> findAllByName(String name);
+    List<CompanyModel> findAllByFoundation(int foundation);
     //List<CompanyModel> findByCountry(String country);
 
 }

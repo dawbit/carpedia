@@ -1,5 +1,7 @@
 package com.carpedia.carpedia.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -15,17 +17,13 @@ public class CompanyModel implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "foundationyear", length = 4)
-    private int foundationyear;
+    @Column(name = "foundation", length = 4)
+    private int foundation;
 
-    //@OneToOne(mappedBy = "company", cascade = CascadeType.ALL)
-    //@JoinColumn(name = "country_id")
-    //private CountryModel country;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "country_id")
+    @JsonBackReference(value = "country-company")
     private CountryModel country;
-    //private int country_id;
 
     public void setId(long id) {
         this.id = id;
@@ -35,8 +33,8 @@ public class CompanyModel implements Serializable {
         this.name = name;
     }
 
-    public void setFoundationyear(int foundationyear) {
-        this.foundationyear = foundationyear;
+    public void setFoundation(int foundation) {
+        this.foundation = foundation;
     }
 
     public void setCountry(CountryModel country) {
@@ -55,8 +53,8 @@ public class CompanyModel implements Serializable {
         return name;
     }
 
-    public int getFoundationyear() {
-        return foundationyear;
+    public int getFoundation() {
+        return foundation;
     }
 
     public CountryModel getCountry() {
@@ -66,8 +64,9 @@ public class CompanyModel implements Serializable {
     protected CompanyModel() {
     }
 
-    public CompanyModel(String name, CountryModel country) {
+    public CompanyModel(String name, int foundation, CountryModel country) {
         this.name = name;
+        this.foundation = foundation;
         this.country = country;
     }
 

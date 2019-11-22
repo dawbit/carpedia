@@ -6,6 +6,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "simplycar")
 public class SimplyCar implements Serializable {
+    //this model is created for using in tests
 
     private static final long serialVersionUID = -3009157732242241606L;
     @Id

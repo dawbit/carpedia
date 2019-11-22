@@ -3,9 +3,12 @@ package com.carpedia.carpedia.controller;
 import com.carpedia.carpedia.model.CountryModel;
 import com.carpedia.carpedia.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class CountryController {
@@ -13,7 +16,7 @@ public class CountryController {
     @Autowired
     CountryRepository country;
 
-    @RequestMapping("/savecountry")
+    @RequestMapping("/country/save")
     public String process(){
         // save a single Country
         country.save(new CountryModel("Poland"));
@@ -25,33 +28,19 @@ public class CountryController {
         return "Done";
     }
 
-    @RequestMapping("/country")
-    public String findAll(){
-        String result = "";
-
-        for(CountryModel country : country.findAll()){
-            result += country.toString() + "<br>";
-        }
-
-        return result;
+    @GetMapping("/country")
+    public List<CountryModel> getAllCountries() {
+        return (List<CountryModel>) country.findAll();
     }
 
-    @RequestMapping("/country/id/{id}")
-    public String fetchdataById(@PathVariable("id") long id){
-        String result = "";
-        result = country.findById(id).toString();
-        return result;
+    @GetMapping("/country/id/{id}")
+    public CountryModel getCountryById(@PathVariable long id) {
+        return country.findById(id);
     }
 
-    @RequestMapping("/country/name/{name}")
-    public String fetchDataByCompany(@PathVariable("name") String company){
-        String result = "";
-
-        for(CountryModel country: country.findByName(company)){
-            result += country.toString() + "<br>";
-        }
-
-        return result;
+    @GetMapping("/country/name/{name}")
+    public List<CountryModel> getCountryByName(@PathVariable String name) {
+        return country.findAllByName(name);
     }
 
 }
