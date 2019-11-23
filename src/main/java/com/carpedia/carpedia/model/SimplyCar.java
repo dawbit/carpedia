@@ -56,8 +56,8 @@ public class SimplyCar implements Serializable {
         this.model = model;
     }
 
-    @Override
-    public String toString(){
-        return new com.google.gson.Gson().toJson(this);
-    }
+//    @Override
+//    public String toString(){
+//        return new com.google.gson.Gson().toJson(this);
+//    }
 }

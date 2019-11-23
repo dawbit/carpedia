@@ -65,13 +65,6 @@ public class EngineModel implements Serializable {
         return capacity;
     }
 
-//    public List<CarModel> getCar() {
-//        return car;
-//    }
-//
-//    public void setCar(List<CarModel> car) {
-//        this.car = car;
-//    }
 
     protected EngineModel() {
     }
@@ -82,8 +75,8 @@ public class EngineModel implements Serializable {
         this.capacity = capacity;
     }
 
-    @Override
-    public String toString(){
-        return new com.google.gson.Gson().toJson(this);
-    }
+//    @Override
+//    public String toString(){
+//        return new com.google.gson.Gson().toJson(this);
+//    }
 }

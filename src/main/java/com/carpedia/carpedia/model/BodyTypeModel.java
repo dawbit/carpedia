@@ -57,8 +57,8 @@ public class BodyTypeModel implements Serializable {
         this.name = name;
     }
 
-    @Override
-    public String toString(){
-        return new com.google.gson.Gson().toJson(this);
-    }
+//    @Override
+//    public String toString(){
+//        return new com.google.gson.Gson().toJson(this);
+//    }
 }
