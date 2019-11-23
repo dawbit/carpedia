@@ -39,9 +39,10 @@ public class CarModel implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "engine_id")
     )
     private List<EngineModel> engine = new ArrayList<>();
+    //private EngineModel engine;
 
     @Column(name = "NCAPstar")
-    private byte ncap_stars;
+    private int ncap_stars;
 
     @ManyToOne
     @JoinColumn(name = "country_id")
@@ -67,10 +68,6 @@ public class CarModel implements Serializable {
     @JsonBackReference(value = "car-author")
     @JsonIgnore
     private UserModel user;
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
 
     public long getId() {
         return id;
@@ -120,11 +117,11 @@ public class CarModel implements Serializable {
         this.engine = engine;
     }
 
-    public byte getNcap_stars() {
+    public int getNcap_stars() {
         return ncap_stars;
     }
 
-    public void setNcap_stars(byte ncap_stars) {
+    public void setNcap_stars(int ncap_stars) {
         this.ncap_stars = ncap_stars;
     }
 
@@ -161,14 +158,14 @@ public class CarModel implements Serializable {
     }
 
     public CarModel(CompanyModel company, String name, String start_production,
-                    String end_production, List<EngineModel> engine, byte ncap_stars,
+                    String end_production, EngineModel engine, int ncap_stars,
                     CountryModel country, SegmentModel segment, BodyTypeModel bodytype,
                     UserModel user) {
         this.company = company;
         this.name = name;
         this.start_production = start_production;
         this.end_production = end_production;
-        this.engine = engine;
+        this.engine = (List<EngineModel>) engine;
         this.ncap_stars = ncap_stars;
         this.country = country;
         this.segment = segment;
