@@ -18,6 +18,16 @@ public class CountryModel implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @OneToMany(mappedBy = "country")
+    @JsonBackReference(value = "country-company")
+    //@JsonIgnore
+    private List<CompanyModel> company;
+
+    @OneToMany(mappedBy = "country")
+    @JsonBackReference(value = "car-country")
+    private List<CarModel> car;
+
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
@@ -46,11 +56,13 @@ public class CountryModel implements Serializable {
         this.company = company;
     }
 
-    @OneToMany(mappedBy = "country")
-    @JsonBackReference(value = "country-company")
-   //@JsonIgnore
-    private List<CompanyModel> company;
-    //private long company_id;
+    public List<CarModel> getCar() {
+        return car;
+    }
+
+    public void setCar(List<CarModel> car) {
+        this.car = car;
+    }
 
     protected CountryModel() {
     }

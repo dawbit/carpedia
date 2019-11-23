@@ -1,7 +1,10 @@
 package com.carpedia.carpedia.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "segment")
@@ -14,6 +17,10 @@ public class SegmentModel implements Serializable {
 
     @Column(name = "name")
     private String name;
+
+    @OneToMany(mappedBy = "segment")
+    @JsonBackReference(value = "car-segment")
+    private List<CarModel> car;
 
     public void setId(long id) {
         this.id = id;
@@ -33,6 +40,14 @@ public class SegmentModel implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public List<CarModel> getCar() {
+        return car;
+    }
+
+    public void setCar(List<CarModel> car) {
+        this.car = car;
     }
 
     protected SegmentModel() {

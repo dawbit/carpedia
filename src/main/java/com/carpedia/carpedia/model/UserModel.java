@@ -1,8 +1,11 @@
 package com.carpedia.carpedia.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name="users")
@@ -31,6 +34,10 @@ public class UserModel implements Serializable {
 
     @Column(name = "ismod", columnDefinition = "boolean default false")
     private boolean ismod;
+
+    @OneToMany(mappedBy = "user")
+    @JsonBackReference(value = "car-user")
+    private List<CarModel> car;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -84,6 +91,13 @@ public class UserModel implements Serializable {
         this.ismod = ismod;
     }
 
+    public List<CarModel> getCar() {
+        return car;
+    }
+
+    public void setCar(List<CarModel> car) {
+        this.car = car;
+    }
 
     protected UserModel() { }
 

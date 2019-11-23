@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "company")
@@ -26,6 +27,10 @@ public class CompanyModel implements Serializable {
     @JsonBackReference(value = "country-company")
     @JsonIgnore
     private CountryModel country;
+
+    @OneToMany(mappedBy = "company")
+    @JsonBackReference(value = "car-company")
+    private List<CarModel> car;
 
     public void setId(long id) {
         this.id = id;
@@ -61,6 +66,14 @@ public class CompanyModel implements Serializable {
 
     public CountryModel getCountry() {
         return country;
+    }
+
+    public List<CarModel> getCar() {
+        return car;
+    }
+
+    public void setCar(List<CarModel> car) {
+        this.car = car;
     }
 
     protected CompanyModel() {

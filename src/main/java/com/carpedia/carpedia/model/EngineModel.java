@@ -1,7 +1,11 @@
 package com.carpedia.carpedia.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "engine")
@@ -20,6 +24,10 @@ public class EngineModel implements Serializable {
 
     @Column(name = "capacity")
     private float capacity;
+
+//    @ManyToMany
+//    @JsonBackReference(value = "car-engine")
+//    List<CarModel> car = new ArrayList<>();
 
     public void setId(long id) {
         this.id = id;
@@ -56,6 +64,14 @@ public class EngineModel implements Serializable {
     public float getCapacity() {
         return capacity;
     }
+
+//    public List<CarModel> getCar() {
+//        return car;
+//    }
+//
+//    public void setCar(List<CarModel> car) {
+//        this.car = car;
+//    }
 
     protected EngineModel() {
     }

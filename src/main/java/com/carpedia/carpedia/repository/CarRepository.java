@@ -1,4 +1,12 @@
 package com.carpedia.carpedia.repository;
 
-public interface CarRepository {
+import com.carpedia.carpedia.model.CarModel;
+import com.carpedia.carpedia.model.CompanyModel;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface CarRepository extends JpaRepository<CarModel, Long> {
+    CompanyModel findById(long id);
+
 }

@@ -1,7 +1,10 @@
 package com.carpedia.carpedia.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "bodytype")
@@ -14,6 +17,10 @@ public class BodyTypeModel implements Serializable {
 
     @Column(name = "name")
     private String name;
+
+    @OneToMany(mappedBy = "bodytype")
+    @JsonBackReference(value = "car-bodytype")
+    private List<CarModel> car;
 
     public void setId(long id) {
         this.id = id;
@@ -33,6 +40,14 @@ public class BodyTypeModel implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public List<CarModel> getCar() {
+        return car;
+    }
+
+    public void setCar(List<CarModel> car) {
+        this.car = car;
     }
 
     protected BodyTypeModel() {
