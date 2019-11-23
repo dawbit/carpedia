@@ -33,6 +33,19 @@ public class UserController {
         return user.findById(id);
     }
 
+    @GetMapping("/user/login/{login}")
+    public List<UserModel> getUserByLogin(@PathVariable String login) {
+        return user.findAllByLogin(login);
+    }
 
+    @GetMapping("/user/fname/{fname}")
+    public List<UserModel> getUserByFname(@PathVariable String fname) {
+        return user.findAllByFname(fname);
+    }
+
+    @GetMapping("/user/lname/{lname}")
+    public List<UserModel> getUserByLname(@PathVariable String lname) {
+        return user.findAllByLname(lname);
+    }
 
 }

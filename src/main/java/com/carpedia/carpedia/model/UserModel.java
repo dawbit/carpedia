@@ -1,6 +1,7 @@
 package com.carpedia.carpedia.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
@@ -12,17 +13,24 @@ public class UserModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "login", unique = true)
+    @Column(name = "login", unique = true, nullable = false)
+    @Size(min = 4, max = 20)
     private String login;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
+    @Size(min = 4, max = 20)
     private String password;
 
     @Column(name = "fname")
+    @Size(min = 4, max = 20)
     private String fname;
 
     @Column(name = "lname")
+    @Size(min = 4, max = 20)
     private String lname;
+
+    @Column(name = "ismod", columnDefinition = "boolean default false")
+    private boolean ismod;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -67,6 +75,15 @@ public class UserModel implements Serializable {
     public void setLname(String lname) {
         this.lname = lname;
     }
+
+    public boolean isIsmod() {
+        return ismod;
+    }
+
+    public void setIsmod(boolean ismod) {
+        this.ismod = ismod;
+    }
+
 
     protected UserModel() { }
 
