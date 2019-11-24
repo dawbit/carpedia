@@ -1,7 +1,9 @@
 package com.carpedia.carpedia.model;
 
+import com.carpedia.carpedia.repository.CompanyRepository;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,6 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "car")
 public class CarModel implements Serializable {
+
     private static final long serialVersionUID = -3009157732242241606L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -157,6 +160,10 @@ public class CarModel implements Serializable {
         this.user = user;
     }
 
+    protected CarModel(){
+
+    }
+
     public CarModel(CompanyModel company, String name, String start_production,
                     String end_production, EngineModel engine, int ncap_stars,
                     CountryModel country, SegmentModel segment, BodyTypeModel bodytype,
@@ -172,4 +179,10 @@ public class CarModel implements Serializable {
         this.bodytype = bodytype;
         this.user = user;
     }
+
+//    public CarModel(long idCompany){
+//        this.company= companyRepository.findById(idCompany);
+//    }
+
+
 }

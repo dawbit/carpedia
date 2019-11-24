@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface EngineRepository extends JpaRepository<EngineModel, Long> {
     EngineModel findById(long id);
+   //List<EngineModel> findById(long id);
 
     List<EngineModel> findAllByName(String name);
     List<EngineModel> findAllByPower(int power);

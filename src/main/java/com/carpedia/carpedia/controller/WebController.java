@@ -31,6 +31,14 @@ public class WebController {
         return "Done";
     }
 
+    @PostMapping("/postsave2")
+    public String procerder2(@RequestBody SimplyCar simplyCar){
+        repository.save(simplyCar);
+        // simplyCar.save
+        //repository.save(new SimplyCar(comp, mod));
+        return "Done";
+    }
+
     @GetMapping("/simply")
     public List<SimplyCar> getAllSimplyCars() {
         return repository.findAll();
