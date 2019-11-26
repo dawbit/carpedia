@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface BodyTypeRepository extends JpaRepository<BodyTypeModel, Long> {
     BodyTypeModel findById(long id);
+    BodyTypeModel findByName(String name);
 
     List<BodyTypeModel> findAllByName(String name);
     //List<SimplyCar> findOne(long id);

@@ -1,9 +1,8 @@
 package com.carpedia.carpedia.model;
 
-import com.carpedia.carpedia.repository.CompanyRepository;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -25,13 +24,13 @@ public class CarModel implements Serializable {
     @JsonIgnore
     private CompanyModel company;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "start_production")
+    @Column(name = "start_production", length = 4)
     private String start_production;
 
-    @Column(name = "end_production")
+    @Column(name = "end_production", length = 4)
     private String end_production;
 
     @ManyToMany
@@ -42,9 +41,9 @@ public class CarModel implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "engine_id")
     )
     private List<EngineModel> engine = new ArrayList<>();
-    //private EngineModel engine;
 
-    @Column(name = "NCAPstar")
+    @Column(name = "NCAPstar", length = 1)
+    @Range(min=1, max=5)
     private int ncap_stars;
 
     @ManyToOne
@@ -179,10 +178,5 @@ public class CarModel implements Serializable {
         this.bodytype = bodytype;
         this.user = user;
     }
-
-//    public CarModel(long idCompany){
-//        this.company= companyRepository.findById(idCompany);
-//    }
-
 
 }

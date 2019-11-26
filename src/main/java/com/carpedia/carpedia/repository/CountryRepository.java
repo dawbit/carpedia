@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface CountryRepository extends JpaRepository<CountryModel, Long> {
     CountryModel findById(long id);
+    CountryModel findByName(String name);
 
     List<CountryModel> findAllByName(String name);
     //List<SimplyCar> findOne(long id);

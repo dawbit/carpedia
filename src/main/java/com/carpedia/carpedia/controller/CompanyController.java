@@ -1,19 +1,22 @@
 package com.carpedia.carpedia.controller;
 
 import com.carpedia.carpedia.model.CompanyModel;
-import com.carpedia.carpedia.model.CountryModel;
 import com.carpedia.carpedia.repository.CompanyRepository;
 import com.carpedia.carpedia.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.List;
+
+//import javax.transaction.Transactional;
 
 @RestController
 public class CompanyController {
+
+    @Autowired
+    EntityManager entityManager;
 
     @Autowired
     CompanyRepository company;
@@ -21,14 +24,14 @@ public class CompanyController {
     @Autowired
     CountryRepository country;
 
-    @RequestMapping("/company/save")
-    public String process(){
-        // save a single Company
-
-        CountryModel france = country.save(new CountryModel("France"));
-        company.save(new CompanyModel("Peugeot",1810, france));
-        return "Done";
-    }
+//    @RequestMapping("/company/save")
+//    public String process(){
+//        // save a single Company
+//
+//        CountryModel france = country.save(new CountryModel("France"));
+//        company.save(new CompanyModel("Peugeot",1810, france));
+//        return "Done";
+//    }
 
     @GetMapping("/company")
     public List<CompanyModel> getAllCompanies() {
@@ -48,6 +51,56 @@ public class CompanyController {
     @GetMapping("/company/foundation/{foundation}")
     public List<CompanyModel> getAllCompanyByFoundation(@PathVariable int foundation) {
         return company.findAllByFoundation(foundation);
+    }
+
+    @PostMapping("/company/save")
+    //@Transactional
+    public String saveCompany(@RequestBody CompanyModel companyModel) {
+        try {
+            if (getCompanyByIdForSave(companyModel.getId()) != null) {
+                return "Company already exists, or incorrect input format";
+            } else {
+                company.save(companyModel);
+                return "Company saved";
+            }
+        } catch (Exception exc) {
+            return "Not saved. Exception: " + exc.getMessage();
+        }
+    }
+
+    @PutMapping("company/update")
+    @Transactional
+    public String updateCompany(@RequestBody CompanyModel engineModel) {
+        try {
+            entityManager.createQuery("UPDATE CompanyModel companyModel " +
+                    "SET companyModel.name=?2 WHERE companyModel.id=?1")
+                    .setParameter(1, engineModel.getId())
+                    .setParameter(2, engineModel.getName())
+                    .executeUpdate();
+            return "Company updated";
+        }
+        catch (Exception exc){
+            return "Not updated. Exception: " + exc.getMessage();
+        }
+    }
+
+    @DeleteMapping("/company/delete")
+    @Transactional
+    public String deleteCompany(@RequestParam("id") long id) {
+        try {
+            company.deleteById(id);
+            return "Company Deleted";
+        } catch (Exception exc) {
+            return "Not deleted. Exception: " + exc.getMessage();
+        }
+    }
+
+    private CompanyModel getCompanyByIdForSave(long id) {
+        return company.findById(id);
+    }
+
+    private boolean doesCompanyExist(String name) {
+        return (company.findByName(name) != null);
     }
 
 }

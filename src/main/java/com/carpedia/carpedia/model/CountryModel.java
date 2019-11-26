@@ -3,6 +3,7 @@ package com.carpedia.carpedia.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.List;
 
@@ -15,7 +16,8 @@ public class CountryModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, unique = true)
+    @Pattern(regexp = "^[A-Z][a-zA-Z]*")
     private String name;
 
     @OneToMany(mappedBy = "country")

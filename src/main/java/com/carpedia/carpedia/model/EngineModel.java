@@ -1,11 +1,7 @@
 package com.carpedia.carpedia.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "engine")
@@ -16,13 +12,13 @@ public class EngineModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true, length = 20)
     private String name;
 
-    @Column(name = "power")
+    @Column(name = "power", length = 4)
     private int power;
 
-    @Column(name = "capacity")
+    @Column(name = "capacity", length = 6)
     private float capacity;
 
 //    @ManyToMany

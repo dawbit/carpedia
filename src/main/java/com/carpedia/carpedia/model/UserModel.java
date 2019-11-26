@@ -35,6 +35,9 @@ public class UserModel implements Serializable {
     @Column(name = "ismod", columnDefinition = "boolean default false")
     private boolean ismod;
 
+    @Column(name = "isactive", columnDefinition = "boolean default false")
+    private boolean isactive;
+
     @OneToMany(mappedBy = "user")
     @JsonBackReference(value = "car-user")
     private List<CarModel> car;
@@ -91,6 +94,14 @@ public class UserModel implements Serializable {
         this.ismod = ismod;
     }
 
+    public boolean isIsactive() {
+        return isactive;
+    }
+
+    public void setIsactive(boolean isactive) {
+        this.isactive = isactive;
+    }
+
     public List<CarModel> getCar() {
         return car;
     }
@@ -101,11 +112,13 @@ public class UserModel implements Serializable {
 
     protected UserModel() { }
 
-    public UserModel(String login, String password, String fname, String lname) {
+    public UserModel(String login, String password, String fname, String lname, boolean ismod, boolean isactive) {
         this.login = login;
         this.password = password;
         this.fname = fname;
         this.lname = lname;
+        this.isactive = isactive;
+        this.ismod = ismod;
     }
 
 }
