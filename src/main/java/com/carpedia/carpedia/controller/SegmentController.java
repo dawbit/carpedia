@@ -3,10 +3,10 @@ package com.carpedia.carpedia.controller;
 import com.carpedia.carpedia.model.SegmentModel;
 import com.carpedia.carpedia.repository.SegmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
@@ -53,7 +53,8 @@ public class SegmentController {
                 segment.save(segmentModel);
                 return "Segment saved";
             }
-        } catch (Exception exc) {
+        }
+        catch (Exception exc) {
             return "Not deleted. Exception: " + exc.getMessage();
         }
     }

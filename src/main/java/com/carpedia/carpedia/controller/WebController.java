@@ -3,10 +3,10 @@ package com.carpedia.carpedia.controller;
 import com.carpedia.carpedia.model.SimplyCar;
 import com.carpedia.carpedia.repository.SimplyCarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
@@ -66,7 +66,8 @@ public class WebController {
                 repository.save(simplyCar);
                 return "SimplyCar saved";
             }
-        } catch (Exception exc) {
+        }
+        catch (Exception exc) {
             return "Not saved. Exception: " + exc.getMessage();
         }
     }

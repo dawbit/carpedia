@@ -3,13 +3,18 @@ package com.carpedia.carpedia.controller;
 import com.carpedia.carpedia.model.CarModel;
 import com.carpedia.carpedia.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 @RestController
 public class CarController {
+
+    @Autowired
+    EntityManager entityManager;
+
     @Autowired
     CompanyRepository company;
 
@@ -36,34 +41,85 @@ public class CarController {
         return car.findAll();
     }
 
-//    @PostMapping("/car/postsave")
-//    public String testsave(@RequestParam("idCompany") int idCompany, @RequestParam("name") String name,
-//                            @RequestParam("start") String start, @RequestParam("stop") String end,
-//                            @RequestParam("idEngine") long idEngine, @RequestParam("ncap_stars") int ncap_stars,
-//                            @RequestParam("idCountry") int idCountry, @RequestParam("idSegment") int idSegment,
-//                            @RequestParam("idBodyType") long idBodyType, @RequestParam("idUser") int idUser){
-//                car.save(new CarModel(company.findById(idCompany),name,start,
-//                end,  engine.findById(idEngine),ncap_stars,country.findById(idCountry),segment.findById(idSegment),
-//                bodytype.findById(idBodyType),
-//                user.findById(idUser)));
-//        return "Done";
-//    }
+    @GetMapping("/car/id/{id}")
+    public CarModel getCarById(@PathVariable long id) {
+        return car.findById(id);
+    }
 
-//    @PostMapping("/car/postsave2")
-//    public String findAllCar(@RequestBody CarModel carModel) {
-//        if (carExist(carModel)){
-//            return "Car already exists";
-//        }
-//        else{
-//            car.save(carModel);
-//            return "Done";
-//        }
-//    }
-//
-//    private boolean carExist(CarModel carModel) {
-//        return (getCarbyId(carModel.getRecipeid()) != null);
-//    }
+    @GetMapping("/car/login/{login}")
+    public List<CarModel> getCarByName(@PathVariable String name) {
+        return car.findAllByName(name);
+    }
 
+    @GetMapping("/car/startproduction/{startproduction}")
+    public List<CarModel> getCarByStartproduction(@PathVariable String startproduction) {
+        return car.findAllByStartproduction(startproduction);
+    }
 
+    @GetMapping("/car/endproduction/{endproduction}")
+    public List<CarModel> getCarByEndproduction(@PathVariable String endproduction) {
+        return car.findAllByEndproduction(endproduction);
+    }
+
+    @GetMapping("/car/ncap/{ncap}")
+    public List<CarModel> getCarByNcap(@PathVariable int ncap) {
+        return car.findAllByNcap(ncap);
+    }
+
+    @PostMapping("/car/save")
+    @Transactional
+    public String saveCar(@RequestBody CarModel carModel) {
+        try {
+            if (getCarByIdForSave(carModel.getId()) != null || doesCarExist(carModel.getName()) ) {
+                return "Car already exists, or incorrect input format";
+            }
+            else {
+                car.save(carModel);
+                return "Car saved";
+            }
+        }
+        catch (Exception exc) {
+            return "Not deleted. Exception: " + exc.getMessage();
+        }
+    }
+
+    @PutMapping("car/update")
+    @Transactional
+    public String updateCar(@RequestBody CarModel carModel) {
+        try {
+            entityManager.createQuery("UPDATE CarModel carModel " +
+                    "SET carModel.name=?2, carModel.startproduction=?3, " +
+                    "carModel.endproduction=?4, carModel.ncap=?5 WHERE carModel.id=?1")
+                    .setParameter(1, carModel.getId())
+                    .setParameter(2, carModel.getName())
+                    .setParameter(3, carModel.getStartproduction())
+                    .setParameter(4, carModel.getEndproduction())
+                    .setParameter(5, carModel.getNcap())
+                    .executeUpdate();
+            return "Car updated";
+        }
+        catch (Exception exc){
+            return "Not updated. Exception: " + exc.getMessage();
+        }
+    }
+
+    @DeleteMapping("/car/delete")
+    @Transactional
+    public String deleteCar(@RequestParam("id") long id) {
+        try {
+            car.deleteById(id);
+            return "Car Deleted";
+        } catch (Exception exc) {
+            return "Not deleted. Exception: " + exc.getMessage();
+        }
+    }
+
+    private CarModel getCarByIdForSave(long id) {
+        return car.findById(id);
+    }
+
+    private boolean doesCarExist(String name) {
+        return (car.findByName(name) != null);
+    }
 
 }

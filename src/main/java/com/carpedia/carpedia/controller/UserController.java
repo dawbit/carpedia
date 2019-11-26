@@ -3,10 +3,10 @@ package com.carpedia.carpedia.controller;
 import com.carpedia.carpedia.model.UserModel;
 import com.carpedia.carpedia.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController

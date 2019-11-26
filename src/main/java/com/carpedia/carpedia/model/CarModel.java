@@ -27,11 +27,11 @@ public class CarModel implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "start_production", length = 4)
-    private String start_production;
+    @Column(name = "startproduction", length = 4)
+    private String startproduction;
 
-    @Column(name = "end_production", length = 4)
-    private String end_production;
+    @Column(name = "endproduction", length = 4)
+    private String endproduction;
 
     @ManyToMany
     @OrderColumn(name = "id")
@@ -42,9 +42,9 @@ public class CarModel implements Serializable {
     )
     private List<EngineModel> engine = new ArrayList<>();
 
-    @Column(name = "NCAPstar", length = 1)
-    @Range(min=1, max=5)
-    private int ncap_stars;
+    @Column(name = "ncap")
+    @Range(max = 5)
+    private int ncap;
 
     @ManyToOne
     @JoinColumn(name = "country_id")
@@ -95,20 +95,20 @@ public class CarModel implements Serializable {
         this.name = name;
     }
 
-    public String getStart_production() {
-        return start_production;
+    public String getStartproduction() {
+        return startproduction;
     }
 
-    public void setStart_production(String start_production) {
-        this.start_production = start_production;
+    public void setStartproduction(String startproduction) {
+        this.startproduction = startproduction;
     }
 
-    public String getEnd_production() {
-        return end_production;
+    public String getEndproduction() {
+        return endproduction;
     }
 
-    public void setEnd_production(String end_production) {
-        this.end_production = end_production;
+    public void setEndproduction(String endproduction) {
+        this.endproduction = endproduction;
     }
 
     public List<EngineModel> getEngine() {
@@ -119,12 +119,16 @@ public class CarModel implements Serializable {
         this.engine = engine;
     }
 
-    public int getNcap_stars() {
-        return ncap_stars;
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
-    public void setNcap_stars(int ncap_stars) {
-        this.ncap_stars = ncap_stars;
+    public int getNcap() {
+        return ncap;
+    }
+
+    public void setNcap(int ncap) {
+        this.ncap = ncap;
     }
 
     public CountryModel getCountry() {
@@ -164,15 +168,15 @@ public class CarModel implements Serializable {
     }
 
     public CarModel(CompanyModel company, String name, String start_production,
-                    String end_production, EngineModel engine, int ncap_stars,
+                    String end_production, List<EngineModel> engine, int ncap,
                     CountryModel country, SegmentModel segment, BodyTypeModel bodytype,
                     UserModel user) {
         this.company = company;
         this.name = name;
-        this.start_production = start_production;
-        this.end_production = end_production;
-        this.engine = (List<EngineModel>) engine;
-        this.ncap_stars = ncap_stars;
+        this.startproduction = startproduction;
+        this.endproduction = endproduction;
+        this.engine = engine;
+        this.ncap = ncap;
         this.country = country;
         this.segment = segment;
         this.bodytype = bodytype;

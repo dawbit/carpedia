@@ -4,10 +4,10 @@ import com.carpedia.carpedia.model.CompanyModel;
 import com.carpedia.carpedia.repository.CompanyRepository;
 import com.carpedia.carpedia.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
 import java.util.List;
 
 //import javax.transaction.Transactional;
@@ -54,7 +54,7 @@ public class CompanyController {
     }
 
     @PostMapping("/company/save")
-    //@Transactional
+    @Transactional
     public String saveCompany(@RequestBody CompanyModel companyModel) {
         try {
             if (getCompanyByIdForSave(companyModel.getId()) != null) {
