@@ -9,37 +9,40 @@ import { MatTableDataSource } from '@angular/material';
 import { map, filter, scan } from 'rxjs/operators';
 
 @Component({
-  selector: "app-simplycar-list",
-  templateUrl: "./simplycar-list.component.html",
-  styleUrls: ["./simplycar-list.component.css"]
+    selector: "app-simplycar-list",
+	templateUrl: "./simplycar-list.component.html",
+	styleUrls: ["./simplycar-list.component.css"]
 })
 
 export class SimplyCarListComponent implements OnInit {
-  //simplycars: Observable<SimplyCar[]>;
-  simplycars: Observable<SimplyCar>;
-  //simplycars = new MatTableDataSource(Observable<SimplyCar[]>);
 
-  // applyFilter(filterValue: string) {
-  //   this.simplycars.filter = filterValue.trim().toLowerCase();
-  // }
+	displayedColumns: string[] = ['id', 'company', 'model', 'action'];
+	simplycars: MatTableDataSource<SimplyCar>;
+	
+	//@ViewChild(MatPaginator) paginator: MatPaginator;
+	//@ViewChild(MatSort) sort: MatSort;
   
-  constructor(private simplycarService: SimplyCarService,
-    private router: Router) {}
-
-    displayedColumns: string[] = ['id', 'company', 'model', 'action'];
+	constructor(private simplycarService: SimplyCarService,
+		private router: Router) {}
 
     
-  ngOnInit() {
-    this.reloadData();
-    // this.simplycars = new MatTableDataSource(); // create new object
-    // this.simplycars.paginator = this.paginator;
-    // this.simplycars.sort = this.sort;
 
-  }
-
-  reloadData() {
-    this.simplycars = this.simplycarService.getSimplyCarsList();
-  }
+    
+	ngOnInit() {
+		this.reloadData();
+		this.simplycars = new MatTableDataSource();
+		this.simplycars.paginator = this.paginator;
+		this.simplycars.sort = this.sort;
+	}
+	
+	getCars() {
+		this.simplycarService.getSimplyCarsList().subscribe((data: {}) => {
+			this.simplycars.data = data;
+			return data;
+			});
+	
+	reloadData() {
+		this.simplycars.data = this.simplycarService.getSimplyCarsList();
 
   deleteSimplyCar(id: number) {
     this.simplycarService.deleteSimplyCar(id)

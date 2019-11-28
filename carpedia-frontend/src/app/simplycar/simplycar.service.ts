@@ -1,15 +1,30 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SimplyCarService {
+export class SimplyCarService  {
 
- private baseUrl = 'http://localhost:8080/simply';
+  private baseUrl = 'http://localhost:8080/simply';
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
 
   constructor(private http: HttpClient) { }
+
+  getSimplyCarsList(): Observable<any> {
+    return this.http.get(this.baseUrl, this.httpOptions).pipe(
+      map(res => res));
+  }
+
+  private extractData(res: Response) {
+    return res || {}; // If 'res' is null, it returns empty object
+  }
 
   getSimplyCar(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/id/${id}`);
@@ -25,10 +40,6 @@ export class SimplyCarService {
 
   deleteSimplyCar(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/delete?id=${id}`, { responseType: 'text' });
-  }
-
-  getSimplyCarsList(): Observable<any> {
-    return this.http.get(`${this.baseUrl}`);
   }
 
   getSimplyCarByModel(model: string): Observable<any> {

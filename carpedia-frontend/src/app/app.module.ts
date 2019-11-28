@@ -30,6 +30,7 @@ import { MatTableModule } from '@angular/material';
     HttpClientModule,
     BrowserAnimationsModule,
     MatTableModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
