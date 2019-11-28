@@ -1,0 +1,18 @@
+<h2>Simply Car Details</h2> 
+
+<hr/>
+<div *ngIf="simplycar">
+  <div>
+    <label><b>ID: </b></label> {{simplycar.id}}
+  </div>
+  <div>
+    <label><b>Company: </b></label> {{simplycar.company}}
+  </div>
+  <div>
+    <label><b>Model: </b></label> {{simplycar.model}}
+  </div>  
+</div>
+
+<br>
+<br>
+<button (click)="list()" class="btn btn-primary">Back to SimplyCar List</button><br>
