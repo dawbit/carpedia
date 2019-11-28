@@ -1,12 +1,12 @@
 <div class="panel panel-primary">
   <div class="panel-heading">
     <h2>Simply Car List</h2>
-  </div>
+</div>
   <div class="panel-body">
-    <table class="table table-striped">
+    <!-- <table material class="table table-striped">
       <thead>
         <tr>
-          <th (sort)="onSort($event)">ID</th>
+          <th>ID</th>
           <th>Company</th>
           <th>Model</th>
           <th>Actions</th>
@@ -23,7 +23,42 @@
           </td>
         </tr>
       </tbody>
+    </table> -->
+
+    <!-- <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field> -->
+
+    <table mat-table [dataSource]="simplycars" >
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let simplycar"> {{simplycar.id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="company">
+        <th mat-header-cell *matHeaderCellDef> Company </th>
+        <td mat-cell *matCellDef="let simplycar"> {{simplycar.company}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="model">
+        <th mat-header-cell *matHeaderCellDef> Model </th>
+        <td mat-cell *matCellDef="let simplycar"> {{simplycar.model}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let simplycar">
+          <button (click)="deleteSimplyCar(simplycar.id)" class="btn btn-danger">Delete</button>
+          <button (click)="updateSimplyCar(simplycar.id)" class="btn btn-info" style="margin-left: 10px">Update</button>
+          <button (click)="simplycarDetails(simplycar.id)" class="btn btn-info" style="margin-left: 10px">Details</button>
+        </td>
+      </ng-container>
+              
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+      
+      
+
   </div>
-</div>
 

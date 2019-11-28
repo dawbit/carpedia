@@ -23,10 +23,6 @@ export class SimplyCarService {
     return this.http.put(`${this.baseUrl}/update`, value);
   }
 
-  // updateSimplyCar(simplycar: Object): Observable<Object> {
-  //   return this.http.put(`${this.baseUrl}/update`, simplycar);
-  // }
-
   deleteSimplyCar(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/delete?id=${id}`, { responseType: 'text' });
   }
@@ -34,4 +30,8 @@ export class SimplyCarService {
   getSimplyCarsList(): Observable<any> {
     return this.http.get(`${this.baseUrl}`);
   }
+
+  getSimplyCarByModel(model: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/model/${model}`);
+  } 
 }

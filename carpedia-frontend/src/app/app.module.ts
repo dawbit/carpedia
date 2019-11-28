@@ -9,6 +9,8 @@ import { SimplyCarListComponent } from './simplycar/simplycar-list/simplycar-lis
 import { HttpClientModule } from '@angular/common/http';
 import { UpdateSimplyCarComponent } from './simplycar/simplycar-update/update-simplycar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +28,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
