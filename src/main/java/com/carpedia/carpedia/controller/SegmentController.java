@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-@RestController
 @CrossOrigin
+@RestController
 public class SegmentController {
 
     @Autowired

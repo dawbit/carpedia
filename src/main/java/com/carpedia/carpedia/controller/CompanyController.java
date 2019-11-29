@@ -12,6 +12,7 @@ import java.util.List;
 
 //import javax.transaction.Transactional;
 
+@CrossOrigin
 @RestController
 public class CompanyController {
 
