@@ -4,9 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SimplyCarService } from '../simplycar.service';
 
 @Component({
-  selector: 'app-update-simplycar',
-  templateUrl: './update-simplycar.component.html',
-  styleUrls: ['./update-simplycar.component.css']
+  selector: 'app-simplycar-update',
+  templateUrl: './simplycar-update.component.html',
+  styleUrls: ['./simplycar-update.component.css']
 })
 export class UpdateSimplyCarComponent implements OnInit {
 

@@ -7,7 +7,7 @@ import { CreateSimplyCarComponent } from "./simplycar/simplycar-create/simplycar
 import { SimplyCarDetailsComponent } from "./simplycar/simplycar-details/simplycar-details.component";
 import { SimplyCarListComponent } from "./simplycar/simplycar-list/simplycar-list.component";
 import { HttpClientModule } from "@angular/common/http";
-import { UpdateSimplyCarComponent } from "./simplycar/simplycar-update/update-simplycar.component";
+import { UpdateSimplyCarComponent } from "./simplycar/simplycar-update/simplycar-update.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
   MatInputModule,
@@ -16,6 +16,7 @@ import {
   MatSortModule,
   MatTableModule
 } from "@angular/material";
+import { HomepageComponent } from './homepage/homepage.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {
     CreateSimplyCarComponent,
     SimplyCarDetailsComponent,
     SimplyCarListComponent,
-    UpdateSimplyCarComponent
+    UpdateSimplyCarComponent,
+    HomepageComponent
   ],
   imports: [
     BrowserModule,

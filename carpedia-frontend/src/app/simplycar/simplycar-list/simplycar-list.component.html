@@ -1,51 +1,32 @@
 <div class="panel panel-primary">
+
   <div class="panel-heading">
     <h2>Simply Car List</h2>
   </div>
+
   <div class="panel-body">
-    <!-- <table material class="table table-striped">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Company</th>
-          <th>Model</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let simplycar of simplycars | async">
-          <td>{{simplycar.id}}</td>
-          <td>{{simplycar.company}}</td>
-          <td>{{simplycar.model}}</td>
-          <td><button (click)="deleteSimplyCar(simplycar.id)" class="btn btn-danger">Delete</button>
-              <button (click)="updateSimplyCar(simplycar.id)" class="btn btn-info" style="margin-left: 10px">Update</button>
-              <button (click)="simplycarDetails(simplycar.id)" class="btn btn-info" style="margin-left: 10px">Details</button>
-          </td>
-        </tr>
-      </tbody>
-    </table> -->
 
-    <!-- <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-    </mat-form-field> -->
+      <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
 
-    <table mat-table [dataSource]="simplycars">
+    <table mat-table [dataSource]="simplycars" matSort>
       <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
         <td mat-cell *matCellDef="let simplycar">{{ simplycar.id }}</td>
       </ng-container>
 
       <ng-container matColumnDef="company">
-        <th mat-header-cell *matHeaderCellDef>Company</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Company</th>
         <td mat-cell *matCellDef="let simplycar">{{ simplycar.company }}</td>
       </ng-container>
 
       <ng-container matColumnDef="model">
-        <th mat-header-cell *matHeaderCellDef>Model</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Model</th>
         <td mat-cell *matCellDef="let simplycar">{{ simplycar.model }}</td>
       </ng-container>
 
-      <ng-container matColumnDef="action">
+      <ng-container matColumnDef="action" id="action">
         <th mat-header-cell *matHeaderCellDef>Action</th>
         <td mat-cell *matCellDef="let simplycar">
           <button
@@ -79,5 +60,7 @@
       [pageSizeOptions]="[5, 10, 20]"
       showFirstLastButtons
     ></mat-paginator>
+
   </div>
+
 </div>

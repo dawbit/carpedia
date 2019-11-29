@@ -44,7 +44,7 @@ export class SimplyCarService {
     });
   }
 
-  getSimplyCarByModel(model: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/model/${model}`);
-  }
+  // getSimplyCarByModel(model: string): Observable<any> {
+  //   return this.http.get(`${this.baseUrl}/model/${model}`);
+  // }
 }

@@ -43,6 +43,14 @@ export class SimplyCarListComponent implements OnInit {
     this.getCars();
   }
 
+  applyFilter(filterValue: string) {
+    this.simplycars.filter = filterValue.trim().toLowerCase();
+
+    if (this.simplycars.paginator) {
+      this.simplycars.paginator.firstPage();
+    }
+  }
+
   getCars() {
     this.simplycarService.getSimplyCarsList().subscribe(data => {
       console.log(data);
