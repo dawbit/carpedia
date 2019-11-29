@@ -21,7 +21,7 @@ import {
 @Component({
   selector: "app-simplycar-list",
   templateUrl: "./simplycar-list.component.html",
-  styleUrls: ["./simplycar-list.component.css"]
+  styleUrls: ["./../../table.css"]
 })
 export class SimplyCarListComponent implements OnInit {
   displayedColumns: string[] = ["id", "company", "model", "action"];

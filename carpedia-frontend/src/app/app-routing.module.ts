@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SimplyCarListComponent } from './simplycar/simplycar-list/simplycar-list.component';
 import { UpdateSimplyCarComponent } from './simplycar/simplycar-update/simplycar-update.component';
 import {HomepageComponent} from './homepage/homepage.component';
+import {CountryListComponent} from './country/country-list/country-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'homepage', pathMatch: 'full' },
@@ -14,6 +15,8 @@ const routes: Routes = [
   { path: 'simplycar/add', component: CreateSimplyCarComponent },
   { path: 'simplycar/update/:id', component: UpdateSimplyCarComponent },
   { path: 'simplycar/details/:id', component: SimplyCarDetailsComponent },
+
+  { path: 'country', component: CountryListComponent },
 ];
 
 @NgModule({

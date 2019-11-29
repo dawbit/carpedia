@@ -17,17 +17,23 @@ import {
   MatTableModule
 } from "@angular/material";
 import { HomepageComponent } from './homepage/homepage.component';
+import { CountryCreateComponent } from './country/country-create/country-create.component';
+import { CountryDetailsComponent } from './country/country-details/country-details.component';
+import { CountryListComponent } from './country/country-list/country-list.component';
+import { CountryUpdateComponent } from './country/country-update/country-update.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-
-    // for Simply Car
     CreateSimplyCarComponent,
     SimplyCarDetailsComponent,
     SimplyCarListComponent,
     UpdateSimplyCarComponent,
-    HomepageComponent
+    HomepageComponent,
+    CountryCreateComponent,
+    CountryDetailsComponent,
+    CountryListComponent,
+    CountryUpdateComponent
   ],
   imports: [
     BrowserModule,
