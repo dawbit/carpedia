@@ -7,7 +7,7 @@
   <div class="panel-body">
 
       <mat-form-field>
-          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search...">
       </mat-form-field>
 
     <table mat-table [dataSource]="simplycars" matSort>

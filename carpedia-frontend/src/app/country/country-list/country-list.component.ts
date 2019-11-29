@@ -34,7 +34,6 @@ export class CountryListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    //this.reloadData();
     this.countrys = new MatTableDataSource();
     this.countrys.paginator = this.paginator;
     this.countrys.sort = this.sort;

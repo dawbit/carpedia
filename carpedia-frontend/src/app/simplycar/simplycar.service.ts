@@ -13,18 +13,10 @@ export class SimplyCarService {
     headers: new HttpHeaders({
       "Content-Type": "application/json",
       'Access-Control-Allow-Origin': '*',
-      //'Access-Control-Allow-Origin': 'http://localhost:8080/simply',
       'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
       'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
     })
   };
-
-  header = {
-    'Access-Control-Allow-Origin': '*',
-    //'Access-Control-Allow-Origin': 'http://localhost:8080/simply',
-    'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
-  }
 
   constructor(private http: HttpClient) {}
 

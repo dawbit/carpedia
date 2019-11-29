@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './simplycar-create.component.html',
   styleUrls: ['./simplycar-create.component.css']
 })
-export class CreateSimplyCarComponent implements OnInit {
+export class SimplyCarCreateComponent implements OnInit {
 
   simplycar: SimplyCar = new SimplyCar();
   submitted = false;

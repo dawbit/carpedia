@@ -1,3 +1,15 @@
-<p>
-  country-details works!
-</p>
+<h2>Country Details</h2> 
+
+<hr/>
+<div *ngIf="country">
+  <div>
+    <label><b>ID: </b></label> {{country.id}}
+  </div>
+  <div>
+    <label><b>Name: </b></label> {{country.name}}
+  </div>
+</div>
+
+<br>
+<br>
+<button (click)="list()" class="btn btn-primary">Back to Country List</button><br>

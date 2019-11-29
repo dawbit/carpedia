@@ -8,7 +8,7 @@ import { SimplyCarService } from '../simplycar.service';
   templateUrl: './simplycar-update.component.html',
   styleUrls: ['./simplycar-update.component.css']
 })
-export class UpdateSimplyCarComponent implements OnInit {
+export class SimplyCarUpdateComponent implements OnInit {
 
   id: number;
   simplycar: SimplyCar;
