@@ -22,7 +22,7 @@ import {
   styleUrls: ["./company-list.component.css"]
 })
 export class CompanyListComponent implements OnInit {
-  displayedColumns: string[] = ["id", "name", "foundation", "country", "action"];
+  displayedColumns: string[] = ["id", "name", "foundation", "action"];
   companys: MatTableDataSource<Company>;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
