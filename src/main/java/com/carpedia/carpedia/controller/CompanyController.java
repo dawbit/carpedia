@@ -71,12 +71,15 @@ public class CompanyController {
 
     @PutMapping("company/update")
     @Transactional
-    public String updateCompany(@RequestBody CompanyModel engineModel) {
+    public String updateCompany(@RequestBody CompanyModel companyModel) {
         try {
             entityManager.createQuery("UPDATE CompanyModel companyModel " +
-                    "SET companyModel.name=?2 WHERE companyModel.id=?1")
-                    .setParameter(1, engineModel.getId())
-                    .setParameter(2, engineModel.getName())
+                    "SET companyModel.name=?2, companyModel.foundation=?3," +
+                    "companyModel.country=?4 WHERE companyModel.id=?1")
+                    .setParameter(1, companyModel.getId())
+                    .setParameter(2, companyModel.getName())
+                    .setParameter(3, companyModel.getFoundation())
+                    .setParameter(4,companyModel.getCountry())
                     .executeUpdate();
             return "Company updated";
         }
