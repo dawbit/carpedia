@@ -47,7 +47,7 @@ public class CarController {
         return car.findById(id);
     }
 
-    @GetMapping("/car/login/{login}")
+    @GetMapping("/car/name/{name}")
     public List<CarModel> getCarByName(@PathVariable String name) {
         return car.findAllByName(name);
     }

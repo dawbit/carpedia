@@ -36,8 +36,8 @@ public class EngineController {
     }
 
     @GetMapping("/engine/id/{id}")
-    public List<EngineModel> getEngineById(@PathVariable long id) {
-        return (List<EngineModel>) engine.findById(id);
+    public EngineModel getEngineById(@PathVariable long id) {
+        return engine.findById(id);
     }
 
     @GetMapping("/engine/name/{name}")

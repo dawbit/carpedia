@@ -18,6 +18,22 @@ import {CompanyCreateComponent} from './company/company-create/company-create.co
 import {CompanyUpdateComponent} from './company/company-update/company-update.component';
 import {CompanyDetailsComponent} from './company/company-details/company-details.component';
 
+import {SegmentListComponent} from './segment/segment-list/segment-list.component';
+import {SegmentCreateComponent} from './segment/segment-create/segment-create.component';
+import {SegmentUpdateComponent} from './segment/segment-update/segment-update.component';
+import {SegmentDetailsComponent} from './segment/segment-details/segment-details.component';
+
+import {BodytypeListComponent} from './bodytype/bodytype-list/bodytype-list.component';
+import {BodytypeCreateComponent} from './bodytype/bodytype-create/bodytype-create.component';
+import {BodytypeUpdateComponent} from './bodytype/bodytype-update/bodytype-update.component';
+import {BodytypeDetailsComponent} from './bodytype/bodytype-details/bodytype-details.component';
+
+import {EngineListComponent} from './engine/engine-list/engine-list.component';
+import {EngineCreateComponent} from './engine/engine-create/engine-create.component';
+import {EngineUpdateComponent} from './engine/engine-update/engine-update.component';
+import {EngineDetailsComponent} from './engine/engine-details/engine-details.component';
+
+
 const routes: Routes = [
   { path: '', redirectTo: 'homepage', pathMatch: 'full' },
   { path: 'homepage', component: HomepageComponent },
@@ -36,6 +52,22 @@ const routes: Routes = [
   { path: 'company/add', component: CompanyCreateComponent },
   { path: 'company/update/:id', component: CompanyUpdateComponent },
   { path: 'company/details/:id', component:CompanyDetailsComponent },
+
+  { path: 'segment', component: SegmentListComponent },
+  { path: 'segment/add', component: SegmentCreateComponent },
+  { path: 'segment/update/:id', component: SegmentUpdateComponent },
+  { path: 'segment/details/:id', component:SegmentDetailsComponent },
+
+  { path: 'bodytype', component: BodytypeListComponent },
+  { path: 'bodytype/add', component: BodytypeCreateComponent },
+  { path: 'bodytype/update/:id', component: BodytypeUpdateComponent },
+  { path: 'bodytype/details/:id', component:BodytypeDetailsComponent },
+
+  { path: 'engine', component: EngineListComponent },
+  { path: 'engine/add', component: EngineCreateComponent },
+  { path: 'engine/update/:id', component: EngineUpdateComponent },
+  { path: 'engine/details/:id', component:EngineDetailsComponent },
+
 ];
 
 @NgModule({

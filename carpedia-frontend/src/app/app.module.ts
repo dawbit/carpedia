@@ -30,6 +30,22 @@ import { CompanyDetailsComponent } from "./company/company-details/company-detai
 import { CompanyListComponent } from "./company/company-list/company-list.component";
 import { CompanyUpdateComponent } from "./company/company-update/company-update.component";
 
+import { SegmentCreateComponent } from './segment/segment-create/segment-create.component';
+import { SegmentDetailsComponent } from './segment/segment-details/segment-details.component';
+import { SegmentListComponent } from './segment/segment-list/segment-list.component';
+import { SegmentUpdateComponent } from './segment/segment-update/segment-update.component';
+
+import { BodytypeCreateComponent } from './bodytype/bodytype-create/bodytype-create.component';
+import { BodytypeDetailsComponent } from './bodytype/bodytype-details/bodytype-details.component';
+import { BodytypeListComponent } from './bodytype/bodytype-list/bodytype-list.component';
+import { BodytypeUpdateComponent } from './bodytype/bodytype-update/bodytype-update.component';
+
+import { EngineCreateComponent } from './engine/engine-create/engine-create.component';
+import { EngineDetailsComponent } from './engine/engine-details/engine-details.component';
+import { EngineListComponent } from './engine/engine-list/engine-list.component';
+import { EngineUpdateComponent } from './engine/engine-update/engine-update.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +64,22 @@ import { CompanyUpdateComponent } from "./company/company-update/company-update.
     CompanyCreateComponent,
     CompanyDetailsComponent,
     CompanyListComponent,
-    CompanyUpdateComponent
+    CompanyUpdateComponent,
+
+    SegmentCreateComponent,
+    SegmentDetailsComponent,
+    SegmentListComponent,
+    SegmentUpdateComponent,
+
+    BodytypeCreateComponent,
+    BodytypeDetailsComponent,
+    BodytypeListComponent,
+    BodytypeUpdateComponent,
+
+    EngineCreateComponent,
+    EngineDetailsComponent,
+    EngineListComponent,
+    EngineUpdateComponent
   ],
   imports: [
     BrowserModule,
