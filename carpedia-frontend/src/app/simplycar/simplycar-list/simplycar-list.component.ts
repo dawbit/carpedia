@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
 import { MatTableDataSource } from "@angular/material";
 //import { filter } from 'rxjs/operators';
 //import { map, filter, scan } from "rxjs/operators";
-import { ViewChild } from "@angular/core";
+import { ViewChild, AfterViewInit } from "@angular/core";
 import {
   MatInputModule,
   MatPaginatorModule,
@@ -26,6 +26,7 @@ import {
 export class SimplyCarListComponent implements OnInit {
   displayedColumns: string[] = ["id", "company", "model", "action"];
   simplycars: MatTableDataSource<SimplyCar>;
+  simply: SimplyCar[];
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -36,11 +37,11 @@ export class SimplyCarListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    //this.reloadData();
+    this.reloadData();
     this.simplycars = new MatTableDataSource();
     this.simplycars.paginator = this.paginator;
     this.simplycars.sort = this.sort;
-    this.getCars();
+    //this.getCars();
   }
 
   applyFilter(filterValue: string) {
@@ -51,6 +52,25 @@ export class SimplyCarListComponent implements OnInit {
     }
   }
 
+  applyModelFilter(filter: string) {
+    this.simplycarService.getSimplyCarByModel(filter).subscribe(
+      (data) => {
+        this.refreshDataSource(data);
+        //this.simplycars.data = data;
+        //return data;
+      })
+      if(filter==''){
+        this.reloadData();
+      };
+  }
+
+  refreshDataSource(data: SimplyCar[]) {
+    this.simply = data;
+    this.simplycars = new MatTableDataSource<SimplyCar>(this.simply);
+    this.simplycars.paginator = this.paginator;
+    this.simplycars.sort = this.sort;
+  }
+
   getCars() {
     this.simplycarService.getSimplyCarsList().subscribe(data => {
       console.log(data);
@@ -59,15 +79,17 @@ export class SimplyCarListComponent implements OnInit {
     });
   }
 
-  //   reloadData() {
-  //     this.simplycars.data = this.simplycarService.getSimplyCarsList();
-  //   }
+  reloadData() {
+    //this.simplycars.data = this.simplycarService.getSimplyCarsList();
+    //this.applyModelFilter(''); // zawiesza stronę
+    this.getCars();
+  }
 
   deleteSimplyCar(id: number) {
     this.simplycarService.deleteSimplyCar(id).subscribe(
       data => {
         console.log(data);
-        //this.reloadData();
+        this.reloadData();
       },
       error => console.log(error)
     );

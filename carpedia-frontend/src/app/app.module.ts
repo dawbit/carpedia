@@ -11,7 +11,8 @@ import {
   MatProgressSpinnerModule,
   MatSortModule,
   MatTableModule,
-  MatSelectModule
+  MatSelectModule,
+  MatCardModule
 } from "@angular/material";
 import { HomepageComponent } from "./homepage/homepage.component";
 
@@ -96,7 +97,8 @@ import { EngineUpdateComponent } from './engine/engine-update/engine-update.comp
     MatPaginatorModule,
     MatSortModule,
     MatSelectModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
