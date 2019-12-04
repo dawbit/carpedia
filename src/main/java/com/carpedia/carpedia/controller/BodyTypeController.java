@@ -55,7 +55,7 @@ public class BodyTypeController {
                 return "Body type saved";
             }
         } catch (Exception exc) {
-            return "Not deleted. Exception: " + exc.getMessage();
+            return "Not saveed. Exception: " + exc.getMessage();
         }
     }
 

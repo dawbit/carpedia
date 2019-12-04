@@ -1,6 +1,6 @@
 package com.carpedia.carpedia.controller;
 
-import com.carpedia.carpedia.model.SimplyCar;
+import com.carpedia.carpedia.model.SimplyCarModel;
 import com.carpedia.carpedia.repository.SimplyCarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-public class WebController {
+public class SimplyCarController {
     //for tests
     @Autowired
     private EntityManager entityManager;
@@ -30,22 +30,22 @@ public class WebController {
 //    }
 
     @GetMapping("/simply")
-    public List<SimplyCar> getAllSimplyCars() {
+    public List<SimplyCarModel> getAllSimplyCars() {
         return repository.findAll();
     }
 
     @GetMapping("/simply/id/{id}")
-    public SimplyCar getSimplyCarsById(@PathVariable long id) {
+    public SimplyCarModel getSimplyCarsById(@PathVariable long id) {
         return repository.findById(id);
     }
 
     @GetMapping("/simply/company/{company}")
-    public List<SimplyCar> getSimplyCarsByCompany(@PathVariable String company) {
+    public List<SimplyCarModel> getSimplyCarsByCompany(@PathVariable String company) {
         return repository.findAllByCompany(company);
     }
 
     @GetMapping("/simply/model/{model}")
-    public List<SimplyCar> getSimplyCarsByModel(@PathVariable String model) {
+    public List<SimplyCarModel> getSimplyCarsByModel(@PathVariable String model) {
         return repository.findAllByModel(model);
     }
 
@@ -58,7 +58,7 @@ public class WebController {
 
     @PostMapping("/simply/save")
     @Transactional
-    public String saveSimplyCar(@RequestBody SimplyCar simplyCar) {
+    public String saveSimplyCar(@RequestBody SimplyCarModel simplyCar) {
         try {
             if (getCarById(simplyCar.getId()) != null) {
                 return "SimplyCar already exists";
@@ -74,7 +74,7 @@ public class WebController {
 
     @PutMapping("simply/update")
     @Transactional
-    public String updateSimplyCar(@RequestBody SimplyCar simplyCar) {
+    public String updateSimplyCar(@RequestBody SimplyCarModel simplyCar) {
         try {
             entityManager.createQuery("UPDATE SimplyCar simplyCar " +
                     "SET simplyCar.company=?2, simplyCar.model=?3 WHERE simplyCar.id=?1")
@@ -101,7 +101,7 @@ public class WebController {
         }
     }
 
-    private SimplyCar getCarById(long id) {
+    private SimplyCarModel getCarById(long id) {
         return repository.findById(id);
     }
 }

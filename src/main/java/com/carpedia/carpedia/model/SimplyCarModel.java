@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "simplycar")
-public class SimplyCar implements Serializable {
+public class SimplyCarModel implements Serializable {
     //this model is created for using in tests
 
     private static final long serialVersionUID = -3009157732242241606L;
@@ -48,10 +48,10 @@ public class SimplyCar implements Serializable {
         return model;
     }
 
-    protected SimplyCar() {
+    protected SimplyCarModel() {
     }
 
-    public SimplyCar(String company, String model) {
+    public SimplyCarModel(String company, String model) {
         this.company = company;
         this.model = model;
     }

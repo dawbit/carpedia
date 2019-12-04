@@ -1,17 +1,16 @@
 package com.carpedia.carpedia.repository;
 
-import com.carpedia.carpedia.model.SimplyCar;
+import com.carpedia.carpedia.model.SimplyCarModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface SimplyCarRepository extends JpaRepository<SimplyCar, Long> {
+public interface SimplyCarRepository extends JpaRepository<SimplyCarModel, Long> {
     //for tests
 
-    SimplyCar findById(long id);
+    SimplyCarModel findById(long id);
 
-    List<SimplyCar> findAllByCompany(String company);
-    List<SimplyCar> findAllByModel(String model);
-    //List<SimplyCar> findOne(long id);
+    List<SimplyCarModel> findAllByCompany(String company);
+    List<SimplyCarModel> findAllByModel(String model);
 
 }
