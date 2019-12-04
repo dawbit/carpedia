@@ -7,13 +7,9 @@
   <div class="panel-body">
 
       <mat-form-field>    
-          <input matInput placeholder="Szukaj po modelu (na bazie)"
+          <input matInput placeholder="Search by model ()"
                  (keyup)="applyModelFilter($event.target.value)">
       </mat-form-field>
-
-      <!-- <button mat-raised-button color="primary" class="flex flex-grow-2 flex-h-center margin-left-10" (click)="applyModelFilter('')">
-          Pokaż wszystkie
-      </button> -->
 
       <mat-form-field>
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search...">
@@ -64,6 +60,10 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
+
+    <mat-card *ngIf="loading" class="full-width flex flex-h-center">
+        <mat-spinner color="primary" mode="indeterminate"></mat-spinner>
+    </mat-card>
 
     <mat-paginator
       [pageSize]="5"

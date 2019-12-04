@@ -33,6 +33,11 @@ import {EngineCreateComponent} from './engine/engine-create/engine-create.compon
 import {EngineUpdateComponent} from './engine/engine-update/engine-update.component';
 import {EngineDetailsComponent} from './engine/engine-details/engine-details.component';
 
+import {CarListComponent} from './car/car-list/car-list.component';
+import {CarCreateComponent} from './car/car-create/car-create.component';
+import {CarUpdateComponent} from './car/car-update/car-update.component';
+import {CarDetailsComponent} from './car/car-details/car-details.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'homepage', pathMatch: 'full' },
@@ -67,6 +72,11 @@ const routes: Routes = [
   { path: 'engine/add', component: EngineCreateComponent },
   { path: 'engine/update/:id', component: EngineUpdateComponent },
   { path: 'engine/details/:id', component:EngineDetailsComponent },
+
+  { path: 'car', component: CarListComponent },
+  { path: 'car/add', component: CarCreateComponent },
+  { path: 'car/update/:id', component: CarUpdateComponent },
+  { path: 'car/details/:id', component:CarDetailsComponent },
 
 ];
 

@@ -167,8 +167,8 @@ public class CarModel implements Serializable {
 
     }
 
-    public CarModel(CompanyModel company, String name, String start_production,
-                    String end_production, List<EngineModel> engine, int ncap,
+    public CarModel(CompanyModel company, String name, String startproduction,
+                    String endproduction, List<EngineModel> engine, int ncap,
                     CountryModel country, SegmentModel segment, BodyTypeModel bodytype,
                     UserModel user) {
         this.company = company;

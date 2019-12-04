@@ -46,6 +46,11 @@ import { EngineDetailsComponent } from './engine/engine-details/engine-details.c
 import { EngineListComponent } from './engine/engine-list/engine-list.component';
 import { EngineUpdateComponent } from './engine/engine-update/engine-update.component';
 
+import { CarCreateComponent } from './car/car-create/car-create.component';
+import { CarDetailsComponent } from './car/car-details/car-details.component';
+import { CarListComponent } from './car/car-list/car-list.component';
+import { CarUpdateComponent } from './car/car-update/car-update.component';
+
 
 @NgModule({
   declarations: [
@@ -80,7 +85,12 @@ import { EngineUpdateComponent } from './engine/engine-update/engine-update.comp
     EngineCreateComponent,
     EngineDetailsComponent,
     EngineListComponent,
-    EngineUpdateComponent
+    EngineUpdateComponent,
+
+    CarCreateComponent,
+    CarDetailsComponent,
+    CarListComponent,
+    CarUpdateComponent
   ],
   imports: [
     BrowserModule,

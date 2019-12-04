@@ -27,6 +27,7 @@ export class SimplyCarListComponent implements OnInit {
   displayedColumns: string[] = ["id", "company", "model", "action"];
   simplycars: MatTableDataSource<SimplyCar>;
   simply: SimplyCar[];
+  loading = true;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -53,9 +54,11 @@ export class SimplyCarListComponent implements OnInit {
   }
 
   applyModelFilter(filter: string) {
+    this.loading = true;
     this.simplycarService.getSimplyCarByModel(filter).subscribe(
       (data) => {
         this.refreshDataSource(data);
+        this.loading = false;
         //this.simplycars.data = data;
         //return data;
       })
@@ -73,8 +76,10 @@ export class SimplyCarListComponent implements OnInit {
 
   getCars() {
     this.simplycarService.getSimplyCarsList().subscribe(data => {
+      this.loading = true;
       console.log(data);
       this.simplycars.data = data;
+      this.loading = false;
       return data;
     });
   }
@@ -82,7 +87,9 @@ export class SimplyCarListComponent implements OnInit {
   reloadData() {
     //this.simplycars.data = this.simplycarService.getSimplyCarsList();
     //this.applyModelFilter(''); // zawiesza stronę
+    this.loading = true;
     this.getCars();
+    this.loading = false;
   }
 
   deleteSimplyCar(id: number) {
