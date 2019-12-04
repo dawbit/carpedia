@@ -46,4 +46,8 @@ export class CarService {
     });
   }
 
+  getCarByModel(name: string): Observable<any> {
+    return this.http.get(`${this.baseUrlCar}/name/${name}`, this.httpOptions);
+  }
+
 }

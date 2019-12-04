@@ -1,21 +1,25 @@
 <div class="panel panel-primary">
 
-        <div class="panel-heading">
-          <h2>Car List</h2>
-        </div>
-      
-        <div class="panel-body">
-      
-            <mat-form-field>
-                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search...">
-            </mat-form-field>
-      
-          <table mat-table [dataSource]="cars" matSort>
+    <div class="panel-heading">
+        <h2>Car List</h2>
+    </div>
+
+    <div class="panel-body">
+
+        <mat-form-field>
+            <input matInput placeholder="Search by model" (keydown.enter)="applyModelFilter($event.target.value)">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search...">
+        </mat-form-field>
+
+        <table mat-table [dataSource]="dataSource" matSort>
             <ng-container matColumnDef="id">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-              <td mat-cell *matCellDef="let car">{{ car.id }}</td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+                <td mat-cell *matCellDef="let car">{{ car.id }}</td>
             </ng-container>
-      
+
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Model</th>
                 <td mat-cell *matCellDef="let car">{{ car.name }}</td>
@@ -24,8 +28,8 @@
             <ng-container matColumnDef="startproduction">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Start production</th>
                 <td mat-cell *matCellDef="let car">{{ car.startproduction }}</td>
-            </ng-container>    
-            
+            </ng-container>
+
             <ng-container matColumnDef="endproduction">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>End production</th>
                 <td mat-cell *matCellDef="let car">{{ car.endproduction }}</td>
@@ -35,48 +39,37 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>NCAP stars</th>
                 <td mat-cell *matCellDef="let car">{{ car.ncap }}</td>
             </ng-container>
-    
+
             <!-- <ng-container matColumnDef="country">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Country</th>
                 <td mat-cell *matCellDef="let car">{{ car.country.name }}</td>
             </ng-container> -->
-      
+
             <ng-container matColumnDef="action" id="action">
-              <th mat-header-cell *matHeaderCellDef>Action</th>
-              <td mat-cell *matCellDef="let car">
-                <button
-                  (click)="deleteCar(car.id)"
-                  class="btn btn-danger"
-                >
-                  Delete
-                </button>
-                <button
-                  (click)="updateCar(car.id)"
-                  class="btn btn-info"
-                  style="margin-left: 10px"
-                >
-                  Update
-                </button>
-                <button
-                  (click)="carDetails(car.id)"
-                  class="btn btn-info"
-                  style="margin-left: 10px"
-                >
-                  Details
-                </button>
-              </td>
+                <th mat-header-cell *matHeaderCellDef>Action</th>
+                <td mat-cell *matCellDef="let car">
+                    <button (click)="deleteCar(car.id)" class="btn btn-danger">
+                        Delete
+                    </button>
+                    <button (click)="updateCar(car.id)" class="btn btn-info" style="margin-left: 10px">
+                        Update
+                    </button>
+                    <button (click)="carDetails(car.id)" class="btn btn-info" style="margin-left: 10px">
+                        Details
+                    </button>
+                </td>
             </ng-container>
-      
+
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-          </table>
-      
-          <mat-paginator
-            [pageSizeOptions]="[5, 10, 20]"
-            showFirstLastButtons
-          ></mat-paginator>
-      
-        </div>
-      
-      </div>
-      
+        </table>
+
+        <mat-card *ngIf="loading" class="full-width flex flex-h-center">
+            <mat-spinner color="primary" mode="indeterminate"></mat-spinner>
+        </mat-card>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+    </div>
+
+</div>

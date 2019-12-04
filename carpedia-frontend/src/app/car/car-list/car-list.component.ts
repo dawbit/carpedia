@@ -24,7 +24,9 @@ import {
 export class CarListComponent implements OnInit {
   displayedColumns: string[] = ["id", "name", "startproduction", "endproduction",
    "ncap", "action"];
-  cars: MatTableDataSource<Car>;
+  dataSource: MatTableDataSource<Car>;
+  cars: Car[];
+  loading = true;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -35,25 +37,55 @@ export class CarListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.cars = new MatTableDataSource();
-    this.cars.paginator = this.paginator;
-    this.cars.sort = this.sort;
-    this.getCars();
+    this.reloadData();
+    this.dataSource = new MatTableDataSource();
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
-  applyFilter(filterValue: string) {
-    this.cars.filter = filterValue.trim().toLowerCase();
+  reloadData() {
+    this.loading = true;
+    this.getCars();
+    this.loading = false;
+  }
 
-    if (this.cars.paginator) {
-      this.cars.paginator.firstPage();
+  applyFilter(filter: string) {
+    this.dataSource.filter = filter.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
     }
   }
 
+  applyModelFilter(filter: string) {
+    this.loading = true;
+    this.carService.getCarByModel(filter).subscribe(
+      data => {
+        this.refreshDataSource(data);
+        this.loading = false;
+      }
+    )
+
+      if(filter==''){
+        this.reloadData();
+      };
+  }
+
+  refreshDataSource(data: Car[]) {
+    this.cars = data;
+    this.dataSource = new MatTableDataSource<Car>(this.cars);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
   getCars() {
-    this.carService.getCarList().subscribe(data => {
-      console.log(data);
-      this.cars.data = data;
-      return data;
+    this.carService.getCarList().subscribe(
+      data => {
+        this.loading = true;
+        console.log(data);
+        this.dataSource.data = data;
+        this.loading = false;
+        return data;
     });
   }
 
@@ -61,6 +93,7 @@ export class CarListComponent implements OnInit {
     this.carService.deleteCar(id).subscribe(
       data => {
         console.log(data);
+        this.reloadData();
       },
       error => console.log(error)
     );
