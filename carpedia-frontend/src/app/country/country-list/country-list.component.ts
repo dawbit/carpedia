@@ -19,7 +19,8 @@ import {
 @Component({
   selector: "app-country-list",
   templateUrl: "./country-list.component.html",
-  styleUrls: ["./../../table.css"]
+  //styleUrls: ["./../../table.css"]
+  styleUrls: ["./country-list.component.css"]
 })
 export class CountryListComponent implements OnInit {
   displayedColumns: string[] = ["id", "name", "action"];
