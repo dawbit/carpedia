@@ -48,18 +48,18 @@ export class CarCreateComponent implements OnInit {
     this.car = new Car();
   }
 
-  getCountries() {
-    this.countryService.getCountryList().subscribe(data => {
-      console.log(data);
-      this.countries = data;
-      return data;
-    });
-  }
-
   getCompanies() {
     this.companyService.getCompanyList().subscribe(data => {
       console.log(data);
       this.companies = data;
+      return data;
+    });
+  }
+
+  getCountries() {
+    this.countryService.getCountryList().subscribe(data => {
+      console.log(data);
+      this.countries = data;
       return data;
     });
   }

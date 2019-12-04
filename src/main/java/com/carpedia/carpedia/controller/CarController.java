@@ -89,14 +89,34 @@ public class CarController {
     public String updateCar(@RequestBody CarModel carModel) {
         try {
             entityManager.createQuery("UPDATE CarModel carModel " +
-                    "SET carModel.name=?2, carModel.startproduction=?3, " +
-                    "carModel.endproduction=?4, carModel.ncap=?5 WHERE carModel.id=?1")
+                    "SET carModel.company=?2, carModel.name=?3, carModel.startproduction=?4," +
+                    "carModel.endproduction=?5, carModel.ncap=?6 WHERE carModel.id=?1")
                     .setParameter(1, carModel.getId())
-                    .setParameter(2, carModel.getName())
-                    .setParameter(3, carModel.getStartproduction())
-                    .setParameter(4, carModel.getEndproduction())
-                    .setParameter(5, carModel.getNcap())
+                    .setParameter(2, carModel.getCompany())
+                    .setParameter(3, carModel.getName())
+                    .setParameter(4, carModel.getStartproduction())
+                    .setParameter(5, carModel.getEndproduction())
+                    .setParameter(6, carModel.getNcap())
                     .executeUpdate();
+
+            entityManager.createQuery("UPDATE CarModel carModel SET carModel.country=?2 " +
+                    "WHERE carModel.id=?1")
+                    .setParameter(1, carModel.getId())
+                    .setParameter(2, carModel.getCountry())
+                    .executeUpdate();
+
+            entityManager.createQuery("UPDATE CarModel carModel SET carModel.segment=?2 " +
+                    "WHERE carModel.id=?1")
+                    .setParameter(1, carModel.getId())
+                    .setParameter(2, carModel.getSegment())
+                    .executeUpdate();
+
+            entityManager.createQuery("UPDATE CarModel carModel SET carModel.bodytype=?2 " +
+                    "WHERE carModel.id=?1")
+                    .setParameter(1, carModel.getId())
+                    .setParameter(2, carModel.getBodytype())
+                    .executeUpdate();
+
             return "Car updated";
         }
         catch (Exception exc){

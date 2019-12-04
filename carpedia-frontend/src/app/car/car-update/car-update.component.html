@@ -1,1 +1,108 @@
-<p>car-update works!</p>
+<h3>Car update</h3>
+<div [hidden]="submitted" style="width: 400px;">
+  <form (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+        <form>
+            <mat-form-field>
+            <mat-label>Company</mat-label>
+            <mat-select [(ngModel)]="car.company" name="company">
+                <mat-option *ngFor="let company of companies" [value]="company"
+                >{{ company.name }}
+                </mat-option>
+            </mat-select>
+            </mat-form-field>
+        </form>
+    </div>
+
+    <div class="form-group">
+        <label for="name">Model</label>
+        <input
+            type="text"
+            class="form-control"
+            id="name"
+            required
+            [(ngModel)]="car.name"
+            name="name"
+        />
+    </div>
+
+    <div class="form-group">
+        <label for="name">Start production</label>
+        <input
+            type="text"
+            class="form-control"
+            id="startproduction"
+            required
+            [(ngModel)]="car.startproduction"
+            name="startproduction"
+        />
+    </div>
+
+    <div class="form-group">
+        <label for="name">End production</label>
+        <input
+            type="text"
+            class="form-control"
+            id="endproduction"
+            required
+            [(ngModel)]="car.endproduction"
+            name="endproduction"
+        />
+    </div>
+
+    <div class="form-group">
+        <label for="name">NCAP stars</label>
+        <input
+            type="text"
+            class="form-control"
+            id="ncap"
+            required
+            [(ngModel)]="car.ncap"
+            name="ncap"
+        />
+    </div>
+
+    <div class="form-group">
+        <form>
+            <mat-form-field>
+            <mat-label>Country</mat-label>
+            <mat-select [(ngModel)]="car.country" name="country">
+                <mat-option *ngFor="let country of countries" [value]="country"
+                >{{ country.name }}
+                </mat-option>
+            </mat-select>
+            </mat-form-field>
+        </form>
+    </div>
+
+    <div class="form-group">
+        <form>
+            <mat-form-field>
+            <mat-label>Segment</mat-label>
+            <mat-select [(ngModel)]="car.segment" name="segment">
+                <mat-option *ngFor="let segment of segments" [value]="segment"
+                >{{ segment.name }}
+                </mat-option>
+            </mat-select>
+            </mat-form-field>
+        </form>
+    </div>
+
+    <div class="form-group">
+        <form>
+            <mat-form-field>
+            <mat-label>Body type</mat-label>
+            <mat-select [(ngModel)]="car.bodytype" name="bodytype">
+                <mat-option *ngFor="let bodytype of bodytypes" [value]="bodytype"
+                >{{ bodytype.name }}
+                </mat-option>
+            </mat-select>
+            </mat-form-field>
+        </form>
+    </div>
+
+
+    <button type="submit" class="btn btn-success">submit</button>
+  </form>
+</div>

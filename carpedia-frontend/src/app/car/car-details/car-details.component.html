@@ -1,1 +1,43 @@
-<p>car-details works!</p>
+<h2>Car Details</h2>
+
+<hr />
+<div *ngIf="car">
+    <div>
+        <label><b>ID: </b></label> {{ car.id }}
+    </div>
+    <div>
+        <label><b>Company: </b></label> {{ car.company.name }}
+    </div>
+    <div>
+        <label><b>Model: </b></label> {{ car.name }}
+    </div>
+    <div>
+        <label><b>Start production: </b></label> {{ car.startproduction }}
+    </div>
+    <div>
+        <label><b>End production: </b></label> {{ car.endproduction }}
+    </div>
+    <!-- <div>
+        <label><b>Engines: </b></label> {{ car.engine list? }}
+    </div> -->
+    <div>
+        <label><b>NCAP stars: </b></label> {{ car.ncap }}
+    </div>
+    <div>
+        <label><b>Country: </b></label> {{ car.country.name }}
+    </div>
+    <div>
+        <label><b>Segment: </b></label> {{ car.segment.name }}
+    </div>
+    <div>
+        <label><b>Body type: </b></label> {{ car.bodytype.name }}
+    </div>
+    <!-- <div>
+        <label><b>Added by: </b></label> {{ user.login user.firstname user.lastname }}
+    </div> -->
+</div>
+
+<br />
+<br />
+<button (click)="list()" class="btn btn-primary">Back to Car List</button
+><br />
