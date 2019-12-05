@@ -19,7 +19,7 @@ import {
 @Component({
   selector: "app-engine-list",
   templateUrl: "./engine-list.component.html",
-  styleUrls: ["./../../table.css"]
+  styleUrls: ["./engine-list.component.css"]
 })
 export class EngineListComponent implements OnInit {
   displayedColumns: string[] = ["id", "name", "power", "capacity", "action"];

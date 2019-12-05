@@ -1,31 +1,17 @@
 <h3>Update Company</h3>
 <div [hidden]="submitted" style="width: 400px;">
-  <form (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input
-        type="text"
-        class="form-control"
-        id="name"
-        required
-        [(ngModel)]="company.name"
-        name="name"
-      />
-    </div>
+    <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" required [(ngModel)]="company.name" name="name" />
+        </div>
 
-    <div class="form-group">
-      <label for="name">Foundation year</label>
-      <input
-        type="text"
-        class="form-control"
-        id="foundation"
-        required
-        [(ngModel)]="company.foundation"
-        name="foundation"
-      />
-    </div>
+        <div class="form-group">
+            <label for="name">Foundation year</label>
+            <input type="text" class="form-control" id="foundation" required [(ngModel)]="company.foundation" name="foundation" />
+        </div>
 
-    <!-- <div class="form-group">
+        <!-- <div class="form-group">
       <label for="name">Company</label>
       <input
         type="text"
@@ -37,23 +23,22 @@
       />
     </div> -->
 
-    <div class="form-group">
-      <form>
-        <mat-form-field>
-          <mat-label>Country</mat-label>
-          <mat-select [(ngModel)]="company.country" name="country">
-            <mat-option *ngFor="let country of countries" [value]="country"
-              >{{ country.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </form>
-    </div>
+        <div class="form-group">
+            <form>
+                <mat-form-field>
+                    <mat-label>Country</mat-label>
+                    <mat-select [(ngModel)]="company.country" name="country">
+                        <mat-option *ngFor="let country of countries" [value]="country">{{ country.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </form>
+        </div>
 
-    <button type="submit" class="btn btn-success">submit</button>
-  </form>
+        <button type="submit" class="btn btn-success">submit</button>
+    </form>
 </div>
 
-<!-- <div [hidden]="!submitted">
-  <h4>You submitted successfully!</h4>
-</div> -->
+<div [hidden]="!submitted">
+    <h4>You updated successfully!</h4>
+</div>
