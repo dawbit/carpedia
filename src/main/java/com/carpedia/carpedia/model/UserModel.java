@@ -22,6 +22,7 @@ public class UserModel implements Serializable {
 
     @Column(name = "password", nullable = false)
     @Size(min = 4, max = 20)
+    @JsonBackReference
     private String password;
 
     @Column(name = "fname")
@@ -86,7 +87,7 @@ public class UserModel implements Serializable {
         this.lname = lname;
     }
 
-    public boolean isIsmod() {
+    public boolean getIsmod() {
         return ismod;
     }
 
@@ -94,7 +95,7 @@ public class UserModel implements Serializable {
         this.ismod = ismod;
     }
 
-    public boolean isIsactive() {
+    public boolean getIsactive() {
         return isactive;
     }
 

@@ -17,12 +17,7 @@
     font-size: 14px;
     width: 100%;
   }
-  
-  /* td, th {
-    width: 12%;
+
+  /* #action td, th {
+      width: 5px;
   } */
-
-  #action td, th {
-      width: 60px;
-  }
-

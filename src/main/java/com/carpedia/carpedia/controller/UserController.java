@@ -70,13 +70,22 @@ public class UserController {
     public String updateUser(@RequestBody UserModel userModel) {
         try {
             entityManager.createQuery("UPDATE UserModel userModel " +
-                    "SET userModel.password=?2, userModel.fname=?3, userModel.lname=?4 WHERE userModel.id=?1")
-                    // WHERE simplyCar.id=?3
+                    "SET userModel.password=?2, userModel.fname=?3, userModel.lname=?4 " +
+                    "WHERE userModel.id=?1")
                     .setParameter(1, userModel.getId())
                     .setParameter(2, userModel.getPassword())
                     .setParameter(3, userModel.getFname())
                     .setParameter(4, userModel.getLname())
                     .executeUpdate();
+
+            entityManager.createQuery("UPDATE UserModel userModel " +
+                    "SET userModel.ismod=?2, userModel.isactive=?3" +
+                    "WHERE userModel.id=?1")
+                    .setParameter(1, userModel.getId())
+                    .setParameter(2, userModel.getIsmod())
+                    .setParameter(3, userModel.getIsactive())
+                    .executeUpdate();
+
             return "User updated";
         }
         catch (Exception exc){

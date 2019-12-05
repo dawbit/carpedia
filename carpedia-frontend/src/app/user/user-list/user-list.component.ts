@@ -22,11 +22,8 @@ import {
   styleUrls: ["./user-list.component.css"]
 })
 export class UserListComponent implements OnInit {
-  //displayedColumns: string[] = ["id", "login", "fname", "lname", "ismod", "isactive"];
-  displayedColumns: string[] = ["id"];
-  dataSource: MatTableDataSource<User>;
-  users: User[];
-  loading = true;
+  displayedColumns: string[] = ["id", "login", "fname", "lname", "ismod", "isactive", "action"];
+  users: MatTableDataSource<User>;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -37,41 +34,25 @@ export class UserListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.reloadData();
-    this.dataSource = new MatTableDataSource();
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
-  reloadData() {
-    this.loading = true;
+    this.users = new MatTableDataSource();
+    this.users.paginator = this.paginator;
+    this.users.sort = this.sort;
     this.getUsers();
-    this.loading = false;
   }
 
-  Filter(filter: string) {
-    this.dataSource.filter = filter.trim().toLowerCase();
+  applyFilter(filterValue: string) {
+    this.users.filter = filterValue.trim().toLowerCase();
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+    if (this.users.paginator) {
+      this.users.paginator.firstPage();
     }
   }
 
-  refreshDataSource(data: User[]) {
-    this.users = data;
-    this.dataSource = new MatTableDataSource<User>(this.users);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
   getUsers() {
-    this.userService.getUserList().subscribe(
-      data => {
-        this.loading = true;
-        console.log(data);
-        this.dataSource.data = data;
-        this.loading = false;
-        return data;
+    this.userService.getUserList().subscribe(data => {
+      console.log(data);
+      this.users.data = data;
+      return data;
     });
   }
 
@@ -79,7 +60,6 @@ export class UserListComponent implements OnInit {
     this.userService.deleteUser(id).subscribe(
       data => {
         console.log(data);
-        this.reloadData();
       },
       error => console.log(error)
     );
