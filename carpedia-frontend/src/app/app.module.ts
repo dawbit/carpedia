@@ -91,6 +91,7 @@ import { UserCreateComponent } from './user/user-create/user-create.component';
 import { UserDetailsComponent } from './user/user-details/user-details.component';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { UserUpdateComponent } from './user/user-update/user-update.component';
+import { UserLoginComponent } from './user/user-login/user-login.component';
 
 
 @NgModule({
@@ -136,7 +137,8 @@ import { UserUpdateComponent } from './user/user-update/user-update.component';
     UserCreateComponent,
     UserDetailsComponent,
     UserListComponent,
-    UserUpdateComponent
+    UserUpdateComponent,
+    UserLoginComponent
   ],
   imports: [
     BrowserModule,

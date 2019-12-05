@@ -42,6 +42,7 @@ import {UserListComponent} from './user/user-list/user-list.component';
 import {UserCreateComponent} from './user/user-create/user-create.component';
 import {UserUpdateComponent} from './user/user-update/user-update.component';
 import {UserDetailsComponent} from './user/user-details/user-details.component';
+import {UserLoginComponent} from './user/user-login/user-login.component';
 
 
 const routes: Routes = [
@@ -87,6 +88,7 @@ const routes: Routes = [
   { path: 'registry', component: UserCreateComponent },
   { path: 'user/update/:id', component: UserUpdateComponent },
   { path: 'user/details/:id', component: UserDetailsComponent },
+  { path: 'login', component: UserLoginComponent },
 
 ];
 
