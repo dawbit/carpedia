@@ -1,51 +1,56 @@
-<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
-  <ul class="navbar-nav">
-      <li class="nav-item">
-          <a routerLink="homepage" class="nav-link" routerLinkActive="active">Home Page</a>
-      </li>
-      <li class="nav-item">
-          <a routerLink="simplycar/" class="nav-link" routerLinkActive="active">Simply Car list</a>
-      </li>
-      <li class="nav-item">
-          <a routerLink="simplycar/add" class="nav-link" routerLinkActive="active">Add simply car</a>
-      </li>
-      <li class="nav-item">
-          <a routerLink="country/" class="nav-link" routerLinkActive="active">Country list</a>
-      </li>
-      <li class="nav-item">
-          <a routerLink="country/add" class="nav-link" routerLinkActive="active">Add country</a>
-      </li>
-      <li class="nav-item">
-          <a routerLink="company/" class="nav-link" routerLinkActive="active">Company list</a>
-      </li>
-      <li class="nav-item">
-          <a routerLink="company/add" class="nav-link" routerLinkActive="active">Add company</a>
-      </li>
-      <li class="nav-item">
-          <a routerLink="segment/" class="nav-link" routerLinkActive="active">Segment list</a>
-      </li>
-      <li class="nav-item">
-          <a routerLink="segment/add" class="nav-link" routerLinkActive="active">Add segment</a>
-      </li>
-      <li class="nav-item">
-          <a routerLink="bodytype/" class="nav-link" routerLinkActive="active">Bodytype list</a>
-      </li>
-      <li class="nav-item">
-          <a routerLink="bodytype/add" class="nav-link" routerLinkActive="active">Add bodytype</a>
-      </li>
-      <li class="nav-item">
-          <a routerLink="engine/" class="nav-link" routerLinkActive="active">Engine list</a>
-      </li>
-      <li class="nav-item">
-          <a routerLink="engine/add" class="nav-link" routerLinkActive="active">Add engine</a>
-      </li>
-      <li class="nav-item">
-          <a routerLink="car/" class="nav-link" routerLinkActive="active">Car list</a>
-      </li>
-      <li class="nav-item">
-          <a routerLink="car/add" class="nav-link" routerLinkActive="active">Add car</a>
-      </li>
-  </ul>
+<nav class="navbar navbar-expand-sm bg-primary">
+
+    <button mat-button routerLink="homepage" routerLinkActive="active">Home page</button>
+    <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+    <div id="space"></div>
+    <button mat-button routerLink="registry/" routerLinkActive="active">Sign up</button>
+    <button mat-button routerLink="login/" routerLinkActive="active">Sign in</button>
+
+    <mat-menu color="white" #menu="matMenu">
+        <button mat-menu-item [matMenuTriggerFor]="bodytypes">Bodytypes</button>
+        <button mat-menu-item [matMenuTriggerFor]="cars">Cars</button>
+        <button mat-menu-item [matMenuTriggerFor]="companies">Companies</button>
+        <button mat-menu-item [matMenuTriggerFor]="countries">Countries</button>
+        <button mat-menu-item [matMenuTriggerFor]="engines">Engines</button>
+        <button mat-menu-item [matMenuTriggerFor]="segments">Segments</button>
+        <button mat-menu-item [matMenuTriggerFor]="simplycars">Simply cars (test)</button>
+    </mat-menu>
+
+    <mat-menu #bodytypes="matMenu">
+        <button mat-menu-item routerLink="bodytype/" routerLinkActive="active">List</button>
+        <button mat-menu-item routerLink="bodytype/add" routerLinkActive="active">Add</button>
+    </mat-menu>
+
+    <mat-menu #cars="matMenu">
+        <button mat-menu-item routerLink="car/" routerLinkActive="active">List</button>
+        <button mat-menu-item routerLink="car/add" routerLinkActive="active">Add</button>
+    </mat-menu>
+
+    <mat-menu #companies="matMenu">
+        <button mat-menu-item routerLink="company/" routerLinkActive="active">List</button>
+        <button mat-menu-item routerLink="company/add" routerLinkActive="active">Add</button>
+    </mat-menu>
+
+    <mat-menu #countries="matMenu">
+        <button mat-menu-item routerLink="country/" routerLinkActive="active">List</button>
+        <button mat-menu-item routerLink="country/add" routerLinkActive="active">Add</button>
+    </mat-menu>
+
+    <mat-menu #engines="matMenu">
+        <button mat-menu-item routerLink="engine/" routerLinkActive="active">List</button>
+        <button mat-menu-item routerLink="engine/add" routerLinkActive="active">Add</button>
+    </mat-menu>
+
+    <mat-menu #segments="matMenu">
+        <button mat-menu-item routerLink="segment/" routerLinkActive="active">List</button>
+        <button mat-menu-item routerLink="segment/add" routerLinkActive="active">Add</button>
+    </mat-menu>
+
+    <mat-menu #simplycars="matMenu">
+        <button mat-menu-item routerLink="simplycar/" routerLinkActive="active">List</button>
+        <button mat-menu-item routerLink="simplycar/add" routerLinkActive="active">Add</button>
+    </mat-menu>
+
 </nav>
 
 <div class="container">
