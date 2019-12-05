@@ -87,6 +87,11 @@ import { CarDetailsComponent } from './car/car-details/car-details.component';
 import { CarListComponent } from './car/car-list/car-list.component';
 import { CarUpdateComponent } from './car/car-update/car-update.component';
 
+import { UserCreateComponent } from './user/user-create/user-create.component';
+import { UserDetailsComponent } from './user/user-details/user-details.component';
+import { UserListComponent } from './user/user-list/user-list.component';
+import { UserUpdateComponent } from './user/user-update/user-update.component';
+
 
 @NgModule({
   declarations: [
@@ -126,7 +131,12 @@ import { CarUpdateComponent } from './car/car-update/car-update.component';
     CarCreateComponent,
     CarDetailsComponent,
     CarListComponent,
-    CarUpdateComponent
+    CarUpdateComponent,
+
+    UserCreateComponent,
+    UserDetailsComponent,
+    UserListComponent,
+    UserUpdateComponent
   ],
   imports: [
     BrowserModule,

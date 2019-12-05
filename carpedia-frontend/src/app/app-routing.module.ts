@@ -38,6 +38,11 @@ import {CarCreateComponent} from './car/car-create/car-create.component';
 import {CarUpdateComponent} from './car/car-update/car-update.component';
 import {CarDetailsComponent} from './car/car-details/car-details.component';
 
+import {UserListComponent} from './user/user-list/user-list.component';
+import {UserCreateComponent} from './user/user-create/user-create.component';
+import {UserUpdateComponent} from './user/user-update/user-update.component';
+import {UserDetailsComponent} from './user/user-details/user-details.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'homepage', pathMatch: 'full' },
@@ -56,27 +61,32 @@ const routes: Routes = [
   { path: 'company', component: CompanyListComponent },
   { path: 'company/add', component: CompanyCreateComponent },
   { path: 'company/update/:id', component: CompanyUpdateComponent },
-  { path: 'company/details/:id', component:CompanyDetailsComponent },
+  { path: 'company/details/:id', component: CompanyDetailsComponent },
 
   { path: 'segment', component: SegmentListComponent },
   { path: 'segment/add', component: SegmentCreateComponent },
   { path: 'segment/update/:id', component: SegmentUpdateComponent },
-  { path: 'segment/details/:id', component:SegmentDetailsComponent },
+  { path: 'segment/details/:id', component: SegmentDetailsComponent },
 
   { path: 'bodytype', component: BodytypeListComponent },
   { path: 'bodytype/add', component: BodytypeCreateComponent },
   { path: 'bodytype/update/:id', component: BodytypeUpdateComponent },
-  { path: 'bodytype/details/:id', component:BodytypeDetailsComponent },
+  { path: 'bodytype/details/:id', component: BodytypeDetailsComponent },
 
   { path: 'engine', component: EngineListComponent },
   { path: 'engine/add', component: EngineCreateComponent },
   { path: 'engine/update/:id', component: EngineUpdateComponent },
-  { path: 'engine/details/:id', component:EngineDetailsComponent },
+  { path: 'engine/details/:id', component: EngineDetailsComponent },
 
   { path: 'car', component: CarListComponent },
   { path: 'car/add', component: CarCreateComponent },
   { path: 'car/update/:id', component: CarUpdateComponent },
-  { path: 'car/details/:id', component:CarDetailsComponent },
+  { path: 'car/details/:id', component: CarDetailsComponent },
+
+  { path: 'user', component: UserListComponent },
+  { path: 'registry', component: UserCreateComponent },
+  { path: 'user/update/:id', component: UserUpdateComponent },
+  { path: 'user/details/:id', component: UserDetailsComponent },
 
 ];
 
