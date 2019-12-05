@@ -7,11 +7,23 @@
     <div class="panel-body">
 
         <mat-form-field>
-            <input matInput placeholder="Search by model" (keydown.enter)="applyModelFilter($event.target.value)">
+            <input matInput placeholder="Search by model" (keydown.enter)="ModelFilter($event.target.value)">
         </mat-form-field>
 
         <mat-form-field>
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search...">
+            <input matInput placeholder="Search by start production" (keydown.enter)="StartProductionFilter($event.target.value)">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Search by end production" (keydown.enter)="EndProductionFilter($event.target.value)">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Search by NCAP stars" (keydown.enter)="NcapFilter($event.target.value)">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput (keyup)="Filter($event.target.value)" placeholder="Search...">
         </mat-form-field>
 
         <table mat-table [dataSource]="dataSource" matSort>

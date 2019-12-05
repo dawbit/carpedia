@@ -49,7 +49,7 @@ export class CarListComponent implements OnInit {
     this.loading = false;
   }
 
-  applyFilter(filter: string) {
+  Filter(filter: string) {
     this.dataSource.filter = filter.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
@@ -57,7 +57,7 @@ export class CarListComponent implements OnInit {
     }
   }
 
-  applyModelFilter(filter: string) {
+  ModelFilter(filter: string) {
     this.loading = true;
     this.carService.getCarByModel(filter).subscribe(
       data => {
@@ -69,6 +69,52 @@ export class CarListComponent implements OnInit {
       if(filter==''){
         this.reloadData();
       };
+
+  }
+
+  StartProductionFilter(filter: string) {
+    this.loading = true;
+    this.carService.getCarByStartProduction(filter).subscribe(
+      data => {
+        this.refreshDataSource(data);
+        this.loading = false;
+      }
+    )
+
+      if(filter==''){
+        this.reloadData();
+      };
+      
+  }
+
+  EndProductionFilter(filter: string) {
+    this.loading = true;
+    this.carService.getCarByEndProduction(filter).subscribe(
+      data => {
+        this.refreshDataSource(data);
+        this.loading = false;
+      }
+    )
+
+      if(filter==''){
+        this.reloadData();
+      };
+      
+  }
+
+  NcapFilter(filter: number) {
+    this.loading = true;
+    this.carService.getCarByNcap(filter).subscribe(
+      data => {
+        this.refreshDataSource(data);
+        this.loading = false;
+      }
+    )
+
+      if(filter==0){
+        this.reloadData();
+      };
+      
   }
 
   refreshDataSource(data: Car[]) {

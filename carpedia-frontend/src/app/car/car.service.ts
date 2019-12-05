@@ -6,6 +6,7 @@ import { map } from "rxjs/operators";
 @Injectable({
   providedIn: "root"
 })
+
 export class CarService {
   private baseUrlCar = "http://localhost:8080/car";
   private httpOptions = {
@@ -17,15 +18,16 @@ export class CarService {
     })
   };
 
+  private extractData(res: Response) {
+    return res || {}; // If 'res' is null, it returns empty object
+  }
+
   constructor(private http: HttpClient) {}
+
 
   getCarList(): Observable<any> {
     return this.http.get(this.baseUrlCar, this.httpOptions).pipe(
     map(this.extractData));
-  }
-
-  private extractData(res: Response) {
-    return res || {}; // If 'res' is null, it returns empty object
   }
 
   getCar(id: number): Observable<any> {
@@ -46,8 +48,21 @@ export class CarService {
     });
   }
 
+  // connections to endpoints for search engine
   getCarByModel(name: string): Observable<any> {
     return this.http.get(`${this.baseUrlCar}/name/${name}`, this.httpOptions);
+  }
+
+  getCarByStartProduction(startproduction: string): Observable<any> {
+    return this.http.get(`${this.baseUrlCar}/startproduction/${startproduction}`, this.httpOptions);
+  }
+
+  getCarByEndProduction(endproduction: string): Observable<any> {
+    return this.http.get(`${this.baseUrlCar}/endproduction/${endproduction}`, this.httpOptions);
+  }
+
+  getCarByNcap(ncap: number): Observable<any> {
+    return this.http.get(`${this.baseUrlCar}/ncap/${ncap}`, this.httpOptions);
   }
 
 }

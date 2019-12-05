@@ -12,20 +12,20 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class CarDetailsComponent implements OnInit {
 
   id: number;
-  dataSource: Car;
+  car: Car;
 
   constructor(private route: ActivatedRoute,private router: Router,
     private carService: CarService) { }
 
   ngOnInit() {
-    this.dataSource = new Car();
+    this.car = new Car();
 
     this.id = this.route.snapshot.params['id'];
     
     this.carService.getCar(this.id)
       .subscribe(data => {
         console.log(data)
-        this.dataSource = data;
+        this.car = data;
       }, error => console.log(error));
   }
 
