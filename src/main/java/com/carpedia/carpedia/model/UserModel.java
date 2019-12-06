@@ -111,7 +111,7 @@ public class UserModel implements Serializable {
         this.car = car;
     }
 
-    public UserModel() { }
+    protected UserModel() { }
 
     public UserModel(String login, String password, String fname, String lname, boolean ismod, boolean isactive) {
         this.login = login;

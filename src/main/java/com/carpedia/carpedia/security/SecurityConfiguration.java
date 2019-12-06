@@ -39,12 +39,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-
                 .authorizeRequests()
+                //.antMatchers("*").permitAll()
                 //.antMatchers("/car/**").hasRole("ROLE_ADMIN")
                 //.antMatchers("/simply/**").hasAnyRole("ROLE_ADMIN","ROLE_USER")
                 .anyRequest().authenticated()
                 .and()
+                //.formLogin()
+                //.loginProcessingUrl("/signin")
+                //.loginPage("/login").permitAll(); .httpBasic() do usuniecia
+                //.usernameParameter("txtUsername")
+                //.passwordParameter("txtPassword")
+                //.and()
+                //.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
+                //.rememberMe().tokenValiditySeconds(2592000).key("mySecret!").rememberMeParameter("checkRememberMe");
                 .httpBasic();
     }
 
@@ -62,8 +70,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     // przy przekazywaniu @BodyRequest nie można zastsować encryption()
     // musiałbym stworzyć coś w rodzaju @JsonArg
     // https://stackoverflow.com/questions/12893566/passing-multiple-variables-in-requestbody-to-a-spring-mvc-controller-using-ajax/
+
     @Bean
     PasswordEncoder passwordEncoder() {
+        // return new BCryptPasswordEncoder();
         return new PasswordEncoderTest();
     }
 }
