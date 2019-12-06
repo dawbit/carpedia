@@ -16,7 +16,7 @@ public class CarpediaApplication implements CommandLineRunner {
 //	CountryRepository country;
 //
 //	@Autowired
-//    SegmentRepository segment;
+//  SegmentRepository segment;
 //
 //	@Autowired
 //	BodyTypeRepository bodytype;

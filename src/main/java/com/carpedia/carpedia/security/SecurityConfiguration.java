@@ -1,8 +1,11 @@
 package com.carpedia.carpedia.security;
 
+import com.carpedia.carpedia.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -10,28 +13,48 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+    
+    private UserPrincipalDetailService userPrincipalDetailService;
+    private UserRepository userRepository;
+
+    public SecurityConfiguration(UserPrincipalDetailService userPrincipalDetailService, UserRepository userRepository) {
+        this.userPrincipalDetailService = userPrincipalDetailService;
+        this.userRepository = userRepository;
+    }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .inMemoryAuthentication()
-                //.withUser("admin").password(passwordEncoder().encode("admin123")).roles("ADMIN")
-                .withUser("admin").password("admin123").roles("ADMIN")
-                .and()
-                //.withUser("dawid").password(passwordEncoder().encode("dawid123")).roles("USER");
-                .withUser("dawid").password("dawid123").roles("USER");
+    protected void configure(AuthenticationManagerBuilder auth){
+//        auth
+//                .inMemoryAuthentication()
+//                //.withUser("admin").password(passwordEncoder().encode("admin123")).roles("ADMIN")
+//                .withUser("admin").password("admin123").roles("ROLE_ADMIN")
+//                .and()
+//                //.withUser("dawid").password(passwordEncoder().encode("dawid123")).roles("USER");
+//                .withUser("dawid").password("dawid123").roles("ROLE_USER");
+        auth.authenticationProvider(authenticationProvider());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+
                 .authorizeRequests()
-                .antMatchers("/car/**").hasRole("ADMIN")
-                .antMatchers("/simply/**").hasAnyRole("ADMIN","USER")
+                //.antMatchers("/car/**").hasRole("ROLE_ADMIN")
+                //.antMatchers("/simply/**").hasAnyRole("ROLE_ADMIN","ROLE_USER")
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();
+    }
+
+    @Bean
+    DaoAuthenticationProvider authenticationProvider(){
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+        daoAuthenticationProvider.setUserDetailsService(this.userPrincipalDetailService);
+
+        return daoAuthenticationProvider;
     }
 
     // https://stackoverflow.com/questions/51208425/how-to-use-spring-security-without-password-encoding

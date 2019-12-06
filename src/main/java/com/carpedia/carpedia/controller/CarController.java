@@ -3,6 +3,7 @@ package com.carpedia.carpedia.controller;
 import com.carpedia.carpedia.model.CarModel;
 import com.carpedia.carpedia.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,6 +39,7 @@ public class CarController {
     CarRepository car;
 
     @GetMapping("/car")
+    @PreAuthorize("hasRole('ROLE_ADMIN')") //for tests
     public List<CarModel> getAllCars() {
         return car.findAll();
     }
