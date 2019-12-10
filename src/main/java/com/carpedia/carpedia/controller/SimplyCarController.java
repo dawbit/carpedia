@@ -3,6 +3,7 @@ package com.carpedia.carpedia.controller;
 import com.carpedia.carpedia.model.SimplyCarModel;
 import com.carpedia.carpedia.repository.SimplyCarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -91,6 +92,7 @@ public class SimplyCarController {
     }
 
     @DeleteMapping("/simply/delete")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public String deleteSimplyCar(@RequestParam("id") long id) {
         try {

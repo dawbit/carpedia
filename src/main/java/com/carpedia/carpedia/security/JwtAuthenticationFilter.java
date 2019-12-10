@@ -1,7 +1,9 @@
 package com.carpedia.carpedia.security;
 
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,8 +18,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
-
 // via https://github.com/dangeabunea/RomanianCoderExamples/commit/b587bf58e9a017747d92dc18462db13889056c6c
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private AuthenticationManager authenticationManager;
@@ -28,8 +28,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-
-        // Grab credentials and map them to login viewmodel
+        //taking credentials and mapping them to LoginModel
         LoginViewModel credentials = null;
         try {
             credentials = new ObjectMapper().readValue(request.getInputStream(), LoginViewModel.class);
@@ -37,31 +36,39 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             e.printStackTrace();
         }
 
-        // Create login token
+        //create token
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                 credentials.getUsername(),
                 credentials.getPassword(),
                 new ArrayList<>());
+        System.out.println(authenticationToken);
 
-        // Authenticate user
+        //authenticate user
         Authentication auth = authenticationManager.authenticate(authenticationToken);
-
         return auth;
     }
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-        // Grab principal
+        //take principal
         UserPrincipal principal = (UserPrincipal) authResult.getPrincipal();
+        boolean role = principal.getRole();
 
-        // Create JWT Token
+        //create JWT token
         String token = JWT.create()
                 .withSubject(principal.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + JwtProperties.EXPIRATION_TIME))
-                .sign(HMAC512(JwtProperties.SECRET.getBytes()));
+                .sign(Algorithm.HMAC512(JwtProperties.SECRET.getBytes()));
 
-        // Add token in response
         response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + token);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        ReturnJwt returnJwt = new ReturnJwt();
+        returnJwt.setJwt(JwtProperties.TOKEN_PREFIX + token);
+        returnJwt.setRole(role);
+        String json = new Gson().toJson(returnJwt);
+        response.getWriter().print(json);
+        response.getWriter().flush();
+
     }
-    /*  */
 }

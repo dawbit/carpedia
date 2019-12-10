@@ -3,6 +3,7 @@ package com.carpedia.carpedia.controller;
 import com.carpedia.carpedia.model.CountryModel;
 import com.carpedia.carpedia.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -80,6 +81,7 @@ public class CountryController {
     }
 
     @DeleteMapping("/country/delete")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public String deleteCountry(@RequestParam("id") long id) {
         try {

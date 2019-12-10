@@ -3,6 +3,8 @@ package com.carpedia.carpedia.controller;
 import com.carpedia.carpedia.model.UserModel;
 import com.carpedia.carpedia.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,12 +18,15 @@ public class UserController {
     private EntityManager entityManager;
 
     @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
     UserRepository user;
 
-//    @RequestMapping("/user/save")
+//    @RequestMapping("/testuser")
 //    public String process(){
-//        // save a single User
-//        user.save(new UserModel("dawbit","psswd","Dawid","Bitner"));
+//        user.save(new UserModel("wasko_admin",passwordEncoder.encode("admin"), "Dawid", "Bitner", true,true));
+//        user.save(new UserModel("wasko_user",passwordEncoder.encode("user"), "Dawid", "Bitner", false,true));
 //        return "Done";
 //    }
 
@@ -29,6 +34,7 @@ public class UserController {
     public List<UserModel> getAllUsers() {
         return user.findAll();
     }
+
 
     @GetMapping("/user/id/{id}")
     public UserModel getUserById(@PathVariable long id) {
@@ -51,12 +57,15 @@ public class UserController {
     }
 
     @PostMapping("/user/save")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public String saveUser(@RequestBody UserModel userModel) {
         try {
             if (getUserByIdForSave(userModel.getId()) != null || doesUserExist(userModel.getLogin()) ) {
                 return "User already exists, or incorrect input format";
-            } else {
+            }
+            else {
+                userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
                 user.save(userModel);
                 return "User saved";
             }
@@ -66,6 +75,7 @@ public class UserController {
     }
 
     @PutMapping("user/update")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public String updateUser(@RequestBody UserModel userModel) {
         try {
@@ -94,6 +104,7 @@ public class UserController {
     }
 
     @DeleteMapping("/user/delete")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public String deleteUser(@RequestParam("id") long id) {
         try {

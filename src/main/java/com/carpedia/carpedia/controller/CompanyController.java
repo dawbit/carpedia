@@ -4,6 +4,7 @@ import com.carpedia.carpedia.model.CompanyModel;
 import com.carpedia.carpedia.repository.CompanyRepository;
 import com.carpedia.carpedia.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -89,6 +90,7 @@ public class CompanyController {
     }
 
     @DeleteMapping("/company/delete")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public String deleteCompany(@RequestParam("id") long id) {
         try {

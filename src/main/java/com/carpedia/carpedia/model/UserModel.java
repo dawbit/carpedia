@@ -21,16 +21,16 @@ public class UserModel implements Serializable {
     private String login;
 
     @Column(name = "password", nullable = false)
-    @Size(min = 4, max = 20)
+    @Size(min = 4, max = 255) //BCrypt
     @JsonBackReference
-    private String password;
+    public String password;
 
     @Column(name = "fname")
-    @Size(min = 4, max = 20)
+    @Size(min = 2, max = 20)
     private String fname;
 
     @Column(name = "lname")
-    @Size(min = 4, max = 20)
+    @Size(min = 2, max = 20)
     private String lname;
 
     @Column(name = "ismod", columnDefinition = "boolean default false")

@@ -39,7 +39,6 @@ public class CarController {
     CarRepository car;
 
     @GetMapping("/car")
-    @PreAuthorize("hasRole('ROLE_ADMIN')") //for tests
     public List<CarModel> getAllCars() {
         return car.findAll();
     }
@@ -127,6 +126,7 @@ public class CarController {
     }
 
     @DeleteMapping("/car/delete")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public String deleteCar(@RequestParam("id") long id) {
         try {

@@ -71,4 +71,6 @@ public class UserPrincipal implements UserDetails {
         return this.userModel.getIsactive();
         //return this.user.getIsactive()==true;
     }
+
+    public boolean getRole() { return  this.userModel.getIsmod(); }
 }

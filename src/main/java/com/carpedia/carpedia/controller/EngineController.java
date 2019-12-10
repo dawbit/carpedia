@@ -3,6 +3,7 @@ package com.carpedia.carpedia.controller;
 import com.carpedia.carpedia.model.EngineModel;
 import com.carpedia.carpedia.repository.EngineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -90,6 +91,7 @@ public class EngineController {
     }
 
     @DeleteMapping("/engine/delete")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public String deleteEngine(@RequestParam("id") long id) {
         try {
