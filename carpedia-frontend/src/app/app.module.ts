@@ -48,6 +48,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 import { HomepageComponent } from "./homepage/homepage.component";
@@ -203,6 +204,9 @@ import { UserLoginComponent } from './user/user-login/user-login.component';
     MatTreeModule,
     PortalModule,
     ScrollingModule,
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

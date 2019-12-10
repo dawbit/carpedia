@@ -44,6 +44,9 @@ import {UserUpdateComponent} from './user/user-update/user-update.component';
 import {UserDetailsComponent} from './user/user-details/user-details.component';
 import {UserLoginComponent} from './user/user-login/user-login.component';
 
+import { DefaultGuard } from './security/guards/default.quard';
+import { AuthGuard } from './security/guards/auth.guard';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'homepage', pathMatch: 'full' },
@@ -51,7 +54,9 @@ const routes: Routes = [
 
   { path: 'simplycar', component: SimplyCarListComponent },
   { path: 'simplycar/add', component: SimplyCarCreateComponent },
-  { path: 'simplycar/update/:id', component: SimplyCarUpdateComponent },
+  { path: 'simplycar/update/:id', component: SimplyCarUpdateComponent,
+  canActivate: [DefaultGuard],
+  canLoad: [DefaultGuard] },
   { path: 'simplycar/details/:id', component: SimplyCarDetailsComponent },
 
   { path: 'country', component: CountryListComponent },
@@ -88,7 +93,8 @@ const routes: Routes = [
   { path: 'registry', component: UserCreateComponent },
   { path: 'user/update/:id', component: UserUpdateComponent },
   { path: 'user/details/:id', component: UserDetailsComponent },
-  { path: 'login', component: UserLoginComponent },
+  { path: 'login', component: UserLoginComponent, 
+  canActivate: [AuthGuard]},
 
 ];
 

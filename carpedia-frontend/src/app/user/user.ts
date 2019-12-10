@@ -7,4 +7,3 @@ export class User {
 	ismod: boolean;
 	isactive: boolean;
   }
-  
