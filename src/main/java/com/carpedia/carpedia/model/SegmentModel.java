@@ -3,6 +3,7 @@ package com.carpedia.carpedia.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
@@ -18,6 +19,7 @@ public class SegmentModel implements Serializable {
 
     @Column(name = "name")
     @Size(min = 1, max = 2)
+    @Pattern(regexp = "^[A-Z][a-zA-Z]")
     private String name;
 
     @OneToMany(mappedBy = "segment")

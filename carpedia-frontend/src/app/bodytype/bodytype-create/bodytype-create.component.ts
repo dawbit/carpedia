@@ -2,6 +2,7 @@ import { BodytypeService } from '../bodytype.service';
 import { Bodytype } from '../bodytype';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-bodytype-create',
@@ -12,6 +13,7 @@ export class BodytypeCreateComponent implements OnInit {
 
   bodytype: Bodytype = new Bodytype();
   submitted = false;
+  error = false;
 
   constructor(private bodytypeService: BodytypeService,
     private router: Router) { }
@@ -30,8 +32,23 @@ export class BodytypeCreateComponent implements OnInit {
     this.bodytype = new Bodytype();
   }
 
+  form = new FormGroup({
+    name: new FormControl('',[Validators.required,Validators.pattern("[A-Z][a-zA-Z ].{0,18}$")]),
+  });
+
+  validError = (controlName: string, errorName: string) => {
+    return this.form.controls[controlName].hasError(errorName);
+  }
+
   onSubmit() {
-    this.submitted = true;
-    this.save();    
+    if(this.form.invalid){
+      this.error = true;
+      return;
+    }
+    else{
+      this.error = false;
+      this.submitted = true;
+      this.save();   
+    }
   }
 }

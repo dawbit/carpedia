@@ -17,10 +17,9 @@ public class CompanyModel implements Serializable {
     private long id;
 
     @Column(name = "name", nullable = false, unique = true)
-    //@Pattern(regexp="[A-Z][a-zA-Z]*")
     private String name;
 
-    @Column(name = "foundation", nullable = false, unique = true, length = 4)
+    @Column(name = "foundation", nullable = false, length = 4)
 
     private int foundation;
 

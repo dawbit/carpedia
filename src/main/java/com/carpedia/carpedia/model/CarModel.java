@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +26,15 @@ public class CarModel implements Serializable {
     private CompanyModel company;
 
     @Column(name = "name", nullable = false)
+    @Pattern(regexp = "^[A-Za-z0-9][a-zA-Z ]*")
     private String name;
 
     @Column(name = "startproduction", length = 4)
+    @Pattern(regexp = "^[1-2][0-9][0-9][0-9]")
     private String startproduction;
 
     @Column(name = "endproduction", length = 4)
+    @Pattern(regexp = "^[1-2][0-9][0-9][0-9]")
     private String endproduction;
 
     @ManyToMany
@@ -44,6 +48,7 @@ public class CarModel implements Serializable {
 
     @Column(name = "ncap")
     @Range(max = 5)
+    @Pattern(regexp = "^[0-5]")
     private int ncap;
 
     @ManyToOne

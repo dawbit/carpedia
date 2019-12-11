@@ -1,6 +1,7 @@
 package com.carpedia.carpedia.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
 @Entity
@@ -14,9 +15,11 @@ public class SimplyCarModel implements Serializable {
     private long id;
 
     @Column(name = "company")
+    @Pattern(regexp = "^[a-zA-Z0-9 ]*")
     private String company;
 
     @Column(name = "model")
+    @Pattern(regexp = "^[a-zA-Z0-9 ]*")
     private String model;
 
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SimplyCar } from '../simplycar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SimplyCarService } from '../simplycar.service';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-simplycar-update',
@@ -12,6 +13,8 @@ export class SimplyCarUpdateComponent implements OnInit {
 
   id: number;
   simplycar: SimplyCar;
+  submitted = false;
+  error = false;
 
   constructor(private route: ActivatedRoute,private router: Router,
     private simplycarService: SimplyCarService) { }
@@ -36,7 +39,25 @@ export class SimplyCarUpdateComponent implements OnInit {
   }
 
   onSubmit() {
-    this.updateSimplyCar();    
+    if(this.form.invalid){
+      this.error = true;
+      return;
+    }
+    else{
+      this.error = false;
+      this.submitted = true;
+      this.updateSimplyCar();   
+    }
+  }
+
+  //for tests
+  form = new FormGroup({
+    company: new FormControl('',[Validators.required,Validators.pattern("[a-zA-Z0-9 ].{0,30}$")]),
+    model: new FormControl('',[Validators.required,Validators.pattern("[a-zA-Z0-9 ].{0,30}$")]),
+  });
+
+  validError = (controlName: string, errorName: string) => {
+    return this.form.controls[controlName].hasError(errorName);
   }
 
   gotoList() {

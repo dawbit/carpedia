@@ -1,15 +1,19 @@
 <h3>Create Simply Car</h3>
 <div [hidden]="submitted" style="width: 400px;">
 
-  <form (ngSubmit)="onSubmit()">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="name">Company</label>
-      <input type="text" class="form-control" id="company" required [(ngModel)]="simplycar.company" name="model">
+      <input type="text" class="form-control" formControlName="company" id="company" required [(ngModel)]="simplycar.company" name="model">
+      <mat-error *ngIf="validError('company', 'required')"></mat-error>
+      <mat-error *ngIf="validError('company', 'pattern')">Incorrect format!</mat-error>
     </div>
 
     <div class="form-group">
       <label for="name">Model</label>
-      <input type="text" class="form-control" id="model" required [(ngModel)]="simplycar.model" name="model">
+      <input type="text" class="form-control" formControlName="model" id="model" required [(ngModel)]="simplycar.model" name="model">
+      <mat-error *ngIf="validError('model', 'required')"></mat-error>
+      <mat-error *ngIf="validError('model', 'pattern')">Incorrect format!</mat-error>
     </div>
 
     <button type="submit" class="btn btn-success">Submit</button>
@@ -18,5 +22,9 @@
 </div>
 
 <div [hidden]="!submitted">
-  <h4>You updated successfully!</h4>
+  <h4>You created successfully!</h4>
+</div>
+
+<div [hidden]="!error">
+  <h4> Something is wrong!</h4>
 </div>

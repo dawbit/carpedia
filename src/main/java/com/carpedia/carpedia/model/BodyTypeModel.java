@@ -3,6 +3,7 @@ package com.carpedia.carpedia.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class BodyTypeModel implements Serializable {
     private long id;
 
     @Column(name = "name", nullable = false, unique = true)
+    @Pattern(regexp = "^[A-Z][a-zA-Z ]*")
     private String name;
 
     @OneToMany(mappedBy = "bodytype")

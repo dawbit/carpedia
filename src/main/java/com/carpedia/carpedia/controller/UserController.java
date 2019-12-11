@@ -27,7 +27,6 @@ public class UserController {
     public String process(){
         //user.save(new UserModel("wasko_admin",passwordEncoder.encode("admin"), "Dawid", "Bitner", true,true));
         //user.save(new UserModel("wasko_user",passwordEncoder.encode("user"), "Dawid", "Bitner", false,true));
-        //user.save(new UserModel("test100", passwordEncoder.encode("test100"), "Test100", "Nazwisko", false, false));
         return "Done";
     }
 
