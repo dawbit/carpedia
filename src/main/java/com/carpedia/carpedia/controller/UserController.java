@@ -23,12 +23,13 @@ public class UserController {
     @Autowired
     UserRepository user;
 
-//    @RequestMapping("/testuser")
-//    public String process(){
-//        user.save(new UserModel("wasko_admin",passwordEncoder.encode("admin"), "Dawid", "Bitner", true,true));
-//        user.save(new UserModel("wasko_user",passwordEncoder.encode("user"), "Dawid", "Bitner", false,true));
-//        return "Done";
-//    }
+    @RequestMapping("/testuser")
+    public String process(){
+        //user.save(new UserModel("wasko_admin",passwordEncoder.encode("admin"), "Dawid", "Bitner", true,true));
+        //user.save(new UserModel("wasko_user",passwordEncoder.encode("user"), "Dawid", "Bitner", false,true));
+        //user.save(new UserModel("test100", passwordEncoder.encode("test100"), "Test100", "Nazwisko", false, false));
+        return "Done";
+    }
 
     @GetMapping("/user")
     public List<UserModel> getAllUsers() {
@@ -65,8 +66,8 @@ public class UserController {
                 return "User already exists, or incorrect input format";
             }
             else {
-                userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
                 user.save(userModel);
+                userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
                 return "User saved";
             }
         } catch (Exception exc) {

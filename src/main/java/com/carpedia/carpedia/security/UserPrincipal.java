@@ -16,7 +16,6 @@ public class UserPrincipal implements UserDetails {
         this.userModel=userModel;
     }
 
-
     // via tutorial:
     // https://github.com/dangeabunea/RomanianCoderExamples/
     // https://www.youtube.com/watch?v=wNN6S_HsD4o

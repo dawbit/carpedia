@@ -1,4 +1,6 @@
 // via https://jasonwatmore.com/post/2019/06/22/angular-8-jwt-authentication-example-tutorial
+// https://angular-academy.com/angular-jwt/
+// https://github.com/bartosz-io/jwt-auth-angular/
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -12,11 +14,8 @@ import { AuthService } from './services/auth.service';
 import { DefaultGuard } from './guards/default.quard';
 import { TokenInterceptor } from './token.interceptor';
 
-import { UserLoginComponent } from '../user/user-login/user-login.component';
-
 @NgModule({
   declarations: [
-    UserLoginComponent
   ],
   providers: [
     AuthGuard,

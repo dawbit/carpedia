@@ -62,6 +62,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .sign(Algorithm.HMAC512(JwtProperties.SECRET.getBytes()));
 
         response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + token);
+
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         ReturnJwt returnJwt = new ReturnJwt();

@@ -1,7 +1,6 @@
 package com.carpedia.carpedia.security;
 
 public class LoginViewModel {
-    //names have to be "username" and "password"
     private String username;
     private String password;
 

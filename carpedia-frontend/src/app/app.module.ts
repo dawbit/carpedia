@@ -94,6 +94,7 @@ import { UserListComponent } from './user/user-list/user-list.component';
 import { UserUpdateComponent } from './user/user-update/user-update.component';
 import { UserLoginComponent } from './user/user-login/user-login.component';
 
+import { AuthModule } from './security/auth.module';
 
 @NgModule({
   declarations: [
@@ -206,7 +207,9 @@ import { UserLoginComponent } from './user/user-login/user-login.component';
     ScrollingModule,
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
