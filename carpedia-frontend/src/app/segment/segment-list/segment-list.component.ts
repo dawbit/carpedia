@@ -15,6 +15,7 @@ import {
   MatPaginator,
   MatSort
 } from "@angular/material";
+import { AuthService } from '../../security/services/auth.service';
 
 @Component({
   selector: "app-segment-list",
@@ -24,13 +25,15 @@ import {
 export class SegmentListComponent implements OnInit {
   displayedColumns: string[] = ["id", "name", "action"];
   segments: MatTableDataSource<Segment>;
+  isAdmin: boolean = false;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(
     private segmentService: SegmentService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -38,6 +41,7 @@ export class SegmentListComponent implements OnInit {
     this.segments.paginator = this.paginator;
     this.segments.sort = this.sort;
     this.getSegments();
+    this.authService.currentMessageRole.subscribe(message => this.isAdmin = message);
   }
 
   applyFilter(filterValue: string) {

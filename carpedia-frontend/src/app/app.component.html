@@ -1,65 +1,66 @@
-<nav class="navbar navbar-expand-sm bg-primary">
+<div class="main_container">
+    <nav class="navbar navbar-dark bg-dark">
+        <button mat-button routerLink="homepage" routerLinkActive="active">Home page</button>
+        <button mat-button *ngIf="isLogged" [matMenuTriggerFor]="menu">Menu</button>
+        <div id="space"></div>
+        <button mat-button *ngIf="isAdmin" routerLink="user/" routerLinkActive="active">Admin page</button>
+        <button mat-button routerLink="registry/" routerLinkActive="active">Sign up</button>
+        <button mat-button *ngIf="isNotLogged" routerLink="login/" routerLinkActive="active">Sign in</button>
+        <button mat-button *ngIf="isLogged" (click)="logout()">Log out</button>
 
-    <button mat-button routerLink="homepage" routerLinkActive="active">Home page</button>
-    <button mat-button [matMenuTriggerFor]="menu">Menu</button>
-    <div id="space"></div>
-    <button mat-button routerLink="user/" routerLinkActive="active">Admin page</button>
-    <button mat-button routerLink="registry/" routerLinkActive="active">Sign up</button>
-    <button mat-button routerLink="login/" routerLinkActive="active">Sign in</button>
+        <mat-menu color="white" #menu="matMenu">
+            <button mat-menu-item [matMenuTriggerFor]="bodytypes">Bodytypes</button>
+            <button mat-menu-item [matMenuTriggerFor]="cars">Cars</button>
+            <button mat-menu-item [matMenuTriggerFor]="companies">Companies</button>
+            <button mat-menu-item [matMenuTriggerFor]="countries">Countries</button>
+            <button mat-menu-item [matMenuTriggerFor]="engines">Engines</button>
+            <button mat-menu-item [matMenuTriggerFor]="segments">Segments</button>
+            <button mat-menu-item [matMenuTriggerFor]="simplycars">Simply cars (test)</button>
+        </mat-menu>
 
-    <mat-menu color="white" #menu="matMenu">
-        <button mat-menu-item [matMenuTriggerFor]="bodytypes">Bodytypes</button>
-        <button mat-menu-item [matMenuTriggerFor]="cars">Cars</button>
-        <button mat-menu-item [matMenuTriggerFor]="companies">Companies</button>
-        <button mat-menu-item [matMenuTriggerFor]="countries">Countries</button>
-        <button mat-menu-item [matMenuTriggerFor]="engines">Engines</button>
-        <button mat-menu-item [matMenuTriggerFor]="segments">Segments</button>
-        <button mat-menu-item [matMenuTriggerFor]="simplycars">Simply cars (test)</button>
-    </mat-menu>
+        <mat-menu #bodytypes="matMenu">
+            <button mat-menu-item routerLink="bodytype/" routerLinkActive="active">List</button>
+            <button mat-menu-item routerLink="bodytype/add" routerLinkActive="active">Add</button>
+        </mat-menu>
 
-    <mat-menu #bodytypes="matMenu">
-        <button mat-menu-item routerLink="bodytype/" routerLinkActive="active">List</button>
-        <button mat-menu-item routerLink="bodytype/add" routerLinkActive="active">Add</button>
-    </mat-menu>
+        <mat-menu #cars="matMenu">
+            <button mat-menu-item routerLink="car/" routerLinkActive="active">List</button>
+            <button mat-menu-item routerLink="car/add" routerLinkActive="active">Add</button>
+        </mat-menu>
 
-    <mat-menu #cars="matMenu">
-        <button mat-menu-item routerLink="car/" routerLinkActive="active">List</button>
-        <button mat-menu-item routerLink="car/add" routerLinkActive="active">Add</button>
-    </mat-menu>
+        <mat-menu #companies="matMenu">
+            <button mat-menu-item routerLink="company/" routerLinkActive="active">List</button>
+            <button mat-menu-item routerLink="company/add" routerLinkActive="active">Add</button>
+        </mat-menu>
 
-    <mat-menu #companies="matMenu">
-        <button mat-menu-item routerLink="company/" routerLinkActive="active">List</button>
-        <button mat-menu-item routerLink="company/add" routerLinkActive="active">Add</button>
-    </mat-menu>
+        <mat-menu #countries="matMenu">
+            <button mat-menu-item routerLink="country/" routerLinkActive="active">List</button>
+            <button mat-menu-item routerLink="country/add" routerLinkActive="active">Add</button>
+        </mat-menu>
 
-    <mat-menu #countries="matMenu">
-        <button mat-menu-item routerLink="country/" routerLinkActive="active">List</button>
-        <button mat-menu-item routerLink="country/add" routerLinkActive="active">Add</button>
-    </mat-menu>
+        <mat-menu #engines="matMenu">
+            <button mat-menu-item routerLink="engine/" routerLinkActive="active">List</button>
+            <button mat-menu-item routerLink="engine/add" routerLinkActive="active">Add</button>
+        </mat-menu>
 
-    <mat-menu #engines="matMenu">
-        <button mat-menu-item routerLink="engine/" routerLinkActive="active">List</button>
-        <button mat-menu-item routerLink="engine/add" routerLinkActive="active">Add</button>
-    </mat-menu>
+        <mat-menu #segments="matMenu">
+            <button mat-menu-item routerLink="segment/" routerLinkActive="active">List</button>
+            <button mat-menu-item routerLink="segment/add" routerLinkActive="active">Add</button>
+        </mat-menu>
 
-    <mat-menu #segments="matMenu">
-        <button mat-menu-item routerLink="segment/" routerLinkActive="active">List</button>
-        <button mat-menu-item routerLink="segment/add" routerLinkActive="active">Add</button>
-    </mat-menu>
+        <mat-menu #simplycars="matMenu">
+            <button mat-menu-item routerLink="simplycar/" routerLinkActive="active">List</button>
+            <button mat-menu-item routerLink="simplycar/add" routerLinkActive="active">Add</button>
+        </mat-menu>
 
-    <mat-menu #simplycars="matMenu">
-        <button mat-menu-item routerLink="simplycar/" routerLinkActive="active">List</button>
-        <button mat-menu-item routerLink="simplycar/add" routerLinkActive="active">Add</button>
-    </mat-menu>
+    </nav>
 
-</nav>
-
-<div class="container">
-  <br>
-  <hr>
-  <div class="card">
-      <div class="card-body">
-          <router-outlet></router-outlet>
-      </div>
-  </div>
+    <div class="container">
+    <br>
+    <hr>
+    <div class="card">
+        <div class="card-body">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
 </div>

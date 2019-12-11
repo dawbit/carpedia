@@ -15,6 +15,7 @@ import {
   MatPaginator,
   MatSort
 } from "@angular/material";
+import { AuthService } from '../../security/services/auth.service';
 
 @Component({
   selector: "app-bodytype-list",
@@ -24,13 +25,15 @@ import {
 export class BodytypeListComponent implements OnInit {
   displayedColumns: string[] = ["id", "name", "action"];
   bodytypes: MatTableDataSource<Bodytype>;
+  isAdmin: boolean = false;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(
     private bodytypeService: BodytypeService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -38,6 +41,7 @@ export class BodytypeListComponent implements OnInit {
     this.bodytypes.paginator = this.paginator;
     this.bodytypes.sort = this.sort;
     this.getBodytypes();
+    this.authService.currentMessageRole.subscribe(message => this.isAdmin = message);
   }
 
   applyFilter(filterValue: string) {

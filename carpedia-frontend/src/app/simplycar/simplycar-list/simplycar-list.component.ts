@@ -17,6 +17,7 @@ import {
   MatPaginator,
   MatSort
 } from "@angular/material";
+import { AuthService } from '../../security/services/auth.service';
 
 @Component({
   selector: "app-simplycar-list",
@@ -28,13 +29,15 @@ export class SimplyCarListComponent implements OnInit {
   simplycars: MatTableDataSource<SimplyCar>;
   simply: SimplyCar[];
   loading = true;
+  isAdmin: boolean = false;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(
     private simplycarService: SimplyCarService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -43,6 +46,7 @@ export class SimplyCarListComponent implements OnInit {
     this.simplycars.paginator = this.paginator;
     this.simplycars.sort = this.sort;
     //this.getCars();
+    this.authService.currentMessageRole.subscribe(message => this.isAdmin = message);
   }
 
   applyFilter(filterValue: string) {
@@ -68,6 +72,7 @@ export class SimplyCarListComponent implements OnInit {
   }
 
   refreshDataSource(data: SimplyCar[]) {
+    this.ngOnInit;
     this.simply = data;
     this.simplycars = new MatTableDataSource<SimplyCar>(this.simply);
     this.simplycars.paginator = this.paginator;

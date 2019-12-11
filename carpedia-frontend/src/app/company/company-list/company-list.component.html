@@ -10,7 +10,7 @@
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search...">
       </mat-form-field>
 
-      <table mat-table [dataSource]="companys" matSort>
+      <table mat-table [dataSource]="companies" matSort>
           <ng-container matColumnDef="id">
               <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
               <td mat-cell *matCellDef="let company">{{ company.id }}</td>
@@ -34,7 +34,7 @@
           <ng-container matColumnDef="action" id="action">
               <th mat-header-cell *matHeaderCellDef>Action</th>
               <td mat-cell *matCellDef="let company">
-                  <button (click)="deleteCompany(company.id)" class="btn btn-danger">
+                  <button *ngIf="isAdmin" (click)="deleteCompany(company.id)" class="btn btn-danger">
                       Delete
                   </button>
                   <button (click)="updateCompany(company.id)" class="btn btn-info" style="margin-left: 10px">

@@ -15,6 +15,7 @@ import {
   MatPaginator,
   MatSort
 } from "@angular/material";
+import { AuthService } from '../../security/services/auth.service';
 
 @Component({
   selector: "app-engine-list",
@@ -24,13 +25,15 @@ import {
 export class EngineListComponent implements OnInit {
   displayedColumns: string[] = ["id", "name", "power", "capacity", "action"];
   engines: MatTableDataSource<Engine>;
+  isAdmin: boolean = false;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(
     private engineService: EngineService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -38,6 +41,7 @@ export class EngineListComponent implements OnInit {
     this.engines.paginator = this.paginator;
     this.engines.sort = this.sort;
     this.getEngines();
+    this.authService.currentMessageRole.subscribe(message => this.isAdmin = message);
   }
 
   applyFilter(filterValue: string) {

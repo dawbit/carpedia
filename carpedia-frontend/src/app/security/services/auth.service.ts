@@ -5,8 +5,6 @@ import { catchError, mapTo, tap } from 'rxjs/operators';
 import { config } from '../config';
 import { Token } from '../models/token';
 import { MatSnackBar } from '@angular/material';
-import { error } from 'util';
-import { UserService } from '../../user/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +13,11 @@ export class AuthService {
 
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
-  private loggedUser: string;
 
   constructor(private http: HttpClient,
-              private userService: UserService,
               private _snackBar: MatSnackBar) {}
 
-  private messageRole = new BehaviorSubject<boolean>(true);
+  private messageRole = new BehaviorSubject<boolean>(false);
   currentMessageRole = this.messageRole.asObservable();
 
   private messageLogged = new BehaviorSubject<boolean>(false);
@@ -42,7 +38,7 @@ export class AuthService {
         tap(tokens => this.doLoginUser(user.username, tokens)),
         mapTo(true),
         catchError(error => {
-          this.snackBar('User is not authenticated. Contact with administrator.', 'OK');
+          this.snackBar('User is not authenticated.', 'OK');
           return of(false);
         }));
   }
@@ -70,13 +66,11 @@ export class AuthService {
   private doLoginUser(login: string, tokens: Token) {
     this.messageRole.next(tokens.role);
     this.messageLogged.next(true);
-    this.messageLoggedUser.next( login );
-    this.loggedUser = login;
+    this.messageLoggedUser.next(login);
     this.storeTokens(tokens);
   }
 
   doLogoutUser() {
-    this.loggedUser = null;
     this.messageLogged.next(false);
     this.removeTokens();
   }

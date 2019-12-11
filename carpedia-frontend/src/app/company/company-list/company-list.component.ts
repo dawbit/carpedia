@@ -15,6 +15,7 @@ import {
   MatPaginator,
   MatSort
 } from "@angular/material";
+import { AuthService } from '../../security/services/auth.service';
 
 @Component({
   selector: "app-company-list",
@@ -23,35 +24,38 @@ import {
 })
 export class CompanyListComponent implements OnInit {
   displayedColumns: string[] = ["id", "name", "foundation", "action"];
-  companys: MatTableDataSource<Company>;
+  companies: MatTableDataSource<Company>;
+  isAdmin: boolean = false;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(
     private companyService: CompanyService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
-    this.companys = new MatTableDataSource();
-    this.companys.paginator = this.paginator;
-    this.companys.sort = this.sort;
+    this.companies = new MatTableDataSource();
+    this.companies.paginator = this.paginator;
+    this.companies.sort = this.sort;
     this.getCompanys();
+    this.authService.currentMessageRole.subscribe(message => this.isAdmin = message);
   }
 
   applyFilter(filterValue: string) {
-    this.companys.filter = filterValue.trim().toLowerCase();
+    this.companies.filter = filterValue.trim().toLowerCase();
 
-    if (this.companys.paginator) {
-      this.companys.paginator.firstPage();
+    if (this.companies.paginator) {
+      this.companies.paginator.firstPage();
     }
   }
 
   getCompanys() {
     this.companyService.getCompanyList().subscribe(data => {
       console.log(data);
-      this.companys.data = data;
+      this.companies.data = data;
       return data;
     });
   }

@@ -15,44 +15,47 @@ import {
   MatPaginator,
   MatSort
 } from "@angular/material";
+import { AuthService } from '../../security/services/auth.service';
 
 @Component({
   selector: "app-country-list",
   templateUrl: "./country-list.component.html",
-  //styleUrls: ["./../../table.css"]
   styleUrls: ["./country-list.component.css"]
 })
 export class CountryListComponent implements OnInit {
   displayedColumns: string[] = ["id", "name", "action"];
-  countrys: MatTableDataSource<Country>;
+  countries: MatTableDataSource<Country>;
+  isAdmin: boolean = false;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(
     private countryService: CountryService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
-    this.countrys = new MatTableDataSource();
-    this.countrys.paginator = this.paginator;
-    this.countrys.sort = this.sort;
+    this.countries = new MatTableDataSource();
+    this.countries.paginator = this.paginator;
+    this.countries.sort = this.sort;
     this.getCountrys();
+    this.authService.currentMessageRole.subscribe(message => this.isAdmin = message);
   }
 
   applyFilter(filterValue: string) {
-    this.countrys.filter = filterValue.trim().toLowerCase();
+    this.countries.filter = filterValue.trim().toLowerCase();
 
-    if (this.countrys.paginator) {
-      this.countrys.paginator.firstPage();
+    if (this.countries.paginator) {
+      this.countries.paginator.firstPage();
     }
   }
 
   getCountrys() {
     this.countryService.getCountryList().subscribe(data => {
       console.log(data);
-      this.countrys.data = data;
+      this.countries.data = data;
       return data;
     });
   }

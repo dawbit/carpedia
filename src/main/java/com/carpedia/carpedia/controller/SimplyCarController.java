@@ -77,7 +77,7 @@ public class SimplyCarController {
     @Transactional
     public String updateSimplyCar(@RequestBody SimplyCarModel simplyCar) {
         try {
-            entityManager.createQuery("UPDATE SimplyCar simplyCar " +
+            entityManager.createQuery("UPDATE SimplyCarModel simplyCar " +
                     "SET simplyCar.company=?2, simplyCar.model=?3 WHERE simplyCar.id=?1")
                     // WHERE simplyCar.id=?3
                     .setParameter(1, simplyCar.getId())
