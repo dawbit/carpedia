@@ -17,8 +17,8 @@ public class SegmentModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "name")
-    @Size(min = 1, max = 2)
+    @Column(name = "name", length = 1)
+    @Size(min = 1, max = 1)
     @Pattern(regexp = "^[A-Z][a-zA-Z]")
     private String name;
 

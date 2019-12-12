@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class CompanyModel implements Serializable {
     private String name;
 
     @Column(name = "foundation", nullable = false, length = 4)
+    @Pattern(regexp = "^[1-2][0-9][0-9][0-9]")
 
     private int foundation;
 

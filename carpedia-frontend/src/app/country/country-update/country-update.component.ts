@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Country } from '../country';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CountryService } from '../country.service';
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-country-update',
@@ -12,6 +13,9 @@ export class CountryUpdateComponent implements OnInit {
 
   id: number;
   country: Country;
+
+  submitted = false;
+  error = false;
 
   constructor(private route: ActivatedRoute,private router: Router,
     private countryService: CountryService) { }
@@ -32,14 +36,26 @@ export class CountryUpdateComponent implements OnInit {
     this.countryService.updateCountry(this.id, this.country)
       .subscribe(data => console.log(data), error => console.log(error));
     this.country = new Country();
-    this.gotoList();
+  }
+
+  form = new FormGroup({
+    name: new FormControl('',[Validators.required,Validators.pattern("[a-zA-Z -'].{0,30}$")]),
+  });
+
+  validError = (controlName: string, errorName: string) => {
+    return this.form.controls[controlName].hasError(errorName);
   }
 
   onSubmit() {
-    this.updateCountry();    
+    if(this.form.invalid){
+      this.error = true;
+      return;
+    }
+    else{
+      this.error = false;
+      this.submitted = true;
+      this.updateCountry();   
+    }
   }
 
-  gotoList() {
-    this.router.navigate(['country']);
-  }
 }

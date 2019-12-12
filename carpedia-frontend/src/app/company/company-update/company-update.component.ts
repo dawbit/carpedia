@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Company } from '../company';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CompanyService } from '../company.service';
 import { MatTableDataSource } from "@angular/material";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Component, OnInit } from '@angular/core';
+import { Company } from '../company';
 import { Country } from "../../country/country";
 import { CountryService } from "../../country/country.service";
 
@@ -16,7 +17,9 @@ export class CompanyUpdateComponent implements OnInit {
   id: number;
   company: Company;
   countries: MatTableDataSource<Country>;
+
   submitted = false;
+  error = false;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -29,7 +32,7 @@ export class CompanyUpdateComponent implements OnInit {
 
     this.id = this.route.snapshot.params['id'];
 
-    this.getCountrys();
+    this.getCountries();
     
     this.companyService.getCompany(this.id)
       .subscribe(data => {
@@ -38,7 +41,7 @@ export class CompanyUpdateComponent implements OnInit {
       }, error => console.log(error));
   }
 
-  getCountrys() {
+  getCountries() {
     this.countryService.getCountryList().subscribe(data => {
       console.log(data);
       this.countries = data;
@@ -50,14 +53,28 @@ export class CompanyUpdateComponent implements OnInit {
     this.companyService.updateCompany(this.id, this.company)
       .subscribe(data => console.log(data), error => console.log(error));
     this.company = new Company();
-    this.gotoList();
+  }
+
+  form = new FormGroup({
+    name: new FormControl('',[Validators.required,Validators.pattern("[a-zA-Z0-9 ].{0,30}$")]),
+    foundation: new FormControl('',[Validators.required,Validators.pattern("[1-2][0-9][0-9][0-9]$")]),
+    country: new FormControl('',[Validators.required]),
+  });
+
+  validError = (controlName: string, errorName: string) => {
+    return this.form.controls[controlName].hasError(errorName);
   }
 
   onSubmit() {
-    this.updateCompany();    
+    if(this.form.invalid){
+      this.error = true;
+      return;
+    }
+    else{
+      this.error = false;
+      this.submitted = true;
+      this.updateCompany();   
+    }
   }
 
-  gotoList() {
-    this.router.navigate(['company']);
-  }
 }

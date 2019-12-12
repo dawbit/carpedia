@@ -14,11 +14,11 @@ public class SimplyCarModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "company")
+    @Column(name = "company", length = 35)
     @Pattern(regexp = "^[a-zA-Z0-9 ]*")
     private String company;
 
-    @Column(name = "model")
+    @Column(name = "model", length = 35)
     @Pattern(regexp = "^[a-zA-Z0-9 ]*")
     private String model;
 

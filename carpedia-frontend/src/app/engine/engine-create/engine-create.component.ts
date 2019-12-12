@@ -2,6 +2,7 @@ import { EngineService } from '../engine.service';
 import { Engine } from '../engine';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-engine-create',
@@ -12,6 +13,7 @@ export class EngineCreateComponent implements OnInit {
 
   engine: Engine = new Engine();
   submitted = false;
+  error = false;
 
   constructor(private engineService: EngineService,
     private router: Router) { }
@@ -30,8 +32,26 @@ export class EngineCreateComponent implements OnInit {
     this.engine = new Engine();
   }
 
-  onSubmit() {
-    this.submitted = true;
-    this.save();    
+  form = new FormGroup({
+    name: new FormControl('',[Validators.required,Validators.pattern("[a-zA-Z -'].{0,20}$")]),
+    power: new FormControl('',[Validators.required,Validators.pattern("[0-9].{0,3}$")]),
+    capacity: new FormControl('',[Validators.required,Validators.pattern("[0-9].{0,4}$")]),
+  });
+
+  validError = (controlName: string, errorName: string) => {
+    return this.form.controls[controlName].hasError(errorName);
   }
+
+  onSubmit() {
+    if(this.form.invalid){
+      this.error = true;
+      return;
+    }
+    else{
+      this.error = false;
+      this.submitted = true;
+      this.save();   
+    }
+  }
+
 }

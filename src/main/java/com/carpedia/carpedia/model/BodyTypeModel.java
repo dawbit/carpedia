@@ -16,7 +16,7 @@ public class BodyTypeModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "name", nullable = false, unique = true)
+    @Column(name = "name", nullable = false, unique = true, length = 20)
     @Pattern(regexp = "^[A-Z][a-zA-Z ]*")
     private String name;
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Engine } from '../engine';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { EngineService } from '../engine.service';
 
 @Component({
@@ -12,6 +13,9 @@ export class EngineUpdateComponent implements OnInit {
 
   id: number;
   engine: Engine;
+
+  submitted = false;
+  error = false;
 
   constructor(private route: ActivatedRoute,private router: Router,
     private engineService: EngineService) { }
@@ -32,14 +36,28 @@ export class EngineUpdateComponent implements OnInit {
     this.engineService.updateEngine(this.id, this.engine)
       .subscribe(data => console.log(data), error => console.log(error));
     this.engine = new Engine();
-    this.gotoList();
+  }
+
+  form = new FormGroup({
+    name: new FormControl('',[Validators.required,Validators.pattern("[a-zA-Z -'].{0,20}$")]),
+    power: new FormControl('',[Validators.required,Validators.pattern("[0-9].{0,3}$")]),
+    capacity: new FormControl('',[Validators.required,Validators.pattern("[0-9].{0,4}$")]),
+  });
+
+  validError = (controlName: string, errorName: string) => {
+    return this.form.controls[controlName].hasError(errorName);
   }
 
   onSubmit() {
-    this.updateEngine();    
+    if(this.form.invalid){
+      this.error = true;
+      return;
+    }
+    else{
+      this.error = false;
+      this.submitted = true;
+      this.updateEngine();   
+    }
   }
 
-  gotoList() {
-    this.router.navigate(['engine']);
-  }
 }

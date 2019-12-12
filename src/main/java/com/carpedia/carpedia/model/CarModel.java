@@ -25,8 +25,8 @@ public class CarModel implements Serializable {
     @JsonIgnore
     private CompanyModel company;
 
-    @Column(name = "name", nullable = false)
-    @Pattern(regexp = "^[A-Za-z0-9][a-zA-Z ]*")
+    @Column(name = "name", nullable = false, length = 35)
+    @Pattern(regexp = "^[A-Za-z0-9]*")
     private String name;
 
     @Column(name = "startproduction", length = 4)
@@ -34,7 +34,7 @@ public class CarModel implements Serializable {
     private String startproduction;
 
     @Column(name = "endproduction", length = 4)
-    @Pattern(regexp = "^[1-2][0-9][0-9][0-9]")
+    @Pattern(regexp = "^[1-2][0-9][0-9][0-9]|null")
     private String endproduction;
 
     @ManyToMany
@@ -48,7 +48,6 @@ public class CarModel implements Serializable {
 
     @Column(name = "ncap")
     @Range(max = 5)
-    @Pattern(regexp = "^[0-5]")
     private int ncap;
 
     @ManyToOne

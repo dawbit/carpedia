@@ -1,10 +1,12 @@
 <h3>Update Bodytype</h3>
 <div [hidden]="submitted" style="width: 400px;">
-    <form (ngSubmit)="onSubmit()">
 
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" required [(ngModel)]="bodytype.name" name="name">
+            <input type="text" class="form-control" formControlName="name" id="name" required [(ngModel)]="bodytype.name" name="name">
+            <mat-error *ngIf="validError('name', 'required')"></mat-error>
+            <mat-error *ngIf="validError('name', 'pattern')">Incorrect format!</mat-error>
         </div>
 
         <button type="submit" class="btn btn-success">Submit</button>
@@ -12,10 +14,9 @@
 </div>
 
 <div [hidden]="!submitted">
-    <h4>You submitted successfully!</h4>
+    <h4>You updated successfully!</h4>
 </div>
     
 <div [hidden]="!error">
     <h4> Something is wrong!</h4>
 </div>
-    

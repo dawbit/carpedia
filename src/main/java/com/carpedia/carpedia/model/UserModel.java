@@ -16,7 +16,7 @@ public class UserModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "login", unique = true, nullable = false)
+    @Column(name = "login", unique = true, nullable = false, length = 20)
     @Size(min = 4, max = 20)
     private String login;
 
@@ -25,12 +25,12 @@ public class UserModel implements Serializable {
     @JsonBackReference
     public String password;
 
-    @Column(name = "fname")
-    @Size(min = 2, max = 20)
+    @Column(name = "fname", length = 20)
+    @Size(max = 20)
     private String fname;
 
-    @Column(name = "lname")
-    @Size(min = 2, max = 20)
+    @Column(name = "lname", length = 20)
+    @Size(max = 20)
     private String lname;
 
     @Column(name = "ismod", columnDefinition = "boolean default false")

@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MatTableDataSource } from "@angular/material";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { CarService } from "../car.service";
 import { Car } from "../car";
 import { CountryService } from "../../country/country.service";
@@ -27,6 +28,7 @@ export class CarUpdateComponent implements OnInit {
   bodytypes: MatTableDataSource<Bodytype>;
 
   submitted = false;
+  error = false;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -90,14 +92,33 @@ export class CarUpdateComponent implements OnInit {
     this.carService.updateCar(this.id, this.car)
       .subscribe(data => console.log(data), error => console.log(error));
     this.car = new Car();
-    this.gotoList();
+  }
+
+  form = new FormGroup({
+    company: new FormControl('',[Validators.required]),
+    name: new FormControl('',[Validators.required,Validators.pattern("[a-zA-Z0-9 ].{0,30}$")]),
+    startproduction: new FormControl('',[Validators.required,Validators.pattern("[1-2][0-9][0-9][0-9]$")]),
+    endproduction: new FormControl('',[Validators.required,Validators.pattern("[1-2][0-9][0-9][0-9]$")]),
+    ncap: new FormControl('',[Validators.required,Validators.pattern("[0-5]$")]),
+    country: new FormControl('',[Validators.required]),
+    segment: new FormControl('',[Validators.required]),
+    bodytype: new FormControl('',[Validators.required]),
+  });
+
+  validError = (controlName: string, errorName: string) => {
+    return this.form.controls[controlName].hasError(errorName);
   }
 
   onSubmit() {
-    this.updateCar();    
+    if(this.form.invalid){
+      this.error = true;
+      return;
+    }
+    else{
+      this.error = false;
+      this.submitted = true;
+      this.updateCar();   
+    }
   }
 
-  gotoList() {
-    this.router.navigate(['car']);
-  }
 }

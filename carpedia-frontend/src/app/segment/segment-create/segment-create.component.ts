@@ -2,6 +2,7 @@ import { SegmentService } from '../segment.service';
 import { Segment } from '../segment';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-segment-create',
@@ -12,6 +13,7 @@ export class SegmentCreateComponent implements OnInit {
 
   segment: Segment = new Segment();
   submitted = false;
+  error = false;
 
   constructor(private segmentService: SegmentService,
     private router: Router) { }
@@ -30,8 +32,24 @@ export class SegmentCreateComponent implements OnInit {
     this.segment = new Segment();
   }
 
-  onSubmit() {
-    this.submitted = true;
-    this.save();    
+  form = new FormGroup({
+    name: new FormControl('',[Validators.required,Validators.pattern("[A-Z]$")]),
+  });
+
+  validError = (controlName: string, errorName: string) => {
+    return this.form.controls[controlName].hasError(errorName);
   }
+
+  onSubmit() {
+    if(this.form.invalid){
+      this.error = true;
+      return;
+    }
+    else{
+      this.error = false;
+      this.submitted = true;
+      this.save();   
+    }
+  }
+
 }

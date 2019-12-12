@@ -2,6 +2,7 @@ import { CountryService } from '../country.service';
 import { Country } from '../country';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-country-create',
@@ -12,6 +13,7 @@ export class CountryCreateComponent implements OnInit {
 
   country: Country = new Country();
   submitted = false;
+  error = false;
 
   constructor(private countryService: CountryService,
     private router: Router) { }
@@ -30,8 +32,24 @@ export class CountryCreateComponent implements OnInit {
     this.country = new Country();
   }
 
-  onSubmit() {
-    this.submitted = true;
-    this.save();    
+  form = new FormGroup({
+    name: new FormControl('',[Validators.required,Validators.pattern("[a-zA-Z -'].{0,30}$")]),
+  });
+
+  validError = (controlName: string, errorName: string) => {
+    return this.form.controls[controlName].hasError(errorName);
   }
+
+  onSubmit() {
+    if(this.form.invalid){
+      this.error = true;
+      return;
+    }
+    else{
+      this.error = false;
+      this.submitted = true;
+      this.save();   
+    }
+  }
+  
 }

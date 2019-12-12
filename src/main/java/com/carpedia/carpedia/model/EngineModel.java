@@ -13,7 +13,7 @@ public class EngineModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "name", unique = true, length = 20)
+    @Column(name = "name", unique = true, length = 25)
     @Pattern(regexp = "^[a-zA-Z0-9 ]*")
     private String name;
 
