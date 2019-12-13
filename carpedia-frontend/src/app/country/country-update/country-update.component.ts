@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Country } from '../country';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CountryService } from '../country.service';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Country } from '../country';
+import { CountryService } from '../country.service';
 
 @Component({
   selector: 'app-country-update',

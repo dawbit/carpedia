@@ -1,22 +1,10 @@
-import { SimplyCarDetailsComponent } from "./../simplycar-details/simplycar-details.component";
-import { Observable } from "rxjs";
-import { SimplyCarService } from "../simplycar.service";
-import { SimplyCar } from "../simplycar";
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { MatTableDataSource } from "@angular/material";
-//import { filter } from 'rxjs/operators';
-//import { map, filter, scan } from "rxjs/operators";
-import { ViewChild, AfterViewInit } from "@angular/core";
-import {
-  MatInputModule,
-  MatPaginatorModule,
-  MatProgressSpinnerModule,
-  MatSortModule,
-  MatTableModule,
-  MatPaginator,
-  MatSort
-} from "@angular/material";
+import { ViewChild } from "@angular/core";
+import { MatPaginator, MatSort } from "@angular/material";
+import { SimplyCarService } from "../simplycar.service";
+import { SimplyCar } from "../simplycar";
 import { AuthService } from '../../security/services/auth.service';
 
 @Component({
@@ -46,7 +34,7 @@ export class SimplyCarListComponent implements OnInit {
     this.simplycars.paginator = this.paginator;
     this.simplycars.sort = this.sort;
     //this.getCars();
-    this.authService.currentMessageRole.subscribe(message => this.isAdmin = message);
+    this.authService.currentRole.subscribe(message => this.isAdmin = message);
   }
 
   applyFilter(filterValue: string) {
@@ -63,8 +51,6 @@ export class SimplyCarListComponent implements OnInit {
       (data) => {
         this.refreshDataSource(data);
         this.loading = false;
-        //this.simplycars.data = data;
-        //return data;
       })
       if(filter==''){
         this.reloadData();
@@ -90,8 +76,6 @@ export class SimplyCarListComponent implements OnInit {
   }
 
   reloadData() {
-    //this.simplycars.data = this.simplycarService.getSimplyCarsList();
-    //this.applyModelFilter(''); // zawiesza stronę
     this.loading = true;
     this.getCars();
     this.loading = false;

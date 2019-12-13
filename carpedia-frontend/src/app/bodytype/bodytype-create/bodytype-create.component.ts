@@ -1,8 +1,8 @@
-import { BodytypeService } from '../bodytype.service';
-import { Bodytype } from '../bodytype';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { BodytypeService } from '../bodytype.service';
+import { Bodytype } from '../bodytype';
 
 @Component({
   selector: 'app-bodytype-create',

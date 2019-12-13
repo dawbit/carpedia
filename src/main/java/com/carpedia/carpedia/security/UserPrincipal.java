@@ -16,9 +16,6 @@ public class UserPrincipal implements UserDetails {
         this.userModel=userModel;
     }
 
-    // via tutorial:
-    // https://github.com/dangeabunea/RomanianCoderExamples/
-    // https://www.youtube.com/watch?v=wNN6S_HsD4o
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
@@ -68,7 +65,6 @@ public class UserPrincipal implements UserDetails {
     @Override
     public boolean isEnabled() {
         return this.userModel.getIsactive();
-        //return this.user.getIsactive()==true;
     }
 
     public boolean getRole() { return  this.userModel.getIsmod(); }

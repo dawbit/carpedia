@@ -20,15 +20,6 @@ public class SimplyCarController {
     @Autowired
     SimplyCarRepository repository;
 
-//    @GetMapping("/simply/save")
-//    public String process(){
-//        repository.save(new SimplyCar("Volkswagen", "Polo"));
-//        repository.save(new SimplyCar("Peugeot", "206"));
-//        repository.save(new SimplyCar("Peugeot", "407"));
-//        repository.save(new SimplyCar("Kia", "Stinger"));
-//        repository.save(new SimplyCar("Fiat", "Punto"));
-//        return "Done";
-//    }
 
     @GetMapping("/simply")
     public List<SimplyCarModel> getAllSimplyCars() {
@@ -79,7 +70,6 @@ public class SimplyCarController {
         try {
             entityManager.createQuery("UPDATE SimplyCarModel simplyCar " +
                     "SET simplyCar.company=?2, simplyCar.model=?3 WHERE simplyCar.id=?1")
-                    // WHERE simplyCar.id=?3
                     .setParameter(1, simplyCar.getId())
                     .setParameter(2, simplyCar.getCompany())
                     .setParameter(3, simplyCar.getModel())
@@ -98,7 +88,8 @@ public class SimplyCarController {
         try {
             repository.deleteById(id);
             return "SimplyCar Deleted";
-        } catch (Exception exc) {
+        }
+        catch (Exception exc) {
             return "Not deleted. Exception: " + exc.getMessage();
         }
     }

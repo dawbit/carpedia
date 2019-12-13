@@ -20,16 +20,6 @@ public class EngineController {
     @Autowired
     EngineRepository engine;
 
-//    @RequestMapping("/engine/save")
-//    public String process(){
-//        // save a single Engine
-//        engine.save(new EngineModel("TU3JP", 75, 1360));
-//        engine.save(new EngineModel("M30B30", 188, 3000));
-//        engine.save(new EngineModel("HR12DE", 60, 1180));
-//        engine.save(new EngineModel("MR18DE", 126, 1750));
-//
-//        return "Done";
-//    }
 
     @GetMapping("/engine")
     public List<EngineModel> getAllEngines() {
@@ -67,7 +57,8 @@ public class EngineController {
                 engine.save(engineModel);
                 return "Engine saved";
             }
-        } catch (Exception exc) {
+        }
+        catch (Exception exc) {
             return "Not saved. Exception: " + exc.getMessage();
         }
     }
@@ -97,7 +88,8 @@ public class EngineController {
         try {
             engine.deleteById(id);
             return "Engine Deleted";
-        } catch (Exception exc) {
+        }
+        catch (Exception exc) {
             return "Not deleted. Exception: " + exc.getMessage();
         }
     }

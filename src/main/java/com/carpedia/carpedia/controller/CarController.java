@@ -38,6 +38,7 @@ public class CarController {
     @Autowired
     CarRepository car;
 
+
     @GetMapping("/car")
     public List<CarModel> getAllCars() {
         return car.findAll();
@@ -132,7 +133,8 @@ public class CarController {
         try {
             car.deleteById(id);
             return "Car Deleted";
-        } catch (Exception exc) {
+        }
+        catch (Exception exc) {
             return "Not deleted. Exception: " + exc.getMessage();
         }
     }

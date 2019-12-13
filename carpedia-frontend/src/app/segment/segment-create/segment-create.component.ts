@@ -1,8 +1,8 @@
-import { SegmentService } from '../segment.service';
-import { Segment } from '../segment';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { SegmentService } from '../segment.service';
+import { Segment } from '../segment';
 
 @Component({
   selector: 'app-segment-create',

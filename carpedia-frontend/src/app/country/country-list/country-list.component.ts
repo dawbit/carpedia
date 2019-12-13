@@ -1,20 +1,10 @@
-import { CountryDetailsComponent } from "./../country-details/country-details.component";
-import { Observable } from "rxjs";
-import { CountryService } from "../country.service";
-import { Country } from "../country";
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { MatTableDataSource } from "@angular/material";
 import { ViewChild } from "@angular/core";
-import {
-  MatInputModule,
-  MatPaginatorModule,
-  MatProgressSpinnerModule,
-  MatSortModule,
-  MatTableModule,
-  MatPaginator,
-  MatSort
-} from "@angular/material";
+import { MatPaginator, MatSort } from "@angular/material";
+import { CountryService } from "../country.service";
+import { Country } from "../country";
 import { AuthService } from '../../security/services/auth.service';
 
 @Component({
@@ -41,7 +31,7 @@ export class CountryListComponent implements OnInit {
     this.countries.paginator = this.paginator;
     this.countries.sort = this.sort;
     this.getCountrys();
-    this.authService.currentMessageRole.subscribe(message => this.isAdmin = message);
+    this.authService.currentRole.subscribe(message => this.isAdmin = message);
   }
 
   applyFilter(filterValue: string) {

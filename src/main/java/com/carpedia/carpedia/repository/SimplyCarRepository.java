@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface SimplyCarRepository extends JpaRepository<SimplyCarModel, Long> {
     //for tests
-
     SimplyCarModel findById(long id);
 
     List<SimplyCarModel> findAllByCompany(String company);

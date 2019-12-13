@@ -1,8 +1,8 @@
-import { EngineService } from '../engine.service';
-import { Engine } from '../engine';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { EngineService } from '../engine.service';
+import { Engine } from '../engine';
 
 @Component({
   selector: 'app-engine-create',
@@ -33,9 +33,9 @@ export class EngineCreateComponent implements OnInit {
   }
 
   form = new FormGroup({
-    name: new FormControl('',[Validators.required,Validators.pattern("[a-zA-Z -'].{0,20}$")]),
-    power: new FormControl('',[Validators.required,Validators.pattern("[0-9].{0,3}$")]),
-    capacity: new FormControl('',[Validators.required,Validators.pattern("[0-9].{0,4}$")]),
+    name: new FormControl('',[Validators.required,Validators.pattern("^[a-zA-Z1-9 -'].{0,20}$")]),
+    power: new FormControl('',[Validators.required,Validators.pattern("^[1-9][0-9][0-9]$")]),
+    capacity: new FormControl('',[Validators.required,Validators.pattern("^[1-9][0-9][0-9][0-9]$")]),
   });
 
   validError = (controlName: string, errorName: string) => {

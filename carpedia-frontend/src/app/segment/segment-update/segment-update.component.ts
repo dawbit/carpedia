@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Segment } from '../segment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Segment } from '../segment';
 import { SegmentService } from '../segment.service';
 
 @Component({

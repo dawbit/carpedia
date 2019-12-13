@@ -1,20 +1,10 @@
-import { UserDetailsComponent } from "./../user-details/user-details.component";
-import { Observable } from "rxjs";
-import { UserService } from "../user.service";
-import { User } from "../user";
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { MatTableDataSource } from "@angular/material";
 import { ViewChild } from "@angular/core";
-import {
-  MatInputModule,
-  MatPaginatorModule,
-  MatProgressSpinnerModule,
-  MatSortModule,
-  MatTableModule,
-  MatPaginator,
-  MatSort
-} from "@angular/material";
+import { MatPaginator, MatSort } from "@angular/material";
+import { UserService } from "../user.service";
+import { User } from "../user";
 
 @Component({
   selector: "app-user-list",

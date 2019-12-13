@@ -1,8 +1,7 @@
-import { Bodytype } from '../bodytype';
-import { Component, OnInit, Input } from '@angular/core';
-import { BodytypeService } from '../bodytype.service';
-import { BodytypeListComponent } from '../bodytype-list/bodytype-list.component';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Bodytype } from '../bodytype';
+import { BodytypeService } from '../bodytype.service';
 
 @Component({
   selector: 'app-bodytype-details',

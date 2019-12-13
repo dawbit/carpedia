@@ -1,8 +1,8 @@
-import { UserService } from '../user.service';
-import { User } from '../user';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { UserService } from '../user.service';
+import { User } from '../user';
 
 @Component({
   selector: 'app-user-create',
@@ -34,7 +34,7 @@ export class UserCreateComponent implements OnInit {
 
   form = new FormGroup({
     login: new FormControl('',[Validators.required,Validators.pattern("[a-zA-Z0-9 ].{0,20}$")]),
-    password: new FormControl('',[Validators.required,Validators.pattern("[a-zA-Z0-9 !@#$%^&*()_+-=[]{};',./<>?].{0,30}$")]),
+    password: new FormControl('',[Validators.required,Validators.pattern("[a-zA-Z0-9$@$!%*?&].{6,}$")]),
     fname: new FormControl('',[Validators.required,Validators.pattern("[a-zA-Z0-9 ].{0,20}$")]),
     lname: new FormControl('',[Validators.required,Validators.pattern("[a-zA-Z0-9 ].{0,20}$")]),
   });

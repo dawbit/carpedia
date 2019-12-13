@@ -1,8 +1,8 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { CompanyService } from '../company.service';
 import { MatTableDataSource } from "@angular/material";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Component, OnInit } from '@angular/core';
+import { CompanyService } from '../company.service';
 import { Company } from '../company';
 import { Country } from "../../country/country";
 import { CountryService } from "../../country/country.service";

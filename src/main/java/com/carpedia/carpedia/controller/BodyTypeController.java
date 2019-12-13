@@ -20,14 +20,6 @@ public class BodyTypeController {
     @Autowired
     BodyTypeRepository bodytype;
 
-//    @RequestMapping("/bodytype/save")
-//    public String process(){
-//        // save a single BodyType
-//        bodytype.save(new BodyTypeModel("Sedan"));
-//        bodytype.save(new BodyTypeModel("Kombi"));
-//        bodytype.save(new BodyTypeModel("Hatchback"));
-//        return "Done";
-//    }
 
     @GetMapping("/bodytype")
     public List<BodyTypeModel> getAllBodyTypes() {
@@ -55,8 +47,9 @@ public class BodyTypeController {
                 bodytype.save(bodyTypeModel);
                 return "Body type saved";
             }
-        } catch (Exception exc) {
-            return "Not saveed. Exception: " + exc.getMessage();
+        }
+        catch (Exception exc) {
+            return "Not saved. Exception: " + exc.getMessage();
         }
     }
 
@@ -83,7 +76,8 @@ public class BodyTypeController {
         try {
             bodytype.deleteById(id);
             return "Body type Deleted";
-        } catch (Exception exc) {
+        }
+        catch (Exception exc) {
             return "Not deleted. Exception: " + exc.getMessage();
         }
     }

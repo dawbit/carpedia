@@ -4,7 +4,6 @@ import { of, Observable, BehaviorSubject } from 'rxjs';
 import { catchError, mapTo, tap } from 'rxjs/operators';
 import { config } from '../config';
 import { Token } from '../models/token';
-import { MatSnackBar } from '@angular/material';
 
 @Injectable({
   providedIn: 'root'
@@ -14,23 +13,14 @@ export class AuthService {
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
 
-  constructor(private http: HttpClient,
-              private _snackBar: MatSnackBar) {}
+  constructor(private http: HttpClient) {}
 
-  private messageRole = new BehaviorSubject<boolean>(false);
-  currentMessageRole = this.messageRole.asObservable();
+  private infoRole = new BehaviorSubject<boolean>(false);
+  currentRole = this.infoRole.asObservable();
 
-  private messageLogged = new BehaviorSubject<boolean>(false);
-  currentMessageLogged = this.messageLogged.asObservable();
+  private infoLogged = new BehaviorSubject<boolean>(false);
+  currentUser = this.infoLogged.asObservable();
 
-  private messageLoggedUser = new BehaviorSubject<string>("");
-  currentMessageLoggedUser = this.messageLoggedUser.asObservable();
-
-  snackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
-      duration: 3000,
-    });
-  }
 
   login(user: { username: string, password: string }): Observable<boolean> {
     return this.http.post<any>(`${config.apiUrl}/login`, user)
@@ -38,17 +28,17 @@ export class AuthService {
         tap(tokens => this.doLoginUser(user.username, tokens)),
         mapTo(true),
         catchError(error => {
-          this.snackBar('User is not authenticated.', 'OK');
+          alert(error.error);
           return of(false);
         }));
   }
 
   logout() {
-    this.http.get<any>(`http://localhost:4200/login`);
+    this.http.get<any>(`http://localhost:4200/homegape`);
   }
 
   isLoggedIn() {
-    return this.messageLogged.value;
+    return this.infoLogged.value;
   }
 
   refreshToken() {
@@ -64,14 +54,13 @@ export class AuthService {
   }
 
   private doLoginUser(login: string, tokens: Token) {
-    this.messageRole.next(tokens.role);
-    this.messageLogged.next(true);
-    this.messageLoggedUser.next(login);
+    this.infoRole.next(tokens.role);
+    this.infoLogged.next(true);
     this.storeTokens(tokens);
   }
 
   doLogoutUser() {
-    this.messageLogged.next(false);
+    this.infoLogged.next(false);
     this.removeTokens();
   }
 

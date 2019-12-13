@@ -1,20 +1,10 @@
-import { BodytypeDetailsComponent } from "./../bodytype-details/bodytype-details.component";
-import { Observable } from "rxjs";
-import { BodytypeService } from "../bodytype.service";
-import { Bodytype } from "../bodytype";
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { MatTableDataSource } from "@angular/material";
 import { ViewChild } from "@angular/core";
-import {
-  MatInputModule,
-  MatPaginatorModule,
-  MatProgressSpinnerModule,
-  MatSortModule,
-  MatTableModule,
-  MatPaginator,
-  MatSort
-} from "@angular/material";
+import { MatPaginator, MatSort } from "@angular/material";
+import { BodytypeService } from "../bodytype.service";
+import { Bodytype } from "../bodytype";
 import { AuthService } from '../../security/services/auth.service';
 
 @Component({
@@ -41,7 +31,7 @@ export class BodytypeListComponent implements OnInit {
     this.bodytypes.paginator = this.paginator;
     this.bodytypes.sort = this.sort;
     this.getBodytypes();
-    this.authService.currentMessageRole.subscribe(message => this.isAdmin = message);
+    this.authService.currentRole.subscribe(message => this.isAdmin = message);
   }
 
   applyFilter(filterValue: string) {

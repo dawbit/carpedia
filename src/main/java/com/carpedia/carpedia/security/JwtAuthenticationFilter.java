@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-// via https://github.com/dangeabunea/RomanianCoderExamples/commit/b587bf58e9a017747d92dc18462db13889056c6c
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private AuthenticationManager authenticationManager;
 
@@ -41,7 +40,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 credentials.getUsername(),
                 credentials.getPassword(),
                 new ArrayList<>());
-        System.out.println(authenticationToken);
+        //System.out.println(authenticationToken);
 
         //authenticate user
         Authentication auth = authenticationManager.authenticate(authenticationToken);
@@ -65,9 +64,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
+
+        //{"jwt": x, "role": x}
         ReturnJwt returnJwt = new ReturnJwt();
         returnJwt.setJwt(JwtProperties.TOKEN_PREFIX + token);
         returnJwt.setRole(role);
+
         String json = new Gson().toJson(returnJwt);
         response.getWriter().print(json);
         response.getWriter().flush();

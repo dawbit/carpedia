@@ -1,20 +1,10 @@
-import { EngineDetailsComponent } from "./../engine-details/engine-details.component";
-import { Observable } from "rxjs";
-import { EngineService } from "../engine.service";
-import { Engine } from "../engine";
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { MatTableDataSource } from "@angular/material";
 import { ViewChild } from "@angular/core";
-import {
-  MatInputModule,
-  MatPaginatorModule,
-  MatProgressSpinnerModule,
-  MatSortModule,
-  MatTableModule,
-  MatPaginator,
-  MatSort
-} from "@angular/material";
+import { MatPaginator, MatSort } from "@angular/material";
+import { EngineService } from "../engine.service";
+import { Engine } from "../engine";
 import { AuthService } from '../../security/services/auth.service';
 
 @Component({
@@ -41,7 +31,7 @@ export class EngineListComponent implements OnInit {
     this.engines.paginator = this.paginator;
     this.engines.sort = this.sort;
     this.getEngines();
-    this.authService.currentMessageRole.subscribe(message => this.isAdmin = message);
+    this.authService.currentRole.subscribe(message => this.isAdmin = message);
   }
 
   applyFilter(filterValue: string) {

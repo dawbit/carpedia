@@ -20,14 +20,6 @@ public class SegmentController {
     @Autowired
     SegmentRepository segment;
 
-//    @RequestMapping("/segment/save")
-//    public String process(){
-//        // save a single Segment
-//        segment.save(new SegmentModel("A"));
-//        segment.save(new SegmentModel("B"));
-//        segment.save(new SegmentModel("C"));
-//        return "Done";
-//    }
 
     @GetMapping("/segment")
     public List<SegmentModel> getAllSegments() {
@@ -84,7 +76,8 @@ public class SegmentController {
         try {
             segment.deleteById(id);
             return "Segment Deleted";
-        } catch (Exception exc) {
+        }
+        catch (Exception exc) {
             return "Not deleted. Exception: " + exc.getMessage();
         }
     }

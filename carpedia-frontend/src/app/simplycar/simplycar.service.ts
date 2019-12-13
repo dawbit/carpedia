@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { SimplyCar } from "./simplycar";
 
 @Injectable({
   providedIn: "root"
@@ -24,14 +23,6 @@ export class SimplyCarService {
     return this.http.get(this.baseUrl, this.httpOptions).pipe(
     map(this.extractData));
   }
-
-  // getSimplyCarsList(pageIndex: number =1, pageSize: number): Observable<any> {
-  //   return this.http.get(this.baseUrl, {
-  //     params: new HttpParams()
-  //       .set('pageIndex', pageIndex.toString())
-  //       .set('pageSize', pageSize.toString())}).pipe(
-  //   map(this.extractData));
-  // }
 
   private extractData(res: Response) {
     return res || {}; // If 'res' is null, it returns empty object

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Bodytype } from '../bodytype';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Bodytype } from '../bodytype';
 import { BodytypeService } from '../bodytype.service';
 
 @Component({

@@ -1,8 +1,8 @@
-import { CountryService } from '../country.service';
-import { Country } from '../country';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { CountryService } from '../country.service';
+import { Country } from '../country';
 
 @Component({
   selector: 'app-country-create',

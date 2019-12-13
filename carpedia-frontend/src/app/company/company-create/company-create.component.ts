@@ -1,7 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { CountryDetailsComponent } from "./../../country/country-details/country-details.component";
-import { Observable } from "rxjs";
 import { MatTableDataSource } from "@angular/material";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { CompanyService } from "../company.service";
@@ -16,7 +14,6 @@ import { Country } from "../../country/country";
 })
 export class CompanyCreateComponent implements OnInit {
   company: Company = new Company();
-  //countries: Country[];
   countries: MatTableDataSource<Country>;
 
   submitted = false;
@@ -29,7 +26,6 @@ export class CompanyCreateComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    //this.countries = new MatTableDataSource();
     this.getCountries();
   }
 

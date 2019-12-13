@@ -1,20 +1,10 @@
-import { CarDetailsComponent } from "./../car-details/car-details.component";
-import { Observable } from "rxjs";
 import { CarService } from "../car.service";
 import { Car } from "../car";
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { MatTableDataSource } from "@angular/material";
 import { ViewChild } from "@angular/core";
-import {
-  MatInputModule,
-  MatPaginatorModule,
-  MatProgressSpinnerModule,
-  MatSortModule,
-  MatTableModule,
-  MatPaginator,
-  MatSort
-} from "@angular/material";
+import { MatPaginator, MatSort } from "@angular/material";
 import { AuthService } from '../../security/services/auth.service';
 
 @Component({
@@ -44,7 +34,7 @@ export class CarListComponent implements OnInit {
     this.dataSource = new MatTableDataSource();
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    this.authService.currentMessageRole.subscribe(message => this.isAdmin = message);
+    this.authService.currentRole.subscribe(message => this.isAdmin = message);
   }
 
   reloadData() {

@@ -25,8 +25,8 @@ public class UserController {
 
     @RequestMapping("/testuser")
     public String process(){
-        //user.save(new UserModel("wasko_admin",passwordEncoder.encode("admin"), "Dawid", "Bitner", true,true));
-        //user.save(new UserModel("wasko_user",passwordEncoder.encode("user"), "Dawid", "Bitner", false,true));
+        //user.save(new UserModel("wasko_admin",passwordEncoder.encode("admin"), "Jan", "Kowalski", true,true));
+        //user.save(new UserModel("wasko_user",passwordEncoder.encode("user"), "Adam", "Nowak", false,true));
         return "Done";
     }
 
@@ -69,7 +69,8 @@ public class UserController {
                 userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
                 return "User saved";
             }
-        } catch (Exception exc) {
+        }
+        catch (Exception exc) {
             return "Not saved. Exception: " + exc.getMessage();
         }
     }
@@ -110,7 +111,8 @@ public class UserController {
         try {
             user.deleteById(id);
             return "User Deleted";
-        } catch (Exception exc) {
+        }
+        catch (Exception exc) {
             return "Not deleted. Exception: " + exc.getMessage();
         }
     }

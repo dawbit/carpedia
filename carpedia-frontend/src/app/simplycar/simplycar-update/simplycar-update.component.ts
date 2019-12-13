@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { SimplyCar } from '../simplycar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SimplyCar } from '../simplycar';
 import { SimplyCarService } from '../simplycar.service';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-simplycar-update',

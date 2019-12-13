@@ -23,9 +23,6 @@ public class EngineModel implements Serializable {
     @Column(name = "capacity", length = 6)
     private float capacity;
 
-//    @ManyToMany
-//    @JsonBackReference(value = "car-engine")
-//    List<CarModel> car = new ArrayList<>();
 
     public void setId(long id) {
         this.id = id;
@@ -73,8 +70,4 @@ public class EngineModel implements Serializable {
         this.capacity = capacity;
     }
 
-//    @Override
-//    public String toString(){
-//        return new com.google.gson.Gson().toJson(this);
-//    }
 }

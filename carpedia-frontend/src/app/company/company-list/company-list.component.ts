@@ -1,20 +1,10 @@
-import { CompanyDetailsComponent } from "./../company-details/company-details.component";
-import { Observable } from "rxjs";
-import { CompanyService } from "../company.service";
-import { Company } from "../company";
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { MatTableDataSource } from "@angular/material";
 import { ViewChild } from "@angular/core";
-import {
-  MatInputModule,
-  MatPaginatorModule,
-  MatProgressSpinnerModule,
-  MatSortModule,
-  MatTableModule,
-  MatPaginator,
-  MatSort
-} from "@angular/material";
+import { MatPaginator, MatSort } from "@angular/material";
+import { Company } from "../company";
+import { CompanyService } from "../company.service";
 import { AuthService } from '../../security/services/auth.service';
 
 @Component({
@@ -41,7 +31,7 @@ export class CompanyListComponent implements OnInit {
     this.companies.paginator = this.paginator;
     this.companies.sort = this.sort;
     this.getCompanys();
-    this.authService.currentMessageRole.subscribe(message => this.isAdmin = message);
+    this.authService.currentRole.subscribe(message => this.isAdmin = message);
   }
 
   applyFilter(filterValue: string) {

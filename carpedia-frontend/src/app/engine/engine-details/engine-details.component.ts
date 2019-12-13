@@ -1,8 +1,7 @@
-import { Engine } from '../engine';
-import { Component, OnInit, Input } from '@angular/core';
-import { EngineService } from '../engine.service';
-import { EngineListComponent } from '../engine-list/engine-list.component';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Engine } from '../engine';
+import { EngineService } from '../engine.service';
 
 @Component({
   selector: 'app-engine-details',

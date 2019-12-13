@@ -1,8 +1,8 @@
-import { SimplyCarService } from '../simplycar.service';
-import { SimplyCar } from '../simplycar';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { SimplyCarService } from '../simplycar.service';
+import { SimplyCar } from '../simplycar';
 
 @Component({
   selector: 'app-simplycar-create',

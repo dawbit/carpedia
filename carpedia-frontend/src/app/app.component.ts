@@ -17,9 +17,9 @@ export class AppComponent {
     private router: Router){}
 
   ngOnInit(){
-    this.authService.currentMessageRole.subscribe(message => this.isAdmin = message);
-    this.authService.currentMessageLogged.subscribe(message => this.isLogged = message);
-    this.authService.currentMessageLogged.subscribe(message => this.isNotLogged = !message);
+    this.authService.currentRole.subscribe(message => this.isAdmin = message);
+    this.authService.currentUser.subscribe(message => this.isLogged = message);
+    this.authService.currentUser.subscribe(message => this.isNotLogged = !message);
   }
 
   logout() {

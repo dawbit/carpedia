@@ -88,8 +88,4 @@ public class CompanyModel implements Serializable {
         this.country = country;
     }
 
-//    @Override
-//    public String toString(){
-//        return new com.google.gson.Gson().toJson(this);
-//    }
 }

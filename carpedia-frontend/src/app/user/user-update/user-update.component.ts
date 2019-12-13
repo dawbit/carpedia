@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { User } from '../user';
 import { UserService } from '../user.service';
 
 @Component({
@@ -39,7 +39,7 @@ export class UserUpdateComponent implements OnInit {
   }
 
   form = new FormGroup({
-    password: new FormControl('',[Validators.required,Validators.pattern("[a-zA-Z0-9 !@#$%^&*()_+-=[]{};',./<>?].{0,30}$")]),
+    password: new FormControl('',[Validators.required,Validators.pattern("[a-zA-Z0-9$@$!%*?&].{6,}$")]),
     fname: new FormControl('',[Validators.required,Validators.pattern("[a-zA-Z0-9 ].{0,20}$")]),
     lname: new FormControl('',[Validators.required,Validators.pattern("[a-zA-Z0-9 ].{0,20}$")]),
   });

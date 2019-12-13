@@ -1,7 +1,3 @@
-// via https://jasonwatmore.com/post/2019/06/22/angular-8-jwt-authentication-example-tutorial
-// https://angular-academy.com/angular-jwt/
-// https://github.com/bartosz-io/jwt-auth-angular/
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';

@@ -20,18 +20,6 @@ public class CountryController {
     @Autowired
     CountryRepository country;
 
-//    @RequestMapping("/country/save")
-////    public String process(){
-////        // save a single Country
-////        country.save(new CountryModel("Poland"));
-////        country.save(new CountryModel("Germany"));
-////        country.save(new CountryModel("France"));
-////        country.save(new CountryModel("China"));
-////        country.save(new CountryModel("Korea"));
-////        country.save(new CountryModel("Russia"));
-////        country.save(new CountryModel("polska")); // for testing pattern
-////        return "Done";
-////    }
 
     @GetMapping("/country")
     public List<CountryModel> getAllCountries() {
@@ -59,7 +47,8 @@ public class CountryController {
                 country.save(countryModel);
                 return "Country saved";
             }
-        } catch (Exception exc) {
+        }
+        catch (Exception exc) {
             return "Not saved. Exception: " + exc.getMessage();
         }
     }
@@ -87,7 +76,8 @@ public class CountryController {
         try {
             country.deleteById(id);
             return "Country Deleted";
-        } catch (Exception exc) {
+        }
+        catch (Exception exc) {
             return "Not deleted. Exception: " + exc.getMessage();
         }
     }

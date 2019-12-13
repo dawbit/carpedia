@@ -1,8 +1,7 @@
-import { Segment } from '../segment';
 import { Component, OnInit, Input } from '@angular/core';
-import { SegmentService } from '../segment.service';
-import { SegmentListComponent } from '../segment-list/segment-list.component';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Segment } from '../segment';
+import { SegmentService } from '../segment.service';
 
 @Component({
   selector: 'app-segment-details',

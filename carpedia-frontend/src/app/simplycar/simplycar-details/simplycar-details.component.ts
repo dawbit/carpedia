@@ -1,8 +1,7 @@
-import { SimplyCar } from '../simplycar';
 import { Component, OnInit, Input } from '@angular/core';
-import { SimplyCarService } from '../simplycar.service';
-import { SimplyCarListComponent } from '../simplycar-list/simplycar-list.component';
 import { Router, ActivatedRoute } from '@angular/router';
+import { SimplyCar } from '../simplycar';
+import { SimplyCarService } from '../simplycar.service';
 
 @Component({
   selector: 'app-simplycar-details',

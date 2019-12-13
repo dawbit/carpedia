@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-//import javax.transaction.Transactional;
-
 @CrossOrigin
 @RestController
 public class CompanyController {
@@ -26,14 +24,6 @@ public class CompanyController {
     @Autowired
     CountryRepository country;
 
-//    @RequestMapping("/company/save")
-//    public String process(){
-//        // save a single Company
-//
-//        CountryModel france = country.save(new CountryModel("France"));
-//        company.save(new CompanyModel("Peugeot",1810, france));
-//        return "Done";
-//    }
 
     @GetMapping("/company")
     public List<CompanyModel> getAllCompanies() {
@@ -59,13 +49,14 @@ public class CompanyController {
     @Transactional
     public String saveCompany(@RequestBody CompanyModel companyModel) {
         try {
-            if (getCompanyByIdForSave(companyModel.getId()) != null) {
+            if (getCompanyByIdForSave(companyModel.getId()) != null || doesCompanyExist(companyModel.getName())) {
                 return "Company already exists, or incorrect input format";
             } else {
                 company.save(companyModel);
                 return "Company saved";
             }
-        } catch (Exception exc) {
+        }
+        catch (Exception exc) {
             return "Not saved. Exception: " + exc.getMessage();
         }
     }
@@ -96,7 +87,8 @@ public class CompanyController {
         try {
             company.deleteById(id);
             return "Company Deleted";
-        } catch (Exception exc) {
+        }
+        catch (Exception exc) {
             return "Not deleted. Exception: " + exc.getMessage();
         }
     }
