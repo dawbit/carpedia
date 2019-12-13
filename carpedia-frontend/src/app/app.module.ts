@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { HttpClientModule } from "@angular/common/http";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
   MatButtonModule,
   MatInputModule,
@@ -113,6 +114,7 @@ import { AuthModule } from './security/auth.module';
   imports: [
     AppRoutingModule, 
     BrowserModule, 
+    BrowserAnimationsModule,
     FormsModule, 
     HttpClientModule,
     MatButtonModule, 
