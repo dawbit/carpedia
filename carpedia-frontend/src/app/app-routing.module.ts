@@ -50,8 +50,7 @@ import { AuthGuard } from './security/guards/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'homepage', pathMatch: 'full' },
-  { path: 'homepage', component: HomepageComponent,
-  canActivate: [AuthGuard] },
+  { path: 'homepage', component: HomepageComponent },
 
   { path: 'simplycar', component: SimplyCarListComponent,
   canActivate: [DefaultGuard], canLoad: [DefaultGuard] },

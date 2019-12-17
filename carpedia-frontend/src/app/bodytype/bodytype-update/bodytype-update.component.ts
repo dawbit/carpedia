@@ -26,14 +26,12 @@ export class BodytypeUpdateComponent implements OnInit {
     
     this.bodytypeService.getBodytype(this.id)
       .subscribe(data => {
-        console.log(data)
         this.bodytype = data;
-      }, error => console.log(error));
+      });
   }
 
   updateBodytype() {
-    this.bodytypeService.updateBodytype(this.id, this.bodytype)
-      .subscribe(data => console.log(data), error => console.log(error));
+    this.bodytypeService.updateBodytype(this.id, this.bodytype).subscribe();
     this.bodytype = new Bodytype();
   }
 

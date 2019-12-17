@@ -27,8 +27,7 @@ export class EngineCreateComponent implements OnInit {
   }
 
   save() {
-    this.engineService.createEngine(this.engine)
-      .subscribe(data => console.log(data), error => console.log(error));
+    this.engineService.createEngine(this.engine).subscribe();
     this.engine = new Engine();
   }
 

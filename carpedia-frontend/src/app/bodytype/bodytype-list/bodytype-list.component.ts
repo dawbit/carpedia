@@ -44,19 +44,13 @@ export class BodytypeListComponent implements OnInit {
 
   getBodytypes() {
     this.bodytypeService.getBodytypeList().subscribe(data => {
-      console.log(data);
       this.bodytypes.data = data;
       return data;
     });
   }
 
   deleteBodytype(id: number) {
-    this.bodytypeService.deleteBodytype(id).subscribe(
-      data => {
-        console.log(data);
-      },
-      error => console.log(error)
-    );
+    this.bodytypeService.deleteBodytype(id).subscribe();
   }
 
   bodytypeDetails(id: number) {

@@ -44,19 +44,13 @@ export class CountryListComponent implements OnInit {
 
   getCountrys() {
     this.countryService.getCountryList().subscribe(data => {
-      console.log(data);
       this.countries.data = data;
       return data;
     });
   }
 
   deleteCountry(id: number) {
-    this.countryService.deleteCountry(id).subscribe(
-      data => {
-        console.log(data);
-      },
-      error => console.log(error)
-    );
+    this.countryService.deleteCountry(id).subscribe();
   }
 
   countryDetails(id: number) {

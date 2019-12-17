@@ -44,19 +44,13 @@ export class EngineListComponent implements OnInit {
 
   getEngines() {
     this.engineService.getEngineList().subscribe(data => {
-      console.log(data);
       this.engines.data = data;
       return data;
     });
   }
 
   deleteEngine(id: number) {
-    this.engineService.deleteEngine(id).subscribe(
-      data => {
-        console.log(data);
-      },
-      error => console.log(error)
-    );
+    this.engineService.deleteEngine(id).subscribe();
   }
 
   engineDetails(id: number) {

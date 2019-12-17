@@ -68,7 +68,6 @@ export class SimplyCarListComponent implements OnInit {
   getCars() {
     this.simplycarService.getSimplyCarsList().subscribe(data => {
       this.loading = true;
-      console.log(data);
       this.simplycars.data = data;
       this.loading = false;
       return data;
@@ -84,10 +83,8 @@ export class SimplyCarListComponent implements OnInit {
   deleteSimplyCar(id: number) {
     this.simplycarService.deleteSimplyCar(id).subscribe(
       data => {
-        console.log(data);
         this.reloadData();
-      },
-      error => console.log(error)
+      }
     );
   }
 

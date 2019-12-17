@@ -27,8 +27,7 @@ export class CountryCreateComponent implements OnInit {
   }
 
   save() {
-    this.countryService.createCountry(this.country)
-      .subscribe(data => console.log(data), error => console.log(error));
+    this.countryService.createCountry(this.country).subscribe();
     this.country = new Country();
   }
 

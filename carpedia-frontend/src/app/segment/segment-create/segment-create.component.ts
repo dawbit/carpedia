@@ -27,8 +27,7 @@ export class SegmentCreateComponent implements OnInit {
   }
 
   save() {
-    this.segmentService.createSegment(this.segment)
-      .subscribe(data => console.log(data), error => console.log(error));
+    this.segmentService.createSegment(this.segment).subscribe();
     this.segment = new Segment();
   }
 

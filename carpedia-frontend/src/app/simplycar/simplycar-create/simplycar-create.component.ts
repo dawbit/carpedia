@@ -28,8 +28,7 @@ export class SimplyCarCreateComponent implements OnInit {
   }
 
   save() {
-    this.simplycarService.createSimplyCar(this.simplycar)
-      .subscribe(data => console.log(data), error => console.log(error));
+    this.simplycarService.createSimplyCar(this.simplycar).subscribe();
     this.simplycar = new SimplyCar();
   }
 

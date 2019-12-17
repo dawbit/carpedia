@@ -27,14 +27,12 @@ export class EngineUpdateComponent implements OnInit {
     
     this.engineService.getEngine(this.id)
       .subscribe(data => {
-        console.log(data)
         this.engine = data;
-      }, error => console.log(error));
+      });
   }
 
   updateEngine() {
-    this.engineService.updateEngine(this.id, this.engine)
-      .subscribe(data => console.log(data), error => console.log(error));
+    this.engineService.updateEngine(this.id, this.engine).subscribe();
     this.engine = new Engine();
   }
 

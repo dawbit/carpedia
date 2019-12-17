@@ -27,14 +27,13 @@ export class CountryUpdateComponent implements OnInit {
     
     this.countryService.getCountry(this.id)
       .subscribe(data => {
-        console.log(data)
         this.country = data;
-      }, error => console.log(error));
+      });
   }
 
   updateCountry() {
     this.countryService.updateCountry(this.id, this.country)
-      .subscribe(data => console.log(data), error => console.log(error));
+      .subscribe();
     this.country = new Country();
   }
 

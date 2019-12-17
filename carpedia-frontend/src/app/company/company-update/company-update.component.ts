@@ -36,22 +36,19 @@ export class CompanyUpdateComponent implements OnInit {
     
     this.companyService.getCompany(this.id)
       .subscribe(data => {
-        console.log(data)
         this.company = data;
-      }, error => console.log(error));
+      });
   }
 
   getCountries() {
     this.countryService.getCountryList().subscribe(data => {
-      console.log(data);
       this.countries = data;
       return data;
     });
   }
 
   updateCompany() {
-    this.companyService.updateCompany(this.id, this.company)
-      .subscribe(data => console.log(data), error => console.log(error));
+    this.companyService.updateCompany(this.id, this.company).subscribe();
     this.company = new Company();
   }
 

@@ -23,9 +23,8 @@ export class BodytypeDetailsComponent implements OnInit {
     
     this.bodytypeService.getBodytype(this.id)
       .subscribe(data => {
-        console.log(data)
         this.bodytype = data;
-      }, error => console.log(error));
+      });
   }
 
   list(){

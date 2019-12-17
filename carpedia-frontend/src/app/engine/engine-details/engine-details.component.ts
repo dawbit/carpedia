@@ -23,9 +23,8 @@ export class EngineDetailsComponent implements OnInit {
     
     this.engineService.getEngine(this.id)
       .subscribe(data => {
-        console.log(data)
         this.engine = data;
-      }, error => console.log(error));
+      });
   }
 
   list(){

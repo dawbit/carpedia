@@ -23,9 +23,8 @@ export class SegmentDetailsComponent implements OnInit {
     
     this.segmentService.getSegment(this.id)
       .subscribe(data => {
-        console.log(data)
         this.segment = data;
-      }, error => console.log(error));
+      });
   }
 
   list(){

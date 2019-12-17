@@ -36,19 +36,14 @@ export class CompanyCreateComponent implements OnInit {
 
   getCountries() {
     this.countryService.getCountryList().subscribe(data => {
-      console.log(data);
       this.countries = data;
       return data;
     });
   }
 
   save() {
-    this.companyService.createCompany(this.company).subscribe(
-      data => console.log(data),
-      error => console.log(error)
-    );
+    this.companyService.createCompany(this.company).subscribe();
     this.company = new Company();
-    console.log(this.companyService.createCompany(this.company));
   }
 
   form = new FormGroup({

@@ -44,19 +44,13 @@ export class SegmentListComponent implements OnInit {
 
   getSegments() {
     this.segmentService.getSegmentList().subscribe(data => {
-      console.log(data);
       this.segments.data = data;
       return data;
     });
   }
 
   deleteSegment(id: number) {
-    this.segmentService.deleteSegment(id).subscribe(
-      data => {
-        console.log(data);
-      },
-      error => console.log(error)
-    );
+    this.segmentService.deleteSegment(id).subscribe();
   }
 
   segmentDetails(id: number) {

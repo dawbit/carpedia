@@ -23,9 +23,8 @@ export class CompanyDetailsComponent implements OnInit {
     
     this.companyService.getCompany(this.id)
       .subscribe(data => {
-        console.log(data)
         this.company = data;
-      }, error => console.log(error));
+      });
   }
 
   list(){

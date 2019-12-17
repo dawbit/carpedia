@@ -51,7 +51,6 @@ export class CarCreateComponent implements OnInit {
 
   getCompanies() {
     this.companyService.getCompanyList().subscribe(data => {
-      console.log(data);
       this.companies = data;
       return data;
     });
@@ -59,7 +58,6 @@ export class CarCreateComponent implements OnInit {
 
   getCountries() {
     this.countryService.getCountryList().subscribe(data => {
-      console.log(data);
       this.countries = data;
       return data;
     });
@@ -67,7 +65,6 @@ export class CarCreateComponent implements OnInit {
 
   getSegments() {
     this.segmentService.getSegmentList().subscribe(data => {
-      console.log(data);
       this.segments = data;
       return data;
     });
@@ -75,19 +72,14 @@ export class CarCreateComponent implements OnInit {
 
   getBodytypes() {
     this.bodytypeService.getBodytypeList().subscribe(data => {
-      console.log(data);
       this.bodytypes = data;
       return data;
     });
   }
 
   save() {
-    this.carService.createCar(this.car).subscribe(
-      data => console.log(data),
-      error => console.log(error)
-    );
+    this.carService.createCar(this.car).subscribe();
     this.car = new Car();
-    console.log(this.carService.createCar(this.car));
   }
 
   form = new FormGroup({

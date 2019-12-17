@@ -40,19 +40,13 @@ export class UserListComponent implements OnInit {
 
   getUsers() {
     this.userService.getUserList().subscribe(data => {
-      console.log(data);
       this.users.data = data;
       return data;
     });
   }
 
   deleteUser(id: number) {
-    this.userService.deleteUser(id).subscribe(
-      data => {
-        console.log(data);
-      },
-      error => console.log(error)
-    );
+    this.userService.deleteUser(id).subscribe();
   }
 
   userDetails(id: number) {

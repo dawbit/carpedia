@@ -27,8 +27,7 @@ export class BodytypeCreateComponent implements OnInit {
   }
 
   save() {
-    this.bodytypeService.createBodytype(this.bodytype)
-      .subscribe(data => console.log(data), error => console.log(error));
+    this.bodytypeService.createBodytype(this.bodytype).subscribe();
     this.bodytype = new Bodytype();
   }
 

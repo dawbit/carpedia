@@ -23,9 +23,8 @@ export class SimplyCarDetailsComponent implements OnInit {
     
     this.simplycarService.getSimplyCar(this.id)
       .subscribe(data => {
-        console.log(data)
         this.simplycar = data;
-      }, error => console.log(error));
+      });
   }
 
   list(){

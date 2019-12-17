@@ -44,19 +44,13 @@ export class CompanyListComponent implements OnInit {
 
   getCompanys() {
     this.companyService.getCompanyList().subscribe(data => {
-      console.log(data);
       this.companies.data = data;
       return data;
     });
   }
 
   deleteCompany(id: number) {
-    this.companyService.deleteCompany(id).subscribe(
-      data => {
-        console.log(data);
-      },
-      error => console.log(error)
-    );
+    this.companyService.deleteCompany(id).subscribe();
   }
 
   companyDetails(id: number) {

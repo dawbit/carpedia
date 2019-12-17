@@ -26,14 +26,12 @@ export class SegmentUpdateComponent implements OnInit {
     
     this.segmentService.getSegment(this.id)
       .subscribe(data => {
-        console.log(data)
         this.segment = data;
-      }, error => console.log(error));
+      });
   }
 
   updateSegment() {
-    this.segmentService.updateSegment(this.id, this.segment)
-      .subscribe(data => console.log(data), error => console.log(error));
+    this.segmentService.updateSegment(this.id, this.segment).subscribe();
     this.segment = new Segment();
   }
 

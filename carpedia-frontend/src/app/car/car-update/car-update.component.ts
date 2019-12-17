@@ -51,14 +51,12 @@ export class CarUpdateComponent implements OnInit {
     
     this.carService.getCar(this.id)
       .subscribe(data => {
-        console.log(data)
         this.car = data;
-      }, error => console.log(error));
+      });
   }
 
   getCompanies() {
     this.companyService.getCompanyList().subscribe(data => {
-      console.log(data);
       this.companies = data;
       return data;
     });
@@ -66,7 +64,6 @@ export class CarUpdateComponent implements OnInit {
 
   getCountries() {
     this.countryService.getCountryList().subscribe(data => {
-      console.log(data);
       this.countries = data;
       return data;
     });
@@ -74,7 +71,6 @@ export class CarUpdateComponent implements OnInit {
 
   getSegments() {
     this.segmentService.getSegmentList().subscribe(data => {
-      console.log(data);
       this.segments = data;
       return data;
     });
@@ -82,7 +78,6 @@ export class CarUpdateComponent implements OnInit {
 
   getBodytypes() {
     this.bodytypeService.getBodytypeList().subscribe(data => {
-      console.log(data);
       this.bodytypes = data;
       return data;
     });
@@ -90,7 +85,7 @@ export class CarUpdateComponent implements OnInit {
 
   updateCar() {
     this.carService.updateCar(this.id, this.car)
-      .subscribe(data => console.log(data), error => console.log(error));
+      .subscribe();
     this.car = new Car();
   }
 

@@ -26,14 +26,12 @@ export class SimplyCarUpdateComponent implements OnInit {
     
     this.simplycarService.getSimplyCar(this.id)
       .subscribe(data => {
-        console.log(data)
         this.simplycar = data;
-      }, error => console.log(error));
+      });
   }
 
   updateSimplyCar() {
-    this.simplycarService.updateSimplyCar(this.id, this.simplycar)
-      .subscribe(data => console.log(data), error => console.log(error));
+    this.simplycarService.updateSimplyCar(this.id, this.simplycar).subscribe();
     this.simplycar = new SimplyCar();
     this.gotoList();
   }

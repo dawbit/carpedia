@@ -122,7 +122,6 @@ export class CarListComponent implements OnInit {
     this.carService.getCarList().subscribe(
       data => {
         this.loading = true;
-        console.log(data);
         this.dataSource.data = data;
         this.loading = false;
         return data;
@@ -131,12 +130,7 @@ export class CarListComponent implements OnInit {
 
   deleteCar(id: number) {
     this.carService.deleteCar(id).subscribe(
-      data => {
-        console.log(data);
-        this.reloadData();
-      },
-      error => console.log(error)
-    );
+      data => { this.reloadData();});
   }
 
   carDetails(id: number) {
