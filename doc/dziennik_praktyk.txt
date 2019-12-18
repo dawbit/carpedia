@@ -1,0 +1,30 @@
+X5.0h	18.11 10:00 - 15:00 - odebranie identyfikatora, przygotowanie komputera
+X5.0h	19.11 07:00 - 12:00 - szkolenie BHP, otrzymanie zadania, przygotowanie środowisk, tutoriale
+X4.5h	20.11 07:00 - 11:30 - początek budowania backendu
+X6.0h	21.11 07:00 - 13:00 - dalsza część budowania backendu, załatwienie relacji i poprawne wyświetlanie obiektów przez szukanie
+X7.5h	22.11 07:00 - 14:30 - budowanie backendu
+X6.0h	26.11 07:30 - 13:30 - pełen CRUD po stronie backendu, następnego dnia przechodzę już do Angulara.
+X7.5h	27.11 08:30 - 16:00 - start Angular
+X8.0h	28.11 07:00 - 15:00 - CRUD, wyświetla dane z przykłdowej tabelki, do zrobienia wyszukiwanie i paginacja
+X8.0h	29.11 07:00 - 15:00 - dodano sortowanie, wyszukiwanie i paginację, problem z dodawaniem marek z kluczem obcym kraju
+X4.0h	03.12 07:30 - 11:30 - przygotowanie reszty tabel
+X8.0h	04.12 07:20 - 15:20 - przygotowywanie głównej tabeli, wyszukiwanie po stronie serwera, paginacja po stronie serwera, autentykacja, rejestracja, dokumentacja
+X8.0h	05.12 07:20 - 15:20 - więcej opcji wyszukiwania, poprawa CSS, navbar, panel admina, rejestracja, panel logowania -> start do autentykacji
+X7.5h	06.12 07:40 - 15:10 - start security
+X8.0h	10.12 07:20 - 15:20 - autentykacja
+X8.0h	11.12 07:40 - 15:40 - autentykacja
+X4.5h	12.12 07:10 - 11:40 - walidacja
+X8.0h	13.12 07:30 - 15:30 - dokończenie walidacji, scenariusze testowe, rozpoczęcie pisania dokumentacji
+X6.5h	17.12 07:00 - 13:30 - dokumentacja
+
+sum=120.0h
+
+TODO:
+[x] wyłączene buttona delete dla użytkowników
+[x] poprawienie literówek i układu HTML - commit
+[] odświeżanie
+[x] regexy
+[] naprawa rejestracji
+[] szukanie po endpointach dla innych tabel
+[] silniki - wiele do wielu
+[] użytkownicy - kto dodał wpis

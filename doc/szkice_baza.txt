@@ -1,0 +1,54 @@
+COMPANY DONE					
+int 	| id PK				X
+string 	| name				+1
+int(4)	| foundationyear		[1-2][0-9][0-9][0-9]
+int	| country_id FK COUNTRIES	X
+
+CAR DONE				PATTERN DONE
+int	| id PK				X
+int	| company_id FK COMPANIES	X
+string	| name				+1
+DATE	| start_production		[1-2][0-9][0-9][0-9]
+DATE	| end_production		[1-2][0-9][0-9][0-9]|null
+int	| engine_id FK ENGINES		X
+int(5)	| NCAPstars			[0-5]
+int	| country_id FK COUNTRIES	X
+int	| segment_id FK SEGMENTS	X
+int	| body_id FK BODY_TYPE		X
+int	| user_id FK USERS		X
+
+COUNTRY	DONE				PATTERN DONE X
+int	| id PK				X
+string	| name				+1
+
+SEGMENTS DONE				PATTERN DONE X
+int	| id PK				X
+string	| name				+1
+
+BODY_TYPE DONE				PATTERN DONE X
+int	| id PK				X
+string	| name				+1
+
+ENGINES DONE				PATTERN DONE
+int	| id PK				X
+string	| name				+1
+int(3)	| power				[1-9][0-9]...
+int(4)	| capacity			[1-9][0-9]...
+
+USER					PATTERN DONE
+int	| id PK				X	
+string	| username			X
+string/password | password		Xitf
+string	| fname				X
+string	| lname				X
+bool	| ismod				X
+bool	| isactive			X
+
+
+------------------------
+testowe:
+
+SIMPLYCAR DONE				PATTERN DONE
+int	| id				X
+string	| company			+1
+string	| model				+1
