@@ -50,30 +50,26 @@ public class SimplyCarController {
 
     @PostMapping("/simply/save")
     @Transactional
-    public String saveSimplyCar(@RequestBody SimplyCarModel simplyCar) {
+    public SimplyCarModel saveSimplyCar(@RequestBody SimplyCarModel simplyCar) {
         try {
             if (getCarById(simplyCar.getId()) != null) {
-                return "SimplyCar already exists";
-            } else {
-                repository.save(simplyCar);
-                return "SimplyCar saved";
+                return null;
+            }
+            else {
+                return repository.save(simplyCar);
             }
         }
         catch (Exception exc) {
-            return "Not saved. Exception: " + exc.getMessage();
+            return null;
         }
+
     }
 
     @PutMapping("simply/update")
     @Transactional
     public String updateSimplyCar(@RequestBody SimplyCarModel simplyCar) {
         try {
-            entityManager.createQuery("UPDATE SimplyCarModel simplyCar " +
-                    "SET simplyCar.company=?2, simplyCar.model=?3 WHERE simplyCar.id=?1")
-                    .setParameter(1, simplyCar.getId())
-                    .setParameter(2, simplyCar.getCompany())
-                    .setParameter(3, simplyCar.getModel())
-                    .executeUpdate();
+            repository.updateSimplyCar(simplyCar.getId(), simplyCar.getCompany(), simplyCar.getModel());
             return "SimplyCar updated";
         }
         catch (Exception exc){

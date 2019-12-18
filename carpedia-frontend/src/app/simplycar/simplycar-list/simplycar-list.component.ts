@@ -1,11 +1,12 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, Inject } from "@angular/core";
 import { Router } from "@angular/router";
 import { MatTableDataSource } from "@angular/material";
-import { ViewChild } from "@angular/core";
 import { MatPaginator, MatSort } from "@angular/material";
 import { SimplyCarService } from "../simplycar.service";
 import { SimplyCar } from "../simplycar";
 import { AuthService } from '../../security/services/auth.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: "app-simplycar-list",
@@ -25,7 +26,8 @@ export class SimplyCarListComponent implements OnInit {
   constructor(
     private simplycarService: SimplyCarService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -78,6 +80,22 @@ export class SimplyCarListComponent implements OnInit {
     this.loading = true;
     this.getCars();
     this.loading = false;
+  }
+
+  deleteDialog(idDel: number): void {
+    const editDialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: 'auto',
+      data: {
+        title: 'Delete',
+        message: 'Are you sure you want to delete this Simply Car?'
+      }
+    });
+
+    editDialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.deleteSimplyCar(idDel);
+      }
+    });
   }
 
   deleteSimplyCar(id: number) {

@@ -1,0 +1,16 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.confirmation-dialog-container{
+    text-align: center;
+    padding: 3%;
+}
+
+.btn.btn-danger{
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+.btn.btn-info{
+    margin-left: 3%;
+    margin-right: 3%;
+}

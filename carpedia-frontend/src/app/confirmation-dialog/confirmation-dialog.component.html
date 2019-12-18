@@ -1,0 +1,7 @@
+<div class="confirmation-dialog-container">
+    <h2 class="mat-h2">{{data.title}}</h2>
+
+    <p class="mat-body-1">{{data.message}}</p>
+        <button class="btn btn-danger" [mat-dialog-close]="true"> YES </button>
+        <button class="btn btn-info" (click)="onNoClick()"> NO </button>
+</div>

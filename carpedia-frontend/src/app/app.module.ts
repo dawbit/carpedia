@@ -7,6 +7,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
   MatButtonModule,
+  MatDialogModule,
   MatInputModule,
   MatPaginatorModule,
   MatProgressSpinnerModule,
@@ -64,11 +65,14 @@ import { UserUpdateComponent } from './user/user-update/user-update.component';
 import { UserLoginComponent } from './user/user-login/user-login.component';
 
 import { AuthModule } from './security/auth.module';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+
     HomepageComponent,
+    ConfirmationDialogComponent,
 
     SimplyCarCreateComponent,
     SimplyCarDetailsComponent,
@@ -109,7 +113,7 @@ import { AuthModule } from './security/auth.module';
     UserDetailsComponent,
     UserListComponent,
     UserUpdateComponent,
-    UserLoginComponent
+    UserLoginComponent,
   ],
   imports: [
     AppRoutingModule, 
@@ -118,7 +122,8 @@ import { AuthModule } from './security/auth.module';
     FormsModule, 
     HttpClientModule,
     MatButtonModule, 
-    MatButtonToggleModule, 
+    MatButtonToggleModule,
+    MatDialogModule, 
     MatCardModule, 
     MatInputModule, 
     MatMenuModule, 
@@ -132,6 +137,10 @@ import { AuthModule } from './security/auth.module';
 
     AuthModule
   ],
+  entryComponents: [
+    ConfirmationDialogComponent
+  ],
+  
   providers: [],
   bootstrap: [AppComponent]
 })

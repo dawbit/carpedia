@@ -117,8 +117,8 @@ const routes: Routes = [
 
   { path: 'user', component: UserListComponent,
   canActivate: [DefaultGuard], canLoad: [DefaultGuard] },
-  { path: 'registry', component: UserCreateComponent,
-  canActivate: [AuthGuard] },
+  { path: 'registry', component: UserCreateComponent},
+  
   { path: 'user/update/:id', component: UserUpdateComponent,
   canActivate: [DefaultGuard], canLoad: [DefaultGuard] },
   { path: 'user/details/:id', component: UserDetailsComponent,
