@@ -49,8 +49,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .addFilter(new JwtAuthorizationFilter(authenticationManager(), this.userRepository))
             .authorizeRequests()
             .antMatchers(HttpMethod.POST, "/login").permitAll()
-            .anyRequest().authenticated();
-            //.anyRequest().permitAll();
+            //.anyRequest().authenticated();
+            .anyRequest().permitAll();
     }
 
     @Bean

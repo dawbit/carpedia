@@ -82,7 +82,7 @@ public class EngineController {
     }
 
     @DeleteMapping("/engine/delete")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public String deleteEngine(@RequestParam("id") long id) {
         try {

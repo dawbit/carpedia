@@ -57,7 +57,7 @@ public class UserController {
     }
 
     @PostMapping("/user/save")
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public String saveUser(@RequestBody UserModel userModel) {
         try {
@@ -76,7 +76,7 @@ public class UserController {
     }
 
     @PutMapping("user/update")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public String updateUser(@RequestBody UserModel userModel) {
         try {
@@ -105,7 +105,7 @@ public class UserController {
     }
 
     @DeleteMapping("/user/delete")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public String deleteUser(@RequestParam("id") long id) {
         try {

@@ -70,7 +70,7 @@ public class BodyTypeController {
     }
 
     @DeleteMapping("/bodytype/delete")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public String deleteBodyType(@RequestParam("id") long id) {
         try {

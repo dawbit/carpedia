@@ -78,7 +78,7 @@ public class SimplyCarController {
     }
 
     @DeleteMapping("/simply/delete")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public String deleteSimplyCar(@RequestParam("id") long id) {
         try {

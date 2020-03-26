@@ -70,7 +70,7 @@ public class SegmentController {
     }
 
     @DeleteMapping("/segment/delete")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public String deleteSegment(@RequestParam("id") long id) {
         try {

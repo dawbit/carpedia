@@ -81,7 +81,7 @@ public class CompanyController {
     }
 
     @DeleteMapping("/company/delete")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public String deleteCompany(@RequestParam("id") long id) {
         try {

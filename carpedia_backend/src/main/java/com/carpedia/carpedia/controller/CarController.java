@@ -49,9 +49,19 @@ public class CarController {
         return car.findById(id);
     }
 
+    @GetMapping("/car/company/{company}")
+    public List<CarModel> getCarByCompanyName(@PathVariable String company) {
+        return car.findAllByCompanyNameIgnoreCase(company);
+    }
+
+    @GetMapping("/car/country/{country}")
+    public List<CarModel> getCarByCompanyCountryName(@PathVariable String country) {
+        return car.findAllByCompanyCountryNameIgnoreCase(country);
+    }
+
     @GetMapping("/car/name/{name}")
     public List<CarModel> getCarByName(@PathVariable String name) {
-        return car.findAllByName(name);
+        return car.findAllByNameIgnoreCase(name);
     }
 
     @GetMapping("/car/startproduction/{startproduction}")
@@ -67,6 +77,16 @@ public class CarController {
     @GetMapping("/car/ncap/{ncap}")
     public List<CarModel> getCarByNcap(@PathVariable int ncap) {
         return car.findAllByNcap(ncap);
+    }
+
+    @GetMapping("/car/segment/{segment}")
+    public List<CarModel> getCarBySegmentName(@PathVariable String segment) {
+        return car.findAllBySegmentNameIgnoreCase(segment);
+    }
+
+    @GetMapping("/car/bodytype/{bodytype}")
+    public List<CarModel> getCarByBodytypeName(@PathVariable String bodytype) {
+        return car.findAllByBodytypeNameIgnoreCase(bodytype);
     }
 
     @PostMapping("/car/save")
@@ -127,7 +147,7 @@ public class CarController {
     }
 
     @DeleteMapping("/car/delete")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public String deleteCar(@RequestParam("id") long id) {
         try {

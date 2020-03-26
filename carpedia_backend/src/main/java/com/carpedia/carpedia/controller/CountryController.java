@@ -70,7 +70,7 @@ public class CountryController {
     }
 
     @DeleteMapping("/country/delete")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional
     public String deleteCountry(@RequestParam("id") long id) {
         try {
