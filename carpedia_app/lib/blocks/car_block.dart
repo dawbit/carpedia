@@ -25,7 +25,8 @@ class CarBloc extends BlocBase {
 
   Future _onCarSuccess(List<CarResponse> car) async {
     _loadingCarSubject.add(false);
-    _carSubject.add(car[0]);
+    car.forEach((f)=> _carSubject.add(f));
+  //  _carSubject.add(car[0]);
   }
 
   Future _onCarError(e) async {
