@@ -3,6 +3,7 @@ import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'package:carpediaapp/widgets/slide_menu.dart';
 import 'package:carpediaapp/blocks/car_block.dart';
 import 'package:carpediaapp/models/car_response.dart';
 import 'package:carpediaapp/screens/car_details.dart';
@@ -34,12 +35,13 @@ class MainContentState extends State<MainContent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: NavDrawer(),
       appBar: AppBar(
         title: Text('Carpedia app'),
       ),
       body: Form(
         child: Row(
-          children: [
+          children: <Widget>[
             Expanded(
               child: Padding(
                 padding: EdgeInsets.only(left: 10.0),
@@ -67,4 +69,5 @@ class MainContentState extends State<MainContent> {
   void _navigateToDetails(CarResponse car) {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => CarDetailsScreen(car)));
   }
+
 }

@@ -31,5 +31,4 @@ class MyApp extends StatelessWidget {
   List<Dependency> get _dependencies => [
     Dependency((_) => CarRepository())
   ]; // Dependency
-
 }
