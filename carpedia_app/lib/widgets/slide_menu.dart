@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:carpediaapp/screens/theme_selector_page.dart';
+import 'package:carpediaapp/blocks/themes_bloc.dart';
+
 class NavDrawer extends StatelessWidget {
+  final ThemeBloc themeBloc;
+  NavDrawer({Key key, this.themeBloc}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -31,7 +36,8 @@ class NavDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.settings),
             title: Text('Settings (tutaj damy buttony ze zmiana stylu)'),
-            onTap: () => {Navigator.of(context).pop()},
+            onTap: () =>  Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ThemeSelectorPage())),
           ),
           ListTile(
             leading: Icon(Icons.border_color),
