@@ -3,6 +3,7 @@ import 'package:bloc_pattern/bloc_pattern.dart';
 
 import 'package:carpediaapp/screens/main_content.dart';
 import 'package:carpediaapp/blocks/car_block.dart';
+import 'package:carpediaapp/blocks/themes_bloc.dart';
 import 'package:carpediaapp/repositories/car_repository.dart';
 
 void main() => runApp(MyApp());
@@ -25,11 +26,11 @@ class MyApp extends StatelessWidget {
   }
 
   List<Bloc> get _blocs => [
-    Bloc((i) => CarBloc(i.get()))
+    Bloc((i) => CarBloc(i.get())),
+    Bloc((_) => ThemeBloc())
   ]; // Block
 
   List<Dependency> get _dependencies => [
     Dependency((_) => CarRepository())
   ]; // Dependency
-
 }
