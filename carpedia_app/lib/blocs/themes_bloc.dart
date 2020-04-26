@@ -1,3 +1,4 @@
+import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 import 'dart:async';
@@ -9,19 +10,16 @@ class DemoTheme {
   const DemoTheme(this.name, this.data);
 }
 
-class ThemeBloc {
-  final Stream<ThemeData> themeDataStream;
-  final Sink<DemoTheme> selectedTheme;
+class ThemeBloc extends BlocBase {
+  final selectedTheme = BehaviorSubject<DemoTheme>();
+  Stream<ThemeData> get selectedThemeStream => selectedTheme.stream.map((theme) => theme.data);
 
-  factory ThemeBloc() {
-    final selectedTheme = PublishSubject<DemoTheme>();
-    final themeDataStream = selectedTheme
-        .distinct()
-        .map((theme) => theme.data);
-    return ThemeBloc._(themeDataStream, selectedTheme);
+
+  @override
+  void dispose() {
+    super.dispose();
+    selectedTheme.close();
   }
-
-  const ThemeBloc._(this.themeDataStream, this.selectedTheme);
 
   DemoTheme initialTheme() {
     return DemoTheme(

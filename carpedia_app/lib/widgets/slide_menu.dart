@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:carpediaapp/screens/theme_selector_page.dart';
-import 'package:carpediaapp/blocks/themes_bloc.dart';
+import 'package:carpediaapp/blocs/themes_bloc.dart';
 
 class NavDrawer extends StatelessWidget {
   final ThemeBloc themeBloc;

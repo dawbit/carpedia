@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:carpediaapp/blocks/themes_bloc.dart';
+import 'package:carpediaapp/blocs/themes_bloc.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 
 class ThemeSelectorPage extends StatefulWidget {
@@ -13,8 +13,7 @@ class ThemeSelectorPageState extends State<ThemeSelectorPage> {
   @override
   void initState() {
     super.initState();
-    _themeBloc = ThemeBloc();
-    //_themeBloc = BlocProvider.getBloc();
+    _themeBloc = BlocProvider.getBloc();
   }
 
   @override

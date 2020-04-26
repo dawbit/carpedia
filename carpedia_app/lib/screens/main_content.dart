@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:carpediaapp/blocks/car_block.dart';
+import 'package:carpediaapp/blocs/car_bloc.dart';
 import 'package:carpediaapp/models/car_response.dart';
 import 'package:carpediaapp/screens/car_details.dart';
 import 'package:carpediaapp/screens/search_input.dart';

@@ -3,7 +3,7 @@ import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:carpediaapp/blocks/car_block.dart';
+import 'package:carpediaapp/blocs/car_bloc.dart';
 import 'package:carpediaapp/models/car_response.dart';
 import 'package:carpediaapp/screens/car_details.dart';
 import 'package:flutter/widgets.dart';
@@ -46,7 +46,7 @@ class CarListItemState extends State<CarListItem> {
             subtitle: Text("${widget.model} ${widget.year}"),
             trailing: IconButton(
               icon: (_isfavorited ? Icon(Icons.star) : Icon(Icons.star_border)),
-              color: Colors.red[500],
+              color: Theme.of(context).accentColor,
               onPressed: _toogleFavorite,
             ),
           ),
