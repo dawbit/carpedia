@@ -2,13 +2,14 @@ import 'dart:async';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:carpediaapp/blocks/car_block.dart';
 import 'package:carpediaapp/models/car_response.dart';
 import 'package:carpediaapp/screens/car_details.dart';
-import 'package:flutter/widgets.dart';
 import 'package:carpediaapp/screens/search_input.dart';
 import 'package:carpediaapp/screens/list_of_cars.dart';
+import 'package:carpediaapp/widgets/slide_menu.dart';
 
 class MainContent extends StatefulWidget {
   @override
@@ -37,6 +38,7 @@ class MainContentState extends State<MainContent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        drawer: NavDrawer(),
         appBar: AppBar(
           title: Text('Carpedia app'),
         ),
