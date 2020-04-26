@@ -7,8 +7,8 @@ import 'package:carpediaapp/blocks/car_block.dart';
 import 'package:carpediaapp/models/car_response.dart';
 import 'package:carpediaapp/screens/car_details.dart';
 import 'package:flutter/widgets.dart';
-import 'package:carpediaapp/screens/search_page/search_input.dart';
-import 'package:carpediaapp/screens/search_page/list_of_cars.dart';
+import 'package:carpediaapp/screens/search_input.dart';
+import 'package:carpediaapp/screens/list_of_cars.dart';
 
 class MainContent extends StatefulWidget {
   @override
