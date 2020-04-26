@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:carpediaapp/blocks/car_block.dart';
 import 'package:carpediaapp/models/car_response.dart';
 import 'package:carpediaapp/screens/car_details.dart';
+import 'package:flutter/widgets.dart';
+import 'package:carpediaapp/screens/search_page/search_input.dart';
+import 'package:carpediaapp/screens/search_page/list_of_cars.dart';
 
 class MainContent extends StatefulWidget {
   @override
@@ -34,37 +37,22 @@ class MainContentState extends State<MainContent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Carpedia app'),
-      ),
-      body: Form(
-        child: Row(
-          children: [
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.only(left: 10.0),
-                child: TextFormField(
-                  controller: _searchController,
-                  decoration: InputDecoration(
-                    hintText: 'Search by model...',
-                  ),
-                ),
-              ),
-            ),
-            IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {
-                _carBloc.getCarForName(_searchController.text);
-//                print(_carBloc.getCarForName(_searchController.text));
-              },
-            )
-          ],
+        appBar: AppBar(
+          title: Text('Carpedia app'),
         ),
-      ),
-    );
+        body: Column(
+          children: <Widget>[
+            Expanded(child: SearchInput(), flex: 0,),
+            Expanded(child: CarList(),flex:1) ],
+        ));
   }
 
+  var rowTemplate = Row(
+    children: <Widget>[SearchInput(), CarList()],
+  );
+
   void _navigateToDetails(CarResponse car) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => CarDetailsScreen(car)));
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => CarDetailsScreen(car)));
   }
 }
