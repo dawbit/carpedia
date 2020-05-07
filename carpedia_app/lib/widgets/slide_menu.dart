@@ -31,7 +31,7 @@ class NavDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.verified_user),
             title: Text('todo'),
-            onTap: () => {Navigator.of(context).pop()},
+            onTap: () => {},
           ),
           ListTile(
             leading: Icon(Icons.settings),

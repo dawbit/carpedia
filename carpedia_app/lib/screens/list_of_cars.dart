@@ -41,15 +41,20 @@ class CarListItemState extends State<CarListItem> {
     return Padding(
         padding: const EdgeInsets.all(4.0),
         child: Card(
-          child: ListTile(
-            title: Text("${widget.mark}"),
-            subtitle: Text("${widget.model} ${widget.year}"),
-            trailing: IconButton(
-              icon: (_isfavorited ? Icon(Icons.star) : Icon(Icons.star_border)),
-              color: Theme.of(context).accentColor,
-              onPressed: _toogleFavorite,
-            ),
-          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Image.network('https://i.stack.imgur.com/lkd0a.png%27', height: 200, width: 200,),
+              Column(
+                children: <Widget>[
+                  Text("sdgsdg", style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold)),
+                  Text("sdgsdg", style: TextStyle(color: Colors.green),),
+                  Text("sdgsdg", style: TextStyle(color: Colors.green),),
+                  Text("sdgsdg", style: TextStyle(color: Colors.green),),
+                ],
+              ),
+            ],
+          )
         ));
   }
 

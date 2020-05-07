@@ -43,6 +43,7 @@ class MainContentState extends State<MainContent> {
           title: Text('Carpedia app'),
         ),
         body: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Expanded(child: SearchInput(), flex: 0,),
             Expanded(child: CarList(),flex:1) ],
