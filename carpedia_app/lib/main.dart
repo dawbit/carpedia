@@ -1,3 +1,5 @@
+import 'package:carpediaapp/models/car_response.dart';
+import 'package:carpediaapp/screens/car_details.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 
@@ -40,8 +42,14 @@ class MyAppState extends State<MyApp> {
           return MaterialApp(
             title: 'Carpedia-App',
             debugShowCheckedModeBanner: false,
-            theme: snapshot.data,
-            home: MainContent(),
+            //theme: snapshot.data,
+              theme: ThemeData(
+                primaryColor: Colors.pink,
+                accentColor: Colors.amberAccent,
+                brightness: Brightness.dark
+              ),
+            home: CarDetailsScreen(CarResponse(name: "206"))
+           // home: MainContent(),
           );
         }
       ),

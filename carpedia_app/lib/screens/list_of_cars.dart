@@ -14,7 +14,7 @@ class CarList extends StatelessWidget {
     return ListView.builder(
       itemCount: 10,
       itemBuilder: (_, position) =>
-          CarListItem(position, "mark", "model", "yest"),
+          CarListItem(position, "Toyota chuj kowola bydlak 11cm kwadratowych", "Supra", "1997"),
     );
   }
 }
@@ -43,15 +43,33 @@ class CarListItemState extends State<CarListItem> {
         child: Card(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Image.network('https://i.stack.imgur.com/lkd0a.png%27', height: 200, width: 200,),
-              Column(
-                children: <Widget>[
-                  Text("sdgsdg", style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold)),
-                  Text("sdgsdg", style: TextStyle(color: Colors.green),),
-                  Text("sdgsdg", style: TextStyle(color: Colors.green),),
-                  Text("sdgsdg", style: TextStyle(color: Colors.green),),
-                ],
+              Expanded(
+                  flex: 0,
+                  child: Image.network('https://i.stack.imgur.com/lkd0a.png%27', height: 150, width: 150,)),
+              Expanded(
+                flex: 69,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(child: Text("${widget.mark}", style: TextStyle(color: Colors.lightBlueAccent, fontWeight: FontWeight.bold)), padding: EdgeInsets.fromLTRB(5, 5, 5, 0),),
+                    Padding(child: Text("${widget.model}"), padding: EdgeInsets.fromLTRB(5, 5, 5, 0),),
+                    Padding(child: Text("${widget.year}"), padding: EdgeInsets.fromLTRB(5, 5, 5, 0),),
+                  ],
+                ),
+              ),
+              Spacer(),
+              Expanded(
+                flex: 0,
+                child: IconButton(
+                  padding: EdgeInsets.all(25.0),
+                  icon: (_isfavorited ? Icon(Icons.star) : Icon(Icons.star_border)),
+                  alignment: Alignment.centerRight,
+                  color: Theme.of(context).accentColor,
+                  onPressed: _toogleFavorite,
+                ),
               ),
             ],
           )
