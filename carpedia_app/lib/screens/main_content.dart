@@ -47,7 +47,8 @@ class MainContentState extends State<MainContent> {
           children: <Widget>[
             Expanded(child: SearchInput(), flex: 0,),
             Expanded(child: CarList(),flex:1) ],
-        ));
+        )
+    );
   }
 
   var rowTemplate = Row(

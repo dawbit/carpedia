@@ -42,13 +42,8 @@ class MyAppState extends State<MyApp> {
           return MaterialApp(
             title: 'Carpedia-App',
             debugShowCheckedModeBanner: false,
-            //theme: snapshot.data,
-              theme: ThemeData(
-                primaryColor: Colors.pink,
-                accentColor: Colors.amberAccent,
-                brightness: Brightness.dark
-              ),
-            home: CarDetailsScreen(CarResponse(name: "206"))
+            theme: snapshot.data,
+            home: MainContent()
            // home: MainContent(),
           );
         }

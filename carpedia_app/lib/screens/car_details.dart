@@ -46,15 +46,15 @@ class CarDetailsScreen extends StatelessWidget {
           Expanded(
             flex: 11,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Padding(child: Text("Model", style: TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold, fontSize: 20)), padding: EdgeInsets.fromLTRB(15, 5, 5, 0),),
-                Padding(child: Text("Marka", style: TextStyle(color: Colors.lightBlueAccent, fontSize: 16)), padding: EdgeInsets.fromLTRB(15, 5, 5, 0),),
-                Padding(child: Text("Kraj"), padding: EdgeInsets.fromLTRB(15, 5, 5, 0),),
-                Padding(child: Text("Start produkcji"), padding: EdgeInsets.fromLTRB(15, 5, 5, 0),),
-                Padding(child: Text("Koniec produkcji"), padding: EdgeInsets.fromLTRB(15, 5, 5, 0),),
-                Padding(child: Text("Typ nadwozia"), padding: EdgeInsets.fromLTRB(15, 5, 5, 0),),
-                Padding(child: Text("Gwiazdki NCAP"), padding: EdgeInsets.fromLTRB(15, 5, 5, 0),),
+                Padding(child: Text("Model:", style: TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold, fontSize: 20)), padding: EdgeInsets.fromLTRB(15, 5, 5, 0),),
+                Padding(child: Text("Marka:", style: TextStyle(color: Colors.lightBlueAccent, fontSize: 16)), padding: EdgeInsets.fromLTRB(15, 5, 5, 0),),
+                Padding(child: Text("Kraj:"), padding: EdgeInsets.fromLTRB(15, 5, 5, 0),),
+                Padding(child: Text("Start produkcji:"), padding: EdgeInsets.fromLTRB(15, 5, 5, 0),),
+                Padding(child: Text("Koniec produkcji:"), padding: EdgeInsets.fromLTRB(15, 5, 5, 0),),
+                Padding(child: Text("Typ nadwozia:"), padding: EdgeInsets.fromLTRB(15, 5, 5, 0),),
+                Padding(child: Text("Gwiazdki NCAP:"), padding: EdgeInsets.fromLTRB(15, 5, 5, 0),),
               ],
             ),
           ),
