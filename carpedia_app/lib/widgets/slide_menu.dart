@@ -1,7 +1,10 @@
+import 'package:carpediaapp/screens/favourite_screen.dart';
+import 'package:carpediaapp/screens/main_content.dart';
 import 'package:flutter/material.dart';
 
 import 'package:carpediaapp/screens/theme_selector_page.dart';
 import 'package:carpediaapp/blocs/themes_bloc.dart';
+import 'package:flutter/services.dart';
 
 class NavDrawer extends StatelessWidget {
   final ThemeBloc themeBloc;
@@ -26,28 +29,25 @@ class NavDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.input),
             title: Text('Welcome'),
-            onTap: () => {},
+            onTap: () {Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (context) => MainContent()));},
           ),
           ListTile(
             leading: Icon(Icons.verified_user),
-            title: Text('todo'),
-            onTap: () => {Navigator.of(context).pop()},
+            title: Text('Favourite'),
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => FavouriteScreen())),
           ),
           ListTile(
             leading: Icon(Icons.settings),
-            title: Text('Settings (tutaj damy buttony ze zmiana stylu)'),
+            title: Text('Dark Mode'),
             onTap: () =>  Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => ThemeSelectorPage())),
           ),
           ListTile(
-            leading: Icon(Icons.border_color),
-            title: Text('todo'),
-            onTap: () => {Navigator.of(context).pop()},
-          ),
-          ListTile(
             leading: Icon(Icons.exit_to_app),
             title: Text('todo'),
-            onTap: () => {Navigator.of(context).pop()},
+            onTap: () {SystemNavigator.pop();},
           ),
         ],
       ),

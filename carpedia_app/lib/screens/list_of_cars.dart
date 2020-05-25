@@ -8,13 +8,31 @@ import 'package:carpediaapp/models/car_response.dart';
 import 'package:carpediaapp/screens/car_details.dart';
 import 'package:flutter/widgets.dart';
 
-class CarList extends StatelessWidget {
+class CarList extends StatefulWidget {
+
+  @override
+  _CarListState createState() => _CarListState();
+}
+
+class _CarListState extends State<CarList> {
+  List<String> lista = [];
+  List<String> marka = ["Toyota", "Toyota", "Toyota"];
+  List<String> model =["Yaris", "Aygo", "Avensis"];
+
+  @override
+  void initState() {
+    lista.add("https://comfortcar.pl/images/detailed/1/avensis.jpg");
+    lista.add("https://t1-cms-2.images.toyota-europe.com/toyotaone/plpl/toyota-aygo-header-mobile_tcm-1015-1492639.jpg");
+    lista.add("https://t1-cms-1.images.toyota-europe.com/toyotaone/plpl/oyota-yaris-classic-header-full-v1_tcm-1015-1673600.jpg");
+    super.initState();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 10,
+      itemCount: 3,
       itemBuilder: (_, position) =>
-          CarListItem(position, "mark", "model", "yest"),
+          CarListItem(position, "Toyota", model[position], "1997", lista[position]),
     );
   }
 }
@@ -24,8 +42,9 @@ class CarListItem extends StatefulWidget {
   final String mark;
   final String model;
   final String year;
+  final String image;
 
-  CarListItem(this.position, this.mark, this.model, this.year);
+  CarListItem(this.position, this.mark, this.model, this.year, this.image);
 
   @override
   State<StatefulWidget> createState() {
@@ -41,15 +60,38 @@ class CarListItemState extends State<CarListItem> {
     return Padding(
         padding: const EdgeInsets.all(4.0),
         child: Card(
-          child: ListTile(
-            title: Text("${widget.mark}"),
-            subtitle: Text("${widget.model} ${widget.year}"),
-            trailing: IconButton(
-              icon: (_isfavorited ? Icon(Icons.star) : Icon(Icons.star_border)),
-              color: Theme.of(context).accentColor,
-              onPressed: _toogleFavorite,
-            ),
-          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Expanded(
+                  flex: 0,
+                  child: Image.network("${widget.image}", height: 150, width: 150, )),
+              Expanded(
+                flex: 69,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(child: Text("${widget.mark}", style: TextStyle(color: Colors.lightBlueAccent, fontWeight: FontWeight.bold)), padding: EdgeInsets.fromLTRB(5, 5, 5, 0),),
+                    Padding(child: Text("${widget.model}"), padding: EdgeInsets.fromLTRB(5, 5, 5, 0),),
+                    Padding(child: Text("${widget.year}"), padding: EdgeInsets.fromLTRB(5, 5, 5, 0),),
+                  ],
+                ),
+              ),
+              Spacer(),
+              Expanded(
+                flex: 0,
+                child: IconButton(
+                  padding: EdgeInsets.all(25.0),
+                  icon: (_isfavorited ? Icon(Icons.star) : Icon(Icons.star_border)),
+                  alignment: Alignment.centerRight,
+                  color: Theme.of(context).accentColor,
+                  onPressed: _toogleFavorite,
+                ),
+              ),
+            ],
+          )
         ));
   }
 
