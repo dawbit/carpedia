@@ -50,11 +50,11 @@ public class CarModel implements Serializable {
     @Range(max = 5)
     private int ncap;
 
-    @ManyToOne
-    @JoinColumn(name = "country_id")
-    @JsonBackReference(value = "car-country")
-    @JsonIgnore
-    private CountryModel country;
+//    @ManyToOne
+//    @JoinColumn(name = "country_id")
+//    @JsonBackReference(value = "car-country")
+//    @JsonIgnore
+//    private CountryModel country;
 
     @ManyToOne
     @JoinColumn(name = "segment_id")
@@ -74,6 +74,9 @@ public class CarModel implements Serializable {
     @JsonBackReference(value = "car-author")
     @JsonIgnore
     private UserModel user;
+
+    @Column(name = "photo", nullable = true)
+    private String photo;
 
     public long getId() {
         return id;
@@ -135,13 +138,13 @@ public class CarModel implements Serializable {
         this.ncap = ncap;
     }
 
-    public CountryModel getCountry() {
-        return country;
-    }
-
-    public void setCountry(CountryModel country) {
-        this.country = country;
-    }
+//    public CountryModel getCountry() {
+//        return country;
+//    }
+//
+//    public void setCountry(CountryModel country) {
+//        this.country = country;
+//    }
 
     public SegmentModel getSegment() {
         return segment;
@@ -167,24 +170,33 @@ public class CarModel implements Serializable {
         this.user = user;
     }
 
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
     protected CarModel(){
 
     }
 
     public CarModel(CompanyModel company, String name, String startproduction,
                     String endproduction, List<EngineModel> engine, int ncap,
-                    CountryModel country, SegmentModel segment, BodyTypeModel bodytype,
-                    UserModel user) {
+                    SegmentModel segment, BodyTypeModel bodytype, UserModel user,
+                    String photo) {
         this.company = company;
         this.name = name;
         this.startproduction = startproduction;
         this.endproduction = endproduction;
         this.engine = engine;
         this.ncap = ncap;
-        this.country = country;
+        //this.country = country;
         this.segment = segment;
         this.bodytype = bodytype;
         this.user = user;
+        this.photo = photo;
     }
 
 }

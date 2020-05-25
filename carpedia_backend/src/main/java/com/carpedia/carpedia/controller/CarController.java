@@ -23,8 +23,8 @@ public class CarController {
     @Autowired
     EngineRepository engine;
 
-    @Autowired
-    CountryRepository country;
+//    @Autowired
+//    CountryRepository country;
 
     @Autowired
     SegmentRepository segment;
@@ -121,11 +121,11 @@ public class CarController {
                     .setParameter(6, carModel.getNcap())
                     .executeUpdate();
 
-            entityManager.createQuery("UPDATE CarModel carModel SET carModel.country=?2 " +
-                    "WHERE carModel.id=?1")
-                    .setParameter(1, carModel.getId())
-                    .setParameter(2, carModel.getCountry())
-                    .executeUpdate();
+//            entityManager.createQuery("UPDATE CarModel carModel SET carModel.country=?2 " +
+//                    "WHERE carModel.id=?1")
+//                    .setParameter(1, carModel.getId())
+//                    .setParameter(2, carModel.getCountry())
+//                    .executeUpdate();
 
             entityManager.createQuery("UPDATE CarModel carModel SET carModel.segment=?2 " +
                     "WHERE carModel.id=?1")
