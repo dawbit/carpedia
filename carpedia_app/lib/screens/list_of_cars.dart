@@ -143,18 +143,6 @@ class CarListItemState extends State<CarListItem> {
                   ),
                 ),
                   Expanded(
-                    flex: 69,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Padding(child: Text("${widget.car.company.companyName}", style: TextStyle(color: Colors.lightBlueAccent, fontWeight: FontWeight.bold)), padding: EdgeInsets.fromLTRB(5, 5, 5, 0),),
-                        Padding(child: Text("${widget.car.model}"), padding: EdgeInsets.fromLTRB(5, 5, 5, 0),),
-                        Padding(child: Text("${widget.car.endproduction}"), padding: EdgeInsets.fromLTRB(5, 5, 5, 0),),
-                      ],
-                    ),
-                  ),
-                  Spacer(),
-                  Expanded(
                     flex: 0,
                     child: IconButton(
                       padding: EdgeInsets.all(25.0),
