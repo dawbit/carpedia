@@ -7,12 +7,29 @@ part of 'car_response.dart';
 // **************************************************************************
 
 CarResponse _$CarResponseFromJson(Map<String, dynamic> json) {
-  return CarResponse(
-    name: json['name'] as String,
-  );
+  return CarResponse()
+    ..id = json['id'] as int
+    ..model = json['name'] as String
+    ..company = json['company'] == null
+        ? null
+        : Company.fromJson(json['company'] as Map<String, dynamic>)
+    ..startproduction = json['startproduction'] as String
+    ..endproduction = json['endproduction'] as String
+    ..ncapStars = json['ncap'] as int
+    ..photo = json['photo'] as String
+    ..bodyType = json['bodytype'] == null
+        ? null
+        : BodyType.fromJson(json['bodytype'] as Map<String, dynamic>);
 }
 
 Map<String, dynamic> _$CarResponseToJson(CarResponse instance) =>
     <String, dynamic>{
-      'name': instance.name,
+      'id': instance.id,
+      'name': instance.model,
+      'company': instance.company,
+      'startproduction': instance.startproduction,
+      'endproduction': instance.endproduction,
+      'ncap': instance.ncapStars,
+      'photo': instance.photo,
+      'bodytype': instance.bodyType,
     };

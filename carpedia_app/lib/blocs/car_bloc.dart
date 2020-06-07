@@ -6,38 +6,78 @@ import 'package:carpediaapp/models/car_response.dart';
 import 'package:carpediaapp/repositories/car_repository.dart';
 
 class CarBloc extends BlocBase {
-  final CarRepository _carRepository;
+  CarRepository _carRepository;
 
-  CarBloc(this._carRepository);
+//  BehaviorSubject<CarResponse> _carSubject = BehaviorSubject();
+//  Stream<CarResponse> get carObservable => _carSubject.stream;
 
-  BehaviorSubject<CarResponse> _carSubject = BehaviorSubject();
-  Stream<CarResponse> get carObservable => _carSubject.stream;
+  PublishSubject<String> _searchSubject = PublishSubject();
+  Stream<List<CarResponse>> searchStream;
 
-  BehaviorSubject<bool> _loadingCarSubject = BehaviorSubject();
-  Stream<bool> get loadingCarObservable => _loadingCarSubject.stream;
+  PublishSubject<String> _searchSubject2 = PublishSubject();
+  Stream<List<CarResponse>> searchStream2;
 
-  Future getCarForName(String name) async {
-    _loadingCarSubject.add(true);
-    _carRepository.getCarForName(name)
-        .then(_onCarSuccess)
-        .catchError(_onCarError);
+//  BehaviorSubject<bool> _loadingCarSubject = BehaviorSubject();
+//  Stream<bool> get loadingCarObservable => _loadingCarSubject.stream;
+
+  CarBloc(this._carRepository){
+    searchStream = _searchSubject
+        .debounceTime(Duration(seconds: 1))
+        .switchMap((query) => query != ''
+        ? _carRepository.getCarForName(query).asStream()
+        : Stream.fromIterable([[]])
+    );
+
+    searchStream2 = _searchSubject2
+        .debounceTime(Duration(seconds: 1))
+        .switchMap((query) => query != ''
+        ? _carRepository.getCarForCompany(query).asStream()
+        : Stream.fromIterable([[]])
+    );
   }
 
-  Future _onCarSuccess(List<CarResponse> car) async {
-    _loadingCarSubject.add(false);
-    car.forEach((f)=> _carSubject.add(f));
-  //  _carSubject.add(car[0]);
-  }
+  Function(String name) get getCarForName => _searchSubject.add;
 
-  Future _onCarError(e) async {
-    _loadingCarSubject.add(false);
-    _carSubject.addError(e);
-  }
+  Function(String name) get getCarForCompany => _searchSubject2.add;
+
+//  Future getCarForName(String name) async {
+//    _loadingCarSubject.add(true);
+//    _carRepository.getCarForName(name)
+//        .then(_onCarSuccess)
+//        .catchError(_onCarError);
+//  }
+//
+//  Future _onCarSuccess(List<CarResponse> car) async {
+//    _loadingCarSubject.add(false);
+//    car.forEach((f)=> _carSubject.add(f));
+//  }
+//
+//  Future _onCarError(e) async {
+//    _loadingCarSubject.add(false);
+//    _carSubject.addError(e);
+//  }
+
+//  Future getCarForCompany(String name) async {
+//    _loadingCarSubject.add(true);
+//    _carRepository.getCarForName(name)
+//        .then(_onCarCompanySuccess)
+//        .catchError(_onCarCompanyError);
+//  }
+//
+//  Future _onCarCompanySuccess(List<CarResponse> car) async {
+//    _loadingCarSubject.add(false);
+//    car.forEach((f)=> _carSubject.add(f));
+//  }
+//
+//  Future _onCarCompanyError(e) async {
+//    _loadingCarSubject.add(false);
+//    _carSubject.addError(e);
+//  }
 
   @override
   void dispose() {
     super.dispose();
-    _carSubject.close();
-    _loadingCarSubject.close();
+//    _carSubject.close();
+//    _loadingCarSubject.close();
   }
 }
