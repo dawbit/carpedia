@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'package:bloc_pattern/bloc_pattern.dart';
+
+import 'package:carpediaapp/blocs/themes_bloc.dart';
 import 'package:carpediaapp/blocs/data_base_bloc.dart';
 import 'package:carpediaapp/models/favourite_car.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -26,6 +29,7 @@ class _CarListState extends State<CarList> {
     List<CarResponse> listOfCars;
     StreamSubscription _streamSubscriptionAdd;
     StreamSubscription _streamSubscriptionAdd2;
+
 
 
   @override
@@ -82,6 +86,7 @@ class CarListItem extends StatefulWidget {
 class CarListItemState extends State<CarListItem> {
   bool _isfavorited = false;
 
+
   DataBaseBloc _dataBaseBloc;
 
   @override
@@ -111,18 +116,27 @@ class CarListItemState extends State<CarListItem> {
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.all(4.0),
-        child: InkWell(
-          onTap: (){ Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => CarDetailsScreen(widget.car)));},
-          child: Card(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Expanded(
-                    flex: 0,
-                    child: Image.network("https://assets.puzzlefactory.pl/puzzle/213/347/original.jpg", height: 150, width: 150, )
+        child: Card(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              SizedBox(width: 20,),
+              Expanded(
+                  flex: 0,
+                  child: Image.network("${widget.image}", height: 150, width: 150, )),
+              SizedBox(width: 20,),
+              Expanded(
+                flex: 69,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(height: 27,),
+                    Padding(child: Text("${widget.mark}", style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold)), padding: EdgeInsets.fromLTRB(5, 5, 5, 0),),
+                    Padding(child: Text("${widget.model}", style: TextStyle(color: Theme.of(context).accentColor, fontWeight: FontWeight.bold)), padding: EdgeInsets.fromLTRB(5, 5, 5, 0),),
+                    Padding(child: Text("${widget.year}"), padding: EdgeInsets.fromLTRB(5, 5, 5, 0),),
+                  ],
                 ),
                 Expanded(
                   flex: 69,
