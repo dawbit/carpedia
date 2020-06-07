@@ -75,15 +75,20 @@ class _NavDrawerState extends State<NavDrawer> {
           ListTile(
             leading: Padding(child: Icon(Icons.home), padding: EdgeInsets.only(left: 2),),
             title: Text('Home'),
-            onTap: () {Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) => MainContent()));},
+            onTap: () {
+              Navigator.of(context).pop();
+              if (ModalRoute.of(context).isCurrent) return;
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => MainContent()));
+              },
           ),
 
           ListTile(
             leading: Padding(child: Icon(Icons.favorite), padding: EdgeInsets.only(left: 2),),
             title: Text('Favourite'),
-            onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => FavouriteScreen())),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => FavouriteScreen()));},
           ),
 
           SwitchListTile(

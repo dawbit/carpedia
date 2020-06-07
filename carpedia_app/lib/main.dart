@@ -1,4 +1,6 @@
+import 'package:carpediaapp/blocs/data_base_bloc.dart';
 import 'package:carpediaapp/models/car_response.dart';
+import 'package:carpediaapp/repositories/data_base_repository.dart';
 import 'package:carpediaapp/screens/car_details.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
@@ -8,7 +10,10 @@ import 'package:carpediaapp/blocs/car_bloc.dart';
 import 'package:carpediaapp/blocs/themes_bloc.dart';
 import 'package:carpediaapp/repositories/car_repository.dart';
 
+import 'dao/app_data_base.dart';
+
 void main() => runApp(MyApp());
+
 
 
 class MyApp extends StatefulWidget {
@@ -19,6 +24,8 @@ class MyApp extends StatefulWidget {
 class MyAppState extends State<MyApp> {
 
   ThemeBloc _themeBloc;
+
+
 
   @override
   void initState() {
@@ -53,10 +60,14 @@ class MyAppState extends State<MyApp> {
 
   List<Bloc> get _blocs => [
     Bloc((i) => CarBloc(i.get())),
-    Bloc((_) => ThemeBloc())
+    Bloc((i) => ThemeBloc(i.get())),
+    Bloc((i) => DataBaseBloc(i.get()))
   ]; // Block
 
   List<Dependency> get _dependencies => [
+    Dependency((_) => DataBaseRepository()),
     Dependency((_) => CarRepository())
   ]; // Dependency
+
+
 }

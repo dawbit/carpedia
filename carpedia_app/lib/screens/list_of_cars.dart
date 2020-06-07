@@ -1,6 +1,10 @@
 import 'dart:async';
 import 'package:bloc_pattern/bloc_pattern.dart';
+
 import 'package:carpediaapp/blocs/themes_bloc.dart';
+import 'package:carpediaapp/blocs/data_base_bloc.dart';
+import 'package:carpediaapp/models/favourite_car.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -11,42 +15,67 @@ import 'package:flutter/widgets.dart';
 
 class CarList extends StatefulWidget {
 
+  List<CarResponse> favCars;
+
+  CarList({this.favCars});
+
   @override
   _CarListState createState() => _CarListState();
 }
 
 class _CarListState extends State<CarList> {
-  List<String> lista = [];
-  List<String> marka = ["Toyota", "Toyota", "Toyota"];
-  List<String> model =["Yaris", "Aygo", "Avensis"];
+
+    CarBloc _carBloc;
+    List<CarResponse> listOfCars;
+    StreamSubscription _streamSubscriptionAdd;
+    StreamSubscription _streamSubscriptionAdd2;
+
 
 
   @override
   void initState() {
-    lista.add("https://comfortcar.pl/images/detailed/1/avensis.jpg");
-    lista.add("https://t1-cms-2.images.toyota-europe.com/toyotaone/plpl/toyota-aygo-header-mobile_tcm-1015-1492639.jpg");
-    lista.add("https://t1-cms-1.images.toyota-europe.com/toyotaone/plpl/oyota-yaris-classic-header-full-v1_tcm-1015-1673600.jpg");
+
+    _carBloc = BlocProvider.getBloc();
+    listOfCars= [];
+    _streamSubscriptionAdd = _carBloc.searchStream.listen(onDataChanged);
+    _streamSubscriptionAdd2 = _carBloc.searchStream2.listen(onDataChanged);
+    if(widget.favCars!=null){
+      setState(() {
+        listOfCars = widget.favCars;
+      });
+    }
     super.initState();
   }
-  
+
+  void onDataChanged(List<CarResponse> carResponse){
+    setState(() {
+      listOfCars = carResponse;
+    });
+  }
+
+  @override
+  void dispose() {
+    _streamSubscriptionAdd.cancel();
+    _streamSubscriptionAdd2.cancel();
+    listOfCars = [];
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 3,
+      itemCount: listOfCars.length ?? 0,
       itemBuilder: (_, position) =>
-          CarListItem(position, "Toyota", model[position], "1997", lista[position]),
+          CarListItem(car: listOfCars[position]),
     );
   }
 }
 
 class CarListItem extends StatefulWidget {
-  final int position;
-  final String mark;
-  final String model;
-  final String year;
-  final String image;
 
-  CarListItem(this.position, this.mark, this.model, this.year, this.image);
+  CarResponse car;
+
+  CarListItem({this.car});
 
   @override
   State<StatefulWidget> createState() {
@@ -57,12 +86,30 @@ class CarListItem extends StatefulWidget {
 class CarListItemState extends State<CarListItem> {
   bool _isfavorited = false;
 
-  ThemeBloc _themeBloc;
+
+  DataBaseBloc _dataBaseBloc;
 
   @override
   void initState() {
-    _themeBloc = BlocProvider.getBloc();
+    _dataBaseBloc = BlocProvider.getBloc();
+    _dataBaseBloc.checkIfPositionExists(widget.car.id).then((onValue){
+      setState(() {
+        _isfavorited = onValue;
+      });
+    });
     super.initState();
+  }
+
+
+
+  void onData(bool bool){
+    setState(() {
+      _isfavorited=bool;
+    });
+  }
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -91,26 +138,61 @@ class CarListItemState extends State<CarListItem> {
                     Padding(child: Text("${widget.year}"), padding: EdgeInsets.fromLTRB(5, 5, 5, 0),),
                   ],
                 ),
-              ),
-              Spacer(),
-              Expanded(
-                flex: 0,
-                child: IconButton(
-                  padding: EdgeInsets.all(25.0),
-                  icon: (_isfavorited ? Icon(Icons.star) : Icon(Icons.star_border)),
-                  alignment: Alignment.centerRight,
-                  color: Theme.of(context).accentColor,
-                  onPressed: _toogleFavorite,
+                Expanded(
+                  flex: 69,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(child: Text("${widget.car.company.companyName}", style: TextStyle(color: Colors.lightBlueAccent, fontWeight: FontWeight.bold)), padding: EdgeInsets.fromLTRB(5, 5, 5, 0),),
+                      Padding(child: Text("${widget.car.model}"), padding: EdgeInsets.fromLTRB(5, 5, 5, 0),),
+                      Padding(child: Text("${widget.car.endproduction}"), padding: EdgeInsets.fromLTRB(5, 5, 5, 0),),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          )
+                Spacer(),
+                Expanded(
+                  flex: 0,
+                  child: IconButton(
+                    padding: EdgeInsets.all(25.0),
+                    icon: (_isfavorited ? Icon(Icons.star) : Icon(Icons.star_border)),
+                    alignment: Alignment.centerRight,
+                    color: Theme.of(context).accentColor,
+                    onPressed: (){
+                      _toogleFavorite();
+                      },
+                  ),
+                ),
+              ],
+            )
+          ),
         ));
   }
 
   void _toogleFavorite() {
+
+    final car = widget.car;
+
+    final favCar =FavouriteCar(
+        id:car.id,
+        bodyType: car.bodyType.bodyTypeName,
+        country: car.company.country.countryName,
+        endProduction: car.endproduction,
+        mark: car.company.companyName,
+        model: car.model,
+        ncapStars: car.ncapStars,
+        photo: car.photo,
+        startProduction: car.startproduction
+    );
+
     setState(() {
       _isfavorited = !_isfavorited;
     });
+
+    if(!_isfavorited){
+      _dataBaseBloc.delete(favCar);
+    }
+    else{
+      _dataBaseBloc.insert(favCar);
+    }
   }
 }

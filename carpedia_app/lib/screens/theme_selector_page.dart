@@ -70,6 +70,7 @@ class ThemeSelectorPageState extends State<ThemeSelectorPage> {
           brightness: Brightness.dark,
           accentColor: Colors.lightBlueAccent,
           primaryColor: Colors.pink,
-        ));
+        )
+    );
   }
 }
