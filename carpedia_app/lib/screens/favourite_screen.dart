@@ -26,7 +26,9 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   @override
   void initState() {
     _dataBaseBloc = BlocProvider.getBloc();
-    listOfCars= [];
+    setState(() {
+      listOfCars= [];
+    });
     _streamSubscription = _dataBaseBloc.carObservable.listen(onData);
     _dataBaseBloc.getCars();
     super.initState();
@@ -37,7 +39,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
 
     cars.forEach((f){
       Company company = Company();
-      company.companyName = f.model;
+      company.companyName = f.mark;
       Country country = Country();
       country.countryName = f.country;
       company.country=country;
@@ -51,6 +53,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
       carResponse.endproduction = f.endProduction;
       carResponse.ncapStars = f.ncapStars;
       carResponse.photo = f.photo;
+
       setState(() {
         listOfCars.add(carResponse);
       });
@@ -74,8 +77,21 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Expanded(child: CarList(favCars: listOfCars),flex:1) ],
+            Expanded(child:
+              ListView.builder(
+                itemCount: listOfCars.length ?? 0,
+                itemBuilder: (_, position) =>
+                    CarListItem(car: listOfCars[position], delete: deleteFromListOfCars, ),),
+                flex:1
+            )
+          ],
         )
     );;
+  }
+
+  void deleteFromListOfCars(CarResponse carResponse){
+    setState(() {
+      listOfCars.remove(carResponse);
+    });
   }
 }

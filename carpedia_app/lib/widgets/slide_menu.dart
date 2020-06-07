@@ -1,4 +1,5 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
+import 'package:carpediaapp/blocs/data_base_bloc.dart';
 import 'package:carpediaapp/screens/favourite_screen.dart';
 import 'package:carpediaapp/screens/main_content.dart';
 import 'package:flutter/material.dart';
@@ -19,10 +20,13 @@ class _NavDrawerState extends State<NavDrawer> {
 
   ThemeBloc _themeBloc;
 
+  DataBaseBloc _dataBaseBloc;
+
   @override
   void initState() {
     super.initState();
     _themeBloc = BlocProvider.getBloc();
+    _dataBaseBloc = BlocProvider.getBloc();
 
     if(_themeBloc.selectedTheme.value?.name == "light"){
       _lights = false;
@@ -92,7 +96,7 @@ class _NavDrawerState extends State<NavDrawer> {
           ),
 
           SwitchListTile(
-            title: const Text('Lights'),
+            title: const Text('Dark Mode'),
             activeColor: Theme.of(context).accentColor,
             value: _lights,
             onChanged: (bool value) {onSwitchStateChange(); },

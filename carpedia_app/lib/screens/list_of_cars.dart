@@ -1,7 +1,5 @@
 import 'dart:async';
 import 'package:bloc_pattern/bloc_pattern.dart';
-
-import 'package:carpediaapp/blocs/themes_bloc.dart';
 import 'package:carpediaapp/blocs/data_base_bloc.dart';
 import 'package:carpediaapp/models/favourite_car.dart';
 
@@ -74,8 +72,9 @@ class _CarListState extends State<CarList> {
 class CarListItem extends StatefulWidget {
 
   CarResponse car;
+  Function delete;
 
-  CarListItem({this.car});
+  CarListItem({this.car, this.delete});
 
   @override
   State<StatefulWidget> createState() {
@@ -88,15 +87,19 @@ class CarListItemState extends State<CarListItem> {
 
 
   DataBaseBloc _dataBaseBloc;
+  Image _image;
 
   @override
   void initState() {
+
     _dataBaseBloc = BlocProvider.getBloc();
     _dataBaseBloc.checkIfPositionExists(widget.car.id).then((onValue){
       setState(() {
         _isfavorited = onValue;
       });
     });
+    if(widget.car.photo!=null) _image = Image.network(widget.car.photo, height: 150, width: 150,);
+    else _image = Image.network("https://assets.puzzlefactory.pl/puzzle/213/347/original.jpg", height: 150, width: 150,);
     super.initState();
   }
 
@@ -128,7 +131,8 @@ class CarListItemState extends State<CarListItem> {
                 SizedBox(width: 20,),
                 Expanded(
                     flex: 0,
-                    child: Image.network("https://assets.puzzlefactory.pl/puzzle/213/347/original.jpg", height: 150, width: 150,)),
+                    child: _image
+                ),
                 SizedBox(width: 20,),
                 Expanded(
                   flex: 69,
@@ -182,6 +186,7 @@ class CarListItemState extends State<CarListItem> {
     });
 
     if(!_isfavorited){
+      widget.delete(widget.car);
       _dataBaseBloc.delete(favCar);
     }
     else{

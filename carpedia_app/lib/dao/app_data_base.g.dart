@@ -111,21 +111,6 @@ class _$FavouriteCarDao extends FavouriteCarDao {
                   'bodyType': item.bodyType,
                   'ncapStars': item.ncapStars,
                   'photo': item.photo
-                }),
-        _favouriteCarDeletionAdapter = DeletionAdapter(
-            database,
-            'FavouriteCar',
-            ['id'],
-            (FavouriteCar item) => <String, dynamic>{
-                  'id': item.id,
-                  'mark': item.mark,
-                  'model': item.model,
-                  'country': item.country,
-                  'startProduction': item.startProduction,
-                  'endProduction': item.endProduction,
-                  'bodyType': item.bodyType,
-                  'ncapStars': item.ncapStars,
-                  'photo': item.photo
                 });
 
   final sqflite.DatabaseExecutor database;
@@ -147,12 +132,16 @@ class _$FavouriteCarDao extends FavouriteCarDao {
 
   final InsertionAdapter<FavouriteCar> _favouriteCarInsertionAdapter;
 
-  final DeletionAdapter<FavouriteCar> _favouriteCarDeletionAdapter;
-
   @override
   Future<List<FavouriteCar>> findAllCars() async {
     return _queryAdapter.queryList('SELECT * FROM FavouriteCar',
         mapper: _favouriteCarMapper);
+  }
+
+  @override
+  Future<void> deleteFavouriteCar(int id) async {
+    await _queryAdapter.queryNoReturn('DELETE FROM FavouriteCar where id = ?',
+        arguments: <dynamic>[id]);
   }
 
   @override
@@ -169,10 +158,5 @@ class _$FavouriteCarDao extends FavouriteCarDao {
   @override
   Future<void> insertFavouriteCar(FavouriteCar car) async {
     await _favouriteCarInsertionAdapter.insert(car, OnConflictStrategy.abort);
-  }
-
-  @override
-  Future<void> deleteFavouriteCar(FavouriteCar car) async {
-    await _favouriteCarDeletionAdapter.delete(car);
   }
 }

@@ -9,8 +9,8 @@ abstract class FavouriteCarDao{
   @Insert()
   Future<void> insertFavouriteCar(FavouriteCar car);
 
-  @delete
-  Future<void> deleteFavouriteCar(FavouriteCar car);
+  @Query('DELETE FROM FavouriteCar where id = :id')
+  Future<void> deleteFavouriteCar(int id);
 
   @Query('DELETE FROM FavouriteCar where id > 0')
   Future<void> deleteFavouriteCarxd();

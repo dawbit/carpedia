@@ -37,6 +37,15 @@ class MyAppState extends State<MyApp> {
     } );
   }
 
+  void onDarkModeValue(bool bool){
+    if(bool){
+      _themeBloc.selectedTheme.add(_buildDarkTheme());
+    }
+    else{
+      _themeBloc.selectedTheme.add(_buildLightTheme());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -67,7 +76,25 @@ class MyAppState extends State<MyApp> {
   List<Dependency> get _dependencies => [
     Dependency((_) => DataBaseRepository()),
     Dependency((_) => CarRepository())
-  ]; // Dependency
+  ];
+  DemoTheme _buildLightTheme() {
+    return DemoTheme(
+        'light',
+        ThemeData(
+          brightness: Brightness.light,
+          accentColor: Colors.lightBlueAccent,
+          primaryColor: Colors.lightBlue,
+        ));
+  }
 
+  DemoTheme _buildDarkTheme() {
+    return DemoTheme(
+        'dark',
+        ThemeData(
+          brightness: Brightness.dark,
+          accentColor: Colors.lightBlueAccent,
+          primaryColor: Colors.blue[800],
+        ));
+  }
 
 }

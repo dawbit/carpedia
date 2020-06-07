@@ -17,7 +17,7 @@ class DataBaseRepository{
   }
 
   Future deleteFavouriteCar(FavouriteCar car) async{
-  await dao.deleteFavouriteCar(car);
+  await dao.deleteFavouriteCar(car.id);
   }
 
   Future insertFavouriteCar(FavouriteCar car) async {

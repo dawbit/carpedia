@@ -16,7 +16,11 @@ class ThemeBloc extends BlocBase {
   final selectedTheme = BehaviorSubject<DemoTheme>();
   Stream<ThemeData> get selectedThemeStream => selectedTheme.stream.map((theme) => theme.data);
   final DataBaseRepository dataBaseRepository;
-  ThemeBloc(this.dataBaseRepository);
+
+
+  ThemeBloc(this.dataBaseRepository){
+    selectedTheme.add(_buildLightTheme());
+  }
 
   @override
   void dispose() {
@@ -26,13 +30,13 @@ class ThemeBloc extends BlocBase {
 
 
 
-  DemoTheme initialTheme() {
+  DemoTheme _buildLightTheme() {
     return DemoTheme(
-        'initial',
+        'light',
         ThemeData(
           brightness: Brightness.light,
-          accentColor: Colors.brown,
-          primaryColor: Colors.green,
+          accentColor: Colors.lightBlueAccent,
+          primaryColor: Colors.lightBlue,
         ));
   }
 }
