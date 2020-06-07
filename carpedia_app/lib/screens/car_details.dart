@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:carpediaapp/models/car_response.dart';
 
-class CarDetailsScreen extends StatelessWidget {
+class CarDetailsScreen extends StatefulWidget {
+
   final CarResponse _car;
   CarDetailsScreen(this._car);
+
+  @override
+  _CarDetailsScreenState createState() => _CarDetailsScreenState();
+}
+
+class _CarDetailsScreenState extends State<CarDetailsScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +39,9 @@ class CarDetailsScreen extends StatelessWidget {
     children: <Widget>[
       Container(
         foregroundDecoration: BoxDecoration(
-          image: DecorationImage(image: NetworkImage('https://d-mf.ppstatic.pl/art/f5/ev/bg8wuvsc8co8osgo44wsw/ferrari-3.1200.jpg'), fit: BoxFit.fill),
+          image: DecorationImage(
+              image: widget._car.photo!= null ? NetworkImage('${widget._car.photo}') : NetworkImage('https://assets.puzzlefactory.pl/puzzle/213/347/original.jpg'),
+              fit: BoxFit.fill),
         ),
         width: double.infinity,
         height: MediaQuery.of(context).size.longestSide * 0.3,
@@ -63,13 +77,13 @@ class CarDetailsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Padding(child: Text(_x, style: TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold, fontSize: 20)), padding: EdgeInsets.fromLTRB(15, 5, 5, 0),),
-                Padding(child: Text("Marka", style: TextStyle(color: Colors.lightBlueAccent, fontSize: 16)), padding: EdgeInsets.fromLTRB(15, 5, 5, 0),),
-                Padding(child: Text("Kraj"), padding: EdgeInsets.fromLTRB(15, 5, 5, 0),),
-                Padding(child: Text("2323"), padding: EdgeInsets.fromLTRB(15, 5, 5, 0),),
-                Padding(child: Text("1212"), padding: EdgeInsets.fromLTRB(15, 5, 5, 0),),
-                Padding(child: Text("kupę"), padding: EdgeInsets.fromLTRB(15, 5, 5, 0),),
-                Padding(child: Text("cztery i puł"), padding: EdgeInsets.fromLTRB(15, 5, 5, 0),),
+                Padding(child: Text("${widget._car.model}", style: TextStyle(color: Colors.lightBlue, fontWeight: FontWeight.bold, fontSize: 20)), padding: EdgeInsets.fromLTRB(15, 5, 5, 0),),
+                Padding(child: Text("${widget._car.company.companyName}", style: TextStyle(color: Colors.lightBlueAccent, fontSize: 16)), padding: EdgeInsets.fromLTRB(15, 5, 5, 0),),
+                Padding(child: Text("${widget._car.company.country.countryName}"), padding: EdgeInsets.fromLTRB(15, 5, 5, 0),),
+                Padding(child: Text("${widget._car.startproduction}"), padding: EdgeInsets.fromLTRB(15, 5, 5, 0),),
+                Padding(child: Text("${widget._car.endproduction}"), padding: EdgeInsets.fromLTRB(15, 5, 5, 0),),
+                Padding(child: Text("${widget._car.bodyType.bodyTypeName}"), padding: EdgeInsets.fromLTRB(15, 5, 5, 0),),
+                Padding(child: Text("${widget._car.ncapStars}"), padding: EdgeInsets.fromLTRB(15, 5, 5, 0),),
               ],
             ),
           ),
@@ -79,14 +93,14 @@ class CarDetailsScreen extends StatelessWidget {
   );
 
   String get _title => _x;
-  String get _x => _car.name;
+//  String get _x => _car.name;
+  String get _x => "_car.name";
 
 
   Widget get _mainInfo => Text(
     'x',
     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, color: Colors.white),
   );
-
 
 
 }

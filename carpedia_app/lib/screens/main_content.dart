@@ -26,7 +26,7 @@ class MainContentState extends State<MainContent> {
     super.initState();
     _searchController = TextEditingController();
     _carBloc = BlocProvider.getBloc();
-    _carSubscription = _carBloc.carObservable.listen(_navigateToDetails);
+//    _carSubscription = _carBloc.carObservable.listen(_navigateToDetails);
   }
 
   @override

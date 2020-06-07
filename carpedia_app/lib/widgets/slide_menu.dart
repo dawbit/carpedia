@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 class NavDrawer extends StatelessWidget {
   final ThemeBloc themeBloc;
   NavDrawer({Key key, this.themeBloc}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -29,14 +30,19 @@ class NavDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.input),
             title: Text('Welcome'),
-            onTap: () {Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) => MainContent()));},
+            onTap: () {
+              Navigator.of(context).pop();
+              if (ModalRoute.of(context).isCurrent) return;
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => MainContent()));
+              },
           ),
           ListTile(
             leading: Icon(Icons.verified_user),
             title: Text('Favourite'),
-            onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => FavouriteScreen())),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => FavouriteScreen()));},
           ),
           ListTile(
             leading: Icon(Icons.settings),

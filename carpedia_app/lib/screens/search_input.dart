@@ -1,3 +1,5 @@
+import 'package:bloc_pattern/bloc_pattern.dart';
+import 'package:carpediaapp/blocs/car_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -10,9 +12,12 @@ class SearchInput extends StatefulWidget {
 class SearchInputState extends State<SearchInput> {
   TextEditingController _searchController;
 
+  CarBloc _carBloc;
+
   @override
   void initState() {
     super.initState();
+    _carBloc= BlocProvider.getBloc();
     _searchController = TextEditingController();
   }
 
@@ -35,7 +40,9 @@ class SearchInputState extends State<SearchInput> {
           IconButton(
             icon: Icon(Icons.search),
             onPressed: () {
-//                print(_carBloc.getCarForName(_searchController.text));
+              print(_searchController.text);
+              _carBloc.getCarForName(_searchController.text);
+              _carBloc.getCarForCompany(_searchController.text);
             },
           ),
         ],
