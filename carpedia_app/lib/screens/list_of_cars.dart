@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:bloc_pattern/bloc_pattern.dart';
+import 'package:carpediaapp/blocs/themes_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +19,7 @@ class _CarListState extends State<CarList> {
   List<String> lista = [];
   List<String> marka = ["Toyota", "Toyota", "Toyota"];
   List<String> model =["Yaris", "Aygo", "Avensis"];
+
 
   @override
   void initState() {
@@ -55,6 +57,14 @@ class CarListItem extends StatefulWidget {
 class CarListItemState extends State<CarListItem> {
   bool _isfavorited = false;
 
+  ThemeBloc _themeBloc;
+
+  @override
+  void initState() {
+    _themeBloc = BlocProvider.getBloc();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -65,16 +75,19 @@ class CarListItemState extends State<CarListItem> {
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
+              SizedBox(width: 20,),
               Expanded(
                   flex: 0,
                   child: Image.network("${widget.image}", height: 150, width: 150, )),
+              SizedBox(width: 20,),
               Expanded(
                 flex: 69,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Padding(child: Text("${widget.mark}", style: TextStyle(color: Colors.lightBlueAccent, fontWeight: FontWeight.bold)), padding: EdgeInsets.fromLTRB(5, 5, 5, 0),),
-                    Padding(child: Text("${widget.model}"), padding: EdgeInsets.fromLTRB(5, 5, 5, 0),),
+                    SizedBox(height: 27,),
+                    Padding(child: Text("${widget.mark}", style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold)), padding: EdgeInsets.fromLTRB(5, 5, 5, 0),),
+                    Padding(child: Text("${widget.model}", style: TextStyle(color: Theme.of(context).accentColor, fontWeight: FontWeight.bold)), padding: EdgeInsets.fromLTRB(5, 5, 5, 0),),
                     Padding(child: Text("${widget.year}"), padding: EdgeInsets.fromLTRB(5, 5, 5, 0),),
                   ],
                 ),

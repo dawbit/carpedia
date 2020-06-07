@@ -11,9 +11,10 @@ class DemoTheme {
 }
 
 class ThemeBloc extends BlocBase {
-  final selectedTheme = BehaviorSubject<DemoTheme>();
-  Stream<ThemeData> get selectedThemeStream => selectedTheme.stream.map((theme) => theme.data);
 
+  final selectedTheme = BehaviorSubject<DemoTheme>();
+
+  Stream<ThemeData> get selectedThemeStream => selectedTheme.stream.map((theme) => theme.data);
 
   @override
   void dispose() {
