@@ -125,7 +125,7 @@ class CarListItemState extends State<CarListItem> {
               SizedBox(width: 20,),
               Expanded(
                   flex: 0,
-                  child: Image.network("${widget.image}", height: 150, width: 150, )),
+                  child: Image.network("https://assets.puzzlefactory.pl/puzzle/213/347/original.jpg", height: 150, width: 150, )),
               SizedBox(width: 20,),
               Expanded(
                 flex: 69,
@@ -133,11 +133,12 @@ class CarListItemState extends State<CarListItem> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     SizedBox(height: 27,),
-                    Padding(child: Text("${widget.mark}", style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold)), padding: EdgeInsets.fromLTRB(5, 5, 5, 0),),
-                    Padding(child: Text("${widget.model}", style: TextStyle(color: Theme.of(context).accentColor, fontWeight: FontWeight.bold)), padding: EdgeInsets.fromLTRB(5, 5, 5, 0),),
-                    Padding(child: Text("${widget.year}"), padding: EdgeInsets.fromLTRB(5, 5, 5, 0),),
+                    Padding(child: Text("${widget.car.company}", style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold)), padding: EdgeInsets.fromLTRB(5, 5, 5, 0),),
+                    Padding(child: Text("${widget.car.model}", style: TextStyle(color: Theme.of(context).accentColor, fontWeight: FontWeight.bold)), padding: EdgeInsets.fromLTRB(5, 5, 5, 0),),
+                    Padding(child: Text("${widget.car.ncapStars}"), padding: EdgeInsets.fromLTRB(5, 5, 5, 0),),
                   ],
                 ),
+              ),
                 Expanded(
                   flex: 69,
                   child: Column(
@@ -165,7 +166,7 @@ class CarListItemState extends State<CarListItem> {
               ],
             )
           ),
-        ));
+        );
   }
 
   void _toogleFavorite() {
