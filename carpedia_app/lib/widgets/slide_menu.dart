@@ -1,14 +1,58 @@
+import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:carpediaapp/screens/favourite_screen.dart';
 import 'package:carpediaapp/screens/main_content.dart';
 import 'package:flutter/material.dart';
 
 import 'package:carpediaapp/screens/theme_selector_page.dart';
 import 'package:carpediaapp/blocs/themes_bloc.dart';
+import 'package:carpediaapp/screens/theme_selector_page.dart';
 import 'package:flutter/services.dart';
 
-class NavDrawer extends StatelessWidget {
+class NavDrawer extends StatefulWidget {
   final ThemeBloc themeBloc;
+  @override
+  _NavDrawerState createState() => _NavDrawerState();
   NavDrawer({Key key, this.themeBloc}) : super(key: key);
+}
+
+class _NavDrawerState extends State<NavDrawer> {
+
+  ThemeBloc _themeBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    _themeBloc = BlocProvider.getBloc();
+
+    if(_themeBloc.selectedTheme.value?.name == "light"){
+      _lights = false;
+    }
+    else{
+      _lights = true;
+    }
+  }
+
+  DemoTheme _buildLightTheme() {
+    return DemoTheme(
+        'light',
+        ThemeData(
+          brightness: Brightness.light,
+          accentColor: Colors.lightBlueAccent,
+          primaryColor: Colors.lightBlue,
+        ));
+  }
+
+  DemoTheme _buildDarkTheme() {
+    return DemoTheme(
+        'dark',
+        ThemeData(
+          brightness: Brightness.dark,
+          accentColor: Colors.lightBlueAccent,
+          primaryColor: Colors.blue[800],
+        ));
+  }
+
+  bool _lights = false;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +62,7 @@ class NavDrawer extends StatelessWidget {
         children: <Widget>[
           DrawerHeader(
             child: Text(
-              'Side menu',
+              'Carpedia',
               style: TextStyle(color: Colors.white, fontSize: 25),
             ),
             decoration: BoxDecoration(
@@ -27,9 +71,10 @@ class NavDrawer extends StatelessWidget {
                     fit: BoxFit.fill,
                     image: AssetImage('assets/PP00.jpg'))),
           ),
+
           ListTile(
-            leading: Icon(Icons.input),
-            title: Text('Welcome'),
+            leading: Padding(child: Icon(Icons.home), padding: EdgeInsets.only(left: 2),),
+            title: Text('Home'),
             onTap: () {
               Navigator.of(context).pop();
               if (ModalRoute.of(context).isCurrent) return;
@@ -37,26 +82,41 @@ class NavDrawer extends StatelessWidget {
                     builder: (context) => MainContent()));
               },
           ),
+
           ListTile(
-            leading: Icon(Icons.verified_user),
+            leading: Padding(child: Icon(Icons.favorite), padding: EdgeInsets.only(left: 2),),
             title: Text('Favourite'),
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => FavouriteScreen()));},
           ),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Dark Mode'),
-            onTap: () =>  Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => ThemeSelectorPage())),
-          ),
-          ListTile(
-            leading: Icon(Icons.exit_to_app),
-            title: Text('todo'),
-            onTap: () {SystemNavigator.pop();},
-          ),
+
+          SwitchListTile(
+            title: const Text('Lights'),
+            activeColor: Theme.of(context).accentColor,
+            value: _lights,
+            onChanged: (bool value) {onSwitchStateChange(); },
+            secondary: _lights ? Image.asset('assets/zarowa0.png', width: 30,) : Image.asset('assets/zarowa1.png', width: 30,),
+          )
         ],
       ),
     );
+
+   // _themeBloc.selectedTheme.add(_buildDarkTheme());
+  }
+
+  void onSwitchStateChange(){
+    setState(() {
+      _lights = !_lights;
+    });
+
+    if(_lights){
+       setState(() {
+         _themeBloc.selectedTheme.add(_buildDarkTheme());
+       });
+    }
+    else{
+      _themeBloc.selectedTheme.add(_buildLightTheme());
+    }
   }
 }

@@ -40,7 +40,7 @@ class MainContentState extends State<MainContent> {
     return Scaffold(
         drawer: NavDrawer(),
         appBar: AppBar(
-          title: Text('Carpedia app'),
+          title: Text('Carpedia'),
         ),
         body: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
