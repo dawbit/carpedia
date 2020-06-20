@@ -46,9 +46,11 @@ class _CarListState extends State<CarList> {
   }
 
   void onDataChanged(List<CarResponse> carResponse){
-    setState(() {
-      listOfCars = carResponse;
-    });
+    if(carResponse.isNotEmpty){
+      setState(() {
+        listOfCars = carResponse;
+      });
+    }
   }
 
   @override
@@ -64,7 +66,7 @@ class _CarListState extends State<CarList> {
     return ListView.builder(
       itemCount: listOfCars.length ?? 0,
       itemBuilder: (_, position) =>
-          CarListItem(car: listOfCars[position]),
+          CarListItem(car: listOfCars[position], key: ValueKey(listOfCars[position].id)),
     );
   }
 }
@@ -74,7 +76,7 @@ class CarListItem extends StatefulWidget {
   CarResponse car;
   Function delete;
 
-  CarListItem({this.car, this.delete});
+  CarListItem({this.car, this.delete, Key key}): super(key:key);
 
   @override
   State<StatefulWidget> createState() {
@@ -186,8 +188,10 @@ class CarListItemState extends State<CarListItem> {
     });
 
     if(!_isfavorited){
-      widget.delete(widget.car);
       _dataBaseBloc.delete(favCar);
+      if(widget.delete!=null){
+        widget.delete(widget.car);
+      }
     }
     else{
       _dataBaseBloc.insert(favCar);

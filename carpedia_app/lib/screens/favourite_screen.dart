@@ -35,6 +35,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   }
 
   void onData(List<FavouriteCar> cars){
+    listOfCars = [];
     CarResponse carResponse = CarResponse();
 
     cars.forEach((f){
@@ -64,7 +65,6 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   @override
   void dispose() {
     _streamSubscription.cancel();
-    listOfCars.clear();
     super.dispose();
   }
 
@@ -81,7 +81,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
               ListView.builder(
                 itemCount: listOfCars.length ?? 0,
                 itemBuilder: (_, position) =>
-                    CarListItem(car: listOfCars[position], delete: deleteFromListOfCars, ),),
+                    CarListItem(car: listOfCars[position], delete: deleteFromListOfCars, key: ValueKey(listOfCars[position].id, ))),
                 flex:1
             )
           ],

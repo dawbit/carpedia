@@ -2,6 +2,7 @@ import 'package:carpediaapp/blocs/data_base_bloc.dart';
 import 'package:carpediaapp/models/car_response.dart';
 import 'package:carpediaapp/repositories/data_base_repository.dart';
 import 'package:carpediaapp/screens/car_details.dart';
+import 'package:carpediaapp/test/ping_test.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 
@@ -29,6 +30,8 @@ class MyAppState extends State<MyApp> {
 
   @override
   void initState() {
+    var pingTest = PingTest();
+    pingTest.test();
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_){
       setState(() {

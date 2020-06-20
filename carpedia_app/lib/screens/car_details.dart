@@ -21,7 +21,7 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text(_title)
+          title: Text("${widget._car.company.companyName} ${widget._car.model}")
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
