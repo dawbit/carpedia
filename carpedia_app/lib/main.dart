@@ -26,8 +26,6 @@ class MyAppState extends State<MyApp> {
 
   ThemeBloc _themeBloc;
 
-
-
   @override
   void initState() {
     var pingTest = PingTest();
@@ -37,6 +35,7 @@ class MyAppState extends State<MyApp> {
       setState(() {
         _themeBloc = BlocProvider.getBloc();
       });
+
     } );
   }
 

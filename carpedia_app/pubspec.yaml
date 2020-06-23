@@ -36,6 +36,7 @@ dependencies:
   floor: ^0.13.0
   moor_flutter: ^3.0.0
   dart_ping: ^1.0.0
+  connectivity: ^0.4.8+6
 
 dev_dependencies:
   flutter_test:

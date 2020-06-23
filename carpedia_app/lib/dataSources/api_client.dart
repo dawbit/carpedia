@@ -5,7 +5,7 @@ import 'package:carpediaapp/models/car_response.dart';
 
 part 'api_client.g.dart';
 
-final client = ApiClient(Dio());
+final client = ApiClient(Dio()..options.connectTimeout=5000);
 
 @RestApi(baseUrl: 'http://192.168.43.228:8080/car')
 abstract class ApiClient {

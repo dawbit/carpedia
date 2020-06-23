@@ -10,6 +10,7 @@ import 'package:carpediaapp/blocs/car_bloc.dart';
 import 'package:carpediaapp/models/car_response.dart';
 import 'package:carpediaapp/screens/car_details.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class CarList extends StatefulWidget {
 
@@ -25,6 +26,8 @@ class _CarListState extends State<CarList> {
 
     CarBloc _carBloc;
     List<CarResponse> listOfCars;
+    List<CarResponse> listOfCarsmodel;
+    List<CarResponse> listOfCarsmark;
     StreamSubscription _streamSubscriptionAdd;
     StreamSubscription _streamSubscriptionAdd2;
 
@@ -35,8 +38,11 @@ class _CarListState extends State<CarList> {
 
     _carBloc = BlocProvider.getBloc();
     listOfCars= [];
-    _streamSubscriptionAdd = _carBloc.searchStream.listen(onDataChanged);
-    _streamSubscriptionAdd2 = _carBloc.searchStream2.listen(onDataChanged);
+    _streamSubscriptionAdd = _carBloc.searchStream.listen(onDataChanged1,
+        onError: message);
+    _streamSubscriptionAdd2 = _carBloc.searchStream2.listen(onDataChanged2,
+    onError: message
+    );
     if(widget.favCars!=null){
       setState(() {
         listOfCars = widget.favCars;
@@ -45,13 +51,43 @@ class _CarListState extends State<CarList> {
     super.initState();
   }
 
-  void onDataChanged(List<CarResponse> carResponse){
-    if(carResponse.isNotEmpty){
+  void message(e){
+    Fluttertoast.showToast(
+        msg: "Connection Timeout",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.red,
+        textColor: Colors.black,
+        fontSize: 16.0
+    );
+  }
+
+  void onDataChanged1(List<CarResponse> carResponse){
+    listOfCarsmodel=carResponse;
+    if(listOfCarsmodel.isNotEmpty || listOfCarsmark.isEmpty){
+      setState(() {
+        listOfCars = carResponse;
+      });
+    }
+    else if (listOfCarsmodel.isEmpty || listOfCarsmark.isEmpty){
       setState(() {
         listOfCars = carResponse;
       });
     }
   }
+    void onDataChanged2(List<CarResponse> carResponse){
+    listOfCarsmark= carResponse;
+      if(listOfCarsmodel.isEmpty || listOfCarsmark.isNotEmpty){
+        setState(() {
+          listOfCars = carResponse;
+        });
+      }
+      else if (listOfCarsmodel.isEmpty || listOfCarsmark.isEmpty){
+        setState(() {
+          listOfCars = carResponse;
+        });
+      }
+    }
 
   @override
   void dispose() {
@@ -63,6 +99,8 @@ class _CarListState extends State<CarList> {
 
   @override
   Widget build(BuildContext context) {
+
+
     return ListView.builder(
       itemCount: listOfCars.length ?? 0,
       itemBuilder: (_, position) =>
